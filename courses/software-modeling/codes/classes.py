@@ -41,3 +41,30 @@ gclass ComputerStudent(Student):
 student_ = ComputerStudent("Pepe", "Perez", "12345", "St. Evergreen 123")
 print(student_.get_address())
 print(student_.lastname, student_.name)
+
+
+# =========== MENU
+MESSAGE = """ 
+Opcion 1. Crear motor
+Opcion 2. Crear carro
+Opcion 3. Crear moto
+Opcion 4. Ver todos los vehiculos
+...
+Opcion 8. Salir
+"""
+
+print(MESSAGE)
+option = int(input("Ingrese una opcion: "))
+while option != 8:
+    if option == 1:
+        print("Creando motor")
+    elif option == 2:
+        print("Creando carro")
+    elif option == 3:
+        print("Creando moto")
+    elif option == 4:
+        print("Viendo todos los vehiculos")
+    else:
+        print("Opcion no valida")
+    print(MESSAGE)
+    option = int(input("Ingrese una opcion: "))
