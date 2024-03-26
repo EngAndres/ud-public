@@ -11,8 +11,8 @@ For now there is information for next courses:
 1. [Computer Networks](courses/computer-netqorks/README.md): foundations of computer networking, devices, protocols, subnetting
 1. [Databases Foundations](courses/databases-foundations/README.md): Basic of DataBase design, ER model, relational databases, relational algebra.
 1. [Python for Everyone](courses/python-for-everyone/README.md): A set of notebooks with examples related to conditionals, loops, tuples, lists, dictionaries, anything useful to someone who wants to learn python.
-1. [Software Modeling](courses/advanced-programming/README.md): Not the best name, but this course is oriented to teach advandec topic of object-oriented design, including design patterns and good practices.
-1. [Systems Analysis](courses/advanced-programming/README.md): systems thinking, systems paradigms, swarm intelligence, IT projects management and leadership.
+1. [Software Modeling](courses/software-modeling/README.md): Not the best name, but this course is oriented to teach advandec topic of object-oriented design, including design patterns and good practices.
+1. [Systems Analysis](courses/systems-analysis/README.md): systems thinking, systems paradigms, swarm intelligence, IT projects management and leadership.
 
 
 ## Researches
