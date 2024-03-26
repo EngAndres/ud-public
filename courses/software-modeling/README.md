@@ -1,26 +1,33 @@
-# DataBases Foundations
+# Software Design I
 
-This course is designed to introduce undergraduate students to foundations of __database systems__ and _good practices_ of databases design.
+This course is designed to introduce undergraduate students to foundations of 
+__design patterns__ and _good practices_ of software modeling.
+This is __not__ a course fully focus on __software architecture__, 
+but it is part of main concepts of software architecture.
 
-This is __not__ a course fully focus on __software engineering__, 
-but it is part of main concepts of software systems building.
-
-Classes will consist of lectures, __discussions__, practical examples, and workshops. Also, you must take some readings from _software architecture_. In addition, there will be a __semester-long project__, as well __three__ exams, __six__ workshops, and __twenty__ additional assignmens. 
+Classes will consist of lectures, __discussions__, practical examples, and workshops. 
+Also, you must take some readings from _software architecture_.
+In addition, there will be a __semester-long project__, as well __two__ exams, 
+__five__ workshops, and __twenty__ additional assignments. 
 
 ## Goals
 
-The main goal of this course is to provide undergraduate students with different **models** **concepts**, and **tools** for solving the data layer of software problems using **database systems** based on software application project requirements.
-  
-At the end of this course you should be able to **create** a full software **database solution** with a good level of **quality** metrics. Also, you should be able to **design** robust database systems in an **agnostic** way.
+The main goal of this course is to provide undergraduate students with different __models__ 
+and __tools__ for solving software problems using __object-oriented paradigm__.
+
+At the end of this course you should be able to __create__ a full software 
+__backend solution__ with a good level of __quality__ metrics. 
+Also, you should be able to __design__ robust software systems in an __agnostic__ way.
 
 ## Pre-requisites
 
 This is a basic course, so you must have some knowledge in:
-- **Programming** in Python, or C++.
-- **Object-Oriented Programming** foundations.
-- UML and **Class Diagrams** basic concepts.
-- **Git** basic usage, and **GitHub** basic usage.
-- Use of **IDEs** like VS Code, Eclipse, or PyCharm.
+- __Programming__ in Java, Python, or C++.
+- __Object-Oriented Programming__ foundations.
+- UML and __Class Diagrams__ basic concepts.
+- __Git__ basic usage, and __GitHub__ basic usage.
+- __Data systems__ and relational model basic concepts.
+- Use of __IDEs__ like VS Code, Eclipse, or PyCharm.
 
 ## Grading
 
@@ -60,11 +67,19 @@ Don't hate the player, hate the game:
 ## Bibliography
 
 Recommended bibliography:
-- **Database Systems: The Complete Book**, by Hector Garcia-Molina, Jeffrey D. Ullman, and Jennifer Widom.
-- **Database Management Systems**, by Raghu Ramakrishnan and Johannes Gehrke.
-- **Fundamentals of Database Systems**, by Ramez Elmasri and Shamkant B. Navathe.
-- **Introducción a los Sistemas de Bases de Datos**, by Date C.J.
-- **Procesamiento de Bases de Datos, Fundamentos, Diseño e Implementación**, by David M. Kroenke.
-- **Sistemas de Bases de Datos: Conceptos Fundamentales**, by Elmasri, Navathe.
-- **Database System Implementation**, by Hector Garcia-Molina, Jeffrey D. Ullman, and Jennifer Widom.
-- **Fundamentos de Bases de Datos**, by Silberschtz A., Korth H.F, Sudershan S.
+- __Design Patterns: Elements of Reusable Object-Oriented Software__, 
+  by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides.
+- __Clean Code: A Handbook of Agile Software Craftsmanship__, 
+  by Robert C. Martin.
+- __Refactoring: Improving the Design of Existing Code__, 
+  by Martin Fowler.
+- __Domain-Driven Design: Tackling Complexity in the Heart of Software__, 
+  by Eric Evans.
+- __Patterns of Enterprise Application Architecture__, 
+  by Martin Fowler.
+- __Construcción de Software Orientado a Objetos__, 
+  by Bertrand Meyer
+- __Thinking Java__, 
+  by Bruce Eckel
+- __Java2 How To Program__, 
+  by Deitel & Deitel.
