@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: ap_backend.Dockerfile
+    depends_on:
+      - database
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ap_frontend.Dockerfile
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
