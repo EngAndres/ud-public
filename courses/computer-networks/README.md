@@ -10,6 +10,15 @@ Also, you must take some readings from _computer network architectures_.
 In addition, there will be a __semester-long project__, as well __three__ exams, 
 __four__ workshops, and __twenty__ additional assignments. 
 
+
+- [Computer Networks](#computer-networks)
+  - [Goals](#goals)
+  - [Pre-requisites](#pre-requisites)
+  - [Grading](#grading)
+  - [Rules](#rules)
+  - [Code of Conduct](#code-of-conduct)
+  - [Bibliography](#bibliography)
+
 ## Goals
 
 The main goal of this course is to provide undergraduate students with different __models__, 
