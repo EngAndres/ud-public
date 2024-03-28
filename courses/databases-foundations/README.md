@@ -7,6 +7,14 @@ but it is part of main concepts of software systems building.
 
 Classes will consist of lectures, __discussions__, practical examples, and workshops. Also, you must take some readings from _software architecture_. In addition, there will be a __semester-long project__, as well __three__ exams, __six__ workshops, and __twenty__ additional assignmens. 
 
+- [DataBases Foundations](#databases-foundations)
+  - [Goals](#goals)
+  - [Pre-requisites](#pre-requisites)
+  - [Grading](#grading)
+  - [Rules](#rules)
+  - [Code of Conduct](#code-of-conduct)
+  - [Bibliography](#bibliography)
+
 ## Goals
 
 The main goal of this course is to provide undergraduate students with different **models** **concepts**, and **tools** for solving the data layer of software problems using **database systems** based on software application project requirements.

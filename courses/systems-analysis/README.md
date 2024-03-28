@@ -9,6 +9,16 @@ Also, you must take some readings from _software architecture_.
 In addition, there will be __three__ exams, 
 __five__ workshops, and __twenty__ additional assignments. 
 
+
+- [Systems Analysis](#systems-analysis)
+  - [Goals](#goals)
+  - [Pre-requisites](#pre-requisites)
+  - [Grading](#grading)
+  - [Rules](#rules)
+  - [Code of Conduct](#code-of-conduct)
+  - [Bibliography](#bibliography)
+
+
 ## Goals
 
 The main goal of this course is to provide undergraduate students with different __models__, 

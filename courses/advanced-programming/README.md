@@ -9,6 +9,14 @@ Classes will consist of lectures, __discussions__, practical examples, and works
 Also, you must take some readings from _software architecture_.
 In addition, there will be a __semester-long project__, as well __two__ exams, __one__ paper, __six__ workshops, and __twenty__ additional assignments. 
 
+- [Advanced Programming](#advanced-programming)
+  - [Goals](#goals)
+  - [Pre-requisites](#pre-requisites)
+  - [Grading](#grading)
+  - [Rules](#rules)
+  - [Code of Conduct](#code-of-conduct)
+  - [Bibliography](#bibliography)
+
 ## Goals
 
 The main goal of this course is to provide undergraduate students with different __models__ 
