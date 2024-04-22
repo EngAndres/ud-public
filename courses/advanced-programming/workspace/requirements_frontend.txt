@@ -1,3 +1,1 @@
-fastapi
-pydantic
-uvicorn
+django

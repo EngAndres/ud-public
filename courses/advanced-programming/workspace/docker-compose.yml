@@ -1,12 +1,14 @@
-version: '3.9'
+version: '3.3'
 
 services:
   database:
     image: postgres:latest
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_PASSWORD: P4$$w0rd
+      POSTGRES_USER: ud_admin
+      POSTGRES_DB: ud_project
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db_data_ap:/var/lib/postgresql/data
 
   backend:
     build:
@@ -23,4 +25,4 @@ services:
       - backend
 
 volumes:
-  db_data:
+  db_data_ap:
