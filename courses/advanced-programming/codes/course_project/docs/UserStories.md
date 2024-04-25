@@ -32,3 +32,21 @@ This is an application to emulate an online video game services platform. It mea
 - BankAccount
 
 ## Process
+
+
+## Web Services
+
+- login -> User.login   POST  {username, password}
+- createPlayer -> Player   POST  {age, name, alias, bank_account{name, number}}
+- createSeller -> Seller   POST {}
+- createManager -> Manager   POST {}
+- markVideoGame -> Manager.mark_videogame    PUT {code}
+- registerPlatformNews -> Manager.register_news   POST  {title, publish_date, description, deadline}
+- deactivatePlatformNews -> Manager.deactive_news    PUT {title}
+- buyVideoGame -> Player.buy_videogame   POST    {code}
+- publishVideoGame -> Seller.publish_videogame  POST {code, name, description, price}
+- updateVideoGame -> Seller.update_videogame   PUT {}
+- createCommunity -> Community  POST {name}
+- showCategories -> Catalog.show_categories   GET
+- showByCategory -> Catalog.show_by_category    GET {?category=...}
+- showNewLaunches -> Catalog.show_new_launches GET
