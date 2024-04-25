@@ -3,12 +3,17 @@ version: '3.3'
 services:
   database:
     image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: P4$$w0rd
       POSTGRES_USER: ud_admin
-      POSTGRES_DB: ud_project
+      POSTGRES_DB: ud_ad_project
     volumes:
       - db_data_ap:/var/lib/postgresql/data
+    networks:
+      - local
 
   backend:
     build:
@@ -16,6 +21,8 @@ services:
       dockerfile: ap_backend.Dockerfile
     depends_on:
       - database
+    networks:
+      - local
 
   frontend:
     build:
@@ -23,6 +30,13 @@ services:
       dockerfile: ap_frontend.Dockerfile
     depends_on:
       - backend
+    networks:
+      - local
 
 volumes:
   db_data_ap:
+    driver: local
+
+networks:
+  local:
+    driver: bridge
