@@ -10,7 +10,7 @@ services:
     environment:
       POSTGRES_USER: ud_admin
       POSTGRES_PASSWORD: Admin12345
-      POSTGRES_DB: ud_project
+      POSTGRES_DB: ud_db_project
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
