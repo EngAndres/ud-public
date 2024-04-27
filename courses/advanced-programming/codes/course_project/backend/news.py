@@ -4,14 +4,16 @@ This file contains the classes and methods to manage the news of the application
 Author: Carlo A. Sierra <cavirguezs@udistrital.edu.co>
 """
 
-class News:
+from pydantic import BaseModel
+
+class News(BaseModel):
     """This class represents the behavior of a news."""
 
-    def __init__(self, name: str, publish_date: str, description: str, deadline: int):
-        self.name = name
-        self.publish_date = publish_date
-        self.description = description
-        self.deadline = deadline
+    name: str
+    publish_date: str
+    description: str
+    deadline: int
+    status: str
 
     def is_activate(self, current_date: str) -> bool:
         """
