@@ -3,23 +3,20 @@ This module contains the classes and methods to manage the users of the applicat
 
 Author: Carlo A. Sierra <cavirguezs@udistrital.edu.co>
 """
-
-from membership import Membership
-from bank_account import BankAccount
+from pydantic import BaseModel
 from news import News
-from videogames import VideoGame
+from .finances import Membership, BankAccount
+from .core import VideoGame, Catalog
 
-
-class User:
+class User(BaseModel):
     """This class is an abstractation for any user into the application"""
 
-    def __init__(self, name: str, alias: str, password: str, bank_account: BankAccount):
-        self.name = name
-        self.alias = alias
-        self.password = password
-        self.bank_account = bank_account
-        self.grants = {}
-        self.membership = Membership("free")
+    name: str
+    alias: str
+    password: str
+    bank_account: BankAccount
+    grants: dict
+    membership: Membership
 
     @staticmethod
     def login(username: str, password: str):
@@ -41,10 +38,11 @@ class User:
 class Player(User):
     """This class represens a concrete implementation of a player user"""
 
+    #pylint: disable=too-many-arguments
     def __init__(
         self, age: int, name: str, alias: str, bank_account: BankAccount, password: str
     ):
-        super().__init__(name, alias, password, bank_account)
+        super().__init__(name=name, alias=alias, password=password, bank_account=bank_account)
         self.age = age
         self.bougth_videogames = []
 
@@ -116,3 +114,13 @@ class Manager(User):
             news (News): the news to deactivate.
         """
         # TODO: update in db
+
+    def mark_videogame(self, code: int) -> bool:
+        """This method.."""
+        flag = False
+        for videogame in Catalog.videogames:
+            if videogame.code == code:
+                videogame.new_launch = True
+                Catalog.update_videogame(code, videogame=videogame)
+                flag = True
+        return flag
