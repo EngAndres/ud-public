@@ -5,9 +5,10 @@ Author: Carlos Sierra - cavirguezs@udistrital.edu.co
 """
 
 from typing import List
-from .vehicles import Vehicle
+from .catalog_interface import CatalogInterface
+from ..vehicles_sub import Vehicle
 
-class Catalog:
+class Catalog(CatalogInterface):
     """This class represents the behavior of a catalog"""
 
     def __init__(self):

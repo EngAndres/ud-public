@@ -75,9 +75,3 @@ class LowEngineFactory(AbstractEngineFactory):
             weight=80.5
         )
         
-if __name__ == "__main__":
-    high_gas = HighEngineFactory().create_gas_engine()
-    low_electric = LowEngineFactory().create_electric_engine()
-
-    print(high_gas)
-    print(low_electric)
