@@ -36,6 +36,20 @@ class Catalog:
         return [videogame for videogame in cls.videogames if videogame.category == category]
 
     @classmethod
+    def show_new_launches(cls):
+        """This method shows all videogames marked as new launches"""
+        return [videogame for videogame in cls.videogames if videogame.new_launch]
+
+    @classmethod
+    def show_categories(cls):
+        """This method shows all distinct categories in videogames"""
+        categories = []
+        for videogame in cls.videogames:
+            if videogame.category not in categories:
+                categories.append(videogame.category)
+        return categories
+
+    @classmethod
     def add_videogame(cls,  videogame: VideoGame):
         """
         This  method adds a videogame to catalog list.
@@ -57,7 +71,7 @@ class Catalog:
 
     @classmethod
     def get_videogame(cls, code: int) -> VideoGame:
-        """THis method performs asearch by code"""
+        """This method performs asearch by code"""
         for videogame in cls.videogames:
             if videogame.code == code:
                 return videogame

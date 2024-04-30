@@ -1,23 +1,27 @@
 """This file  has theentry point implementtion for RESTapi services."""
 from fastapi import FastAPI
-from .users import User, Player, Seller, Manager
-from .news import News
-from .core import VideoGame, Catalog
-from .community import Community
+from users_sub import User, Player, Seller, Manager
+from news import News
+from core import VideoGame, Catalog
+from community import Community
 from typing import List
+from models import UserCredentials
 
+from pydantic import BaseModel
 
 app = FastAPI()
 
+
+
 @app.post("/login", response_model=User)
-def login(credentials: dict):
+def login(credentials: UserCredentials):
     """
     This method validates if a user is valid or not.
 
     Args:
         credentials (dict): username and password of the user
     """
-    return User.login(credentials["username"], credentials["password"])
+    return User.login(credentials.username, credentials.password)
 
 @app.post("/create_player")
 def create_player(player: Player) -> bool:
@@ -58,7 +62,7 @@ def mark_videogame(code: int) -> bool:
 @app.post("/manager/register_platform_news")
 def register_plaftorm_news(news: News):
     """This service lets to add a news in the platform."""
-    manager = Manager()
+    manager = Manager(name="name", alias="alias", password="password", grants={})
     manager.register_news(news)
 
 @app.put("/manage/deactivate_platform_news")
@@ -79,19 +83,22 @@ def publish_videogame(videogame: VideoGame):
 
 @app.put("/seller/update_videogame/{code}")
 def update_videogame(code: int, videogame: VideoGame): 
+    manager = Manager()
+    manager.update_videogame(code, videogame)
 
 @app.post("/player/create_community")
 def create_community(community: Community):
     # TODO add community to db
+    pass
 
 @app.get("/catalog/get_categories", response_model=List[str])
 def get_categories():
-    
+    return Catalog.show_categories()
 
 @app.get("/catalog/show_by_category/{category}", response_model=List[VideoGame])
 def show_by_category(category: str):
     return Catalog.show_by_category(category=category)
 
-@app.get("/catalog/new_launchers", response_model=List[VideoGame])
+@app.get("/catalog/new_launches", response_model=List[VideoGame])
 def new_launches():
-    Catalog.
+    return Catalog.show_new_launches()

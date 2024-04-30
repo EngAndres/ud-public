@@ -3,10 +3,11 @@ This module contains the classes and methods to manage the users of the applicat
 
 Author: Carlo A. Sierra <cavirguezs@udistrital.edu.co>
 """
+
 from pydantic import BaseModel
 from news import News
-from .finances import Membership, BankAccount
-from .core import VideoGame, Catalog
+from finances import Membership, BankAccount
+from core import VideoGame, Catalog
 
 class User(BaseModel):
     """This class is an abstractation for any user into the application"""
@@ -14,9 +15,9 @@ class User(BaseModel):
     name: str
     alias: str
     password: str
-    bank_account: BankAccount
+    #bank_account: BankAccount
     grants: dict
-    membership: Membership
+    #membership: Membership
 
     @staticmethod
     def login(username: str, password: str):
@@ -26,7 +27,8 @@ class User(BaseModel):
         Args:
             username (str): the alias of the user
             password (str): the password of the user
-        """
+        """ 
+        return User(name="Carlos", alias="cavirguezs", password="1234", grants={"publish": True})
 
     def can_publish(self):
         """
@@ -104,6 +106,7 @@ class Manager(User):
         Args:
             news (News): the news to create.
         """
+        print("Registed news:" + str(news))
         # TODO: send to db
 
     def deactivate_news(self, news: News):
