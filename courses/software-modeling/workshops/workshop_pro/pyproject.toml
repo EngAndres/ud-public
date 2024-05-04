@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "workshop-pro"
+version = "0.1.2"
+description = "This is an example of a vehicle catalog using design patterns"
+authors = ["casierrav <cavirguezs@udistrital.edu.co>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.111.0"
+sqlalchemy = "^2.0.29"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.0"
+black = "^24.4.2"
+pylint = "^3.1.0"
+dill = "^0.3.8"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
