@@ -1,15 +1,16 @@
 """This file  has theentry point implementtion for RESTapi services."""
+from typing import List
 from fastapi import FastAPI
 from users_sub import User, Player, Seller, Manager
 from news import News
 from core import VideoGame, Catalog
 from community import Community
-from typing import List
 from models import UserCredentials
 
-from pydantic import BaseModel
+from catalog_services import router_catalog
 
 app = FastAPI()
+app.include_router(router_catalog)
 
 
 
@@ -90,15 +91,3 @@ def update_videogame(code: int, videogame: VideoGame):
 def create_community(community: Community):
     # TODO add community to db
     pass
-
-@app.get("/catalog/get_categories", response_model=List[str])
-def get_categories():
-    return Catalog.show_categories()
-
-@app.get("/catalog/show_by_category/{category}", response_model=List[VideoGame])
-def show_by_category(category: str):
-    return Catalog.show_by_category(category=category)
-
-@app.get("/catalog/new_launches", response_model=List[VideoGame])
-def new_launches():
-    return Catalog.show_new_launches()
