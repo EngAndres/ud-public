@@ -4,7 +4,8 @@ This file contains the classes and methods to manage the catalog of videogames o
 Author: Carlo A. Sierra <cavirguezs@udistrital.edu.co>
 """
 
-from .videogames import VideoGame
+from .videogames import VideoGame, VideoGameDB
+from db_connection import PostgresConnection
 
 class Catalog:
     """This class represents a catalog of videogames"""
@@ -19,6 +20,21 @@ class Catalog:
         Returns:
             list: the list of videogames.
         """
+        if len(cls.videogames) == 0:
+            list_videogames = []
+            connection = PostgresConnection("ud_ap_user", "P4$$w0rd", "localhost", 5432, "ud_ad_project")
+
+            for videogame_db in connection.session.query(VideoGameDB).all():
+                videogame_obj = VideoGame(
+                    name = videogame_db.name,
+                    code = videogame_db.code,
+                    description = videogame_db.description,
+                    price = videogame_db.price,
+                    new_launch = videogame_db.new_launch,
+                )
+                list_videogames.append(videogame_obj)
+            cls.videogames = list_videogames
+
         return cls.videogames
 
     @classmethod
@@ -57,9 +73,9 @@ class Catalog:
         Args:
             videogame (VideoGame): videogame object to add
         """
+        videogame.add_to_db()
         cls.videogames.append(videogame)
-
-
+        
     @classmethod
     def update_videogame(cls, code: int, videogame: VideoGame):
         """This method updates avideogame in the list based on its code.

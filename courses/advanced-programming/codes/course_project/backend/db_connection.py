@@ -1,12 +1,13 @@
-def test_function():
-    print("This is a test of a function")
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-class DBConnection:
-    """This class handle a DB Connection"""
 
-    def __init__(self):
-        pass
+class PostgresConnection:
 
-    def connect(self):
-        """This is a function to connecto to DataBase"""
-        print("Connect to database")
+    def __init__(
+        self, user: str, password: str, host: str, port: int, database_name: str
+    ):
+        self.engine = create_engine(
+            f"postgresql://{user}:{password}@{host}:{port}/{database_name}"
+        )
+        self.session = sessionmaker(bind=self.engine)
