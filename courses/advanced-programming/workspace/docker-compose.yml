@@ -3,12 +3,13 @@ version: '3.3'
 services:
   database:
     image: postgres:latest
+    container_name: postgres_pa
     restart: always
     ports:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: P4$$w0rd
-      POSTGRES_USER: ud_admin
+      POSTGRES_USER: ud_ap_user
       POSTGRES_DB: ud_ad_project
     volumes:
       - db_data_ap:/var/lib/postgresql/data
