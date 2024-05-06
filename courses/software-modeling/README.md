@@ -14,6 +14,7 @@ __five__ workshops, and __twenty__ additional assignments.
 - [Software Design I](#software-design-i)
   - [Goals](#goals)
   - [Pre-requisites](#pre-requisites)
+  - [Tasks](#tasks)
   - [Grading](#grading)
   - [Rules](#rules)
   - [Code of Conduct](#code-of-conduct)
@@ -38,22 +39,39 @@ This is a basic course, so you must have some knowledge in:
 - __Data systems__ and relational model basic concepts.
 - Use of __IDEs__ like VS Code, Eclipse, or PyCharm.
 
+## Tasks
+
+As follows the list of task of the course is described. Be careful with deadlines.
+
+| Deadline   | Task ID  |   Task Description                                                                                                                       | 
+| ---------- | -------- |   -------------------------------------------------------------------------------------------------------------------------------------- | 
+| May 8th    | T11      |   What is Continuous Delivery/Deployment in software development lifecycle?                                                              | 
+| May 8th    | T12      |   What is "Segregation of Duties" in Software Development Teams?                                                                         | 
+| May 10th   | T13      |   What is the Hexagonal Arquitecture approach in Software Design?                                                                        | 
+| May 10th   | T14      |   Why do some software tools make use command-line interfaces (CLI)?                                                                     | 
+| May 15th   | T15      |   What is scalability in software design and which ones are the current recommended practices to make pretty scalable software projects? | 
+| May 15th   | T16      |   What is the Model-Template Controller paradigm in Software Development? How does it is related to MVC?                                 | 
+| May 17th   | T17      |   What are both Ghosts and Dead Code? What are Code Linters and why are they important in Software Development?                          | 
+| May 17th   | T18      |   Which ones are the recommended cases to do not apply patterns design?                                                                  | 
+| May 22th   | T19      |   What are the main skills companies are looking for software developers?                                                             | 
+| May 24th   | T20      |   Which ones are traditional questions in technical interviews for software developer positions?                                         | 
+
 ## Grading
 
 As follows there is a simple distribution of percentage of grades:
 
 
-| Period    | Item                   | Percentage |
-| --------- | ---------------------- | ---------- |
-| Period I  | Assignments            | 10%        |
-|           | Workshops              | 15%        |
-|           | Project Partial Delivery           | 10%        |
-| Period II | Assignments            | 10%        |
-|           | Workshops              | 15%        |
-|           | Test                   | 10%        |
-| Period III| Workshop + Assignments | 5%         |
-|           | Final Test             | 10%        |
-|           | Course Project         | 15%        |
+| Period    | Item                     | Percentage |
+| --------- | ------------------------ | ---------- |
+| Period I  | Assignments              | 10%        |
+|           | Workshops                | 15%        |
+|           | Project Partial Delivery | 10%        |
+| Period II | Assignments              | 10%        |
+|           | Workshops                | 15%        |
+|           | Test                     | 10%        |
+| Period III| Workshop + Assignments   | 5%         |
+|           | Final Test               | 10%        |
+|           | Course Project           | 15%        |
 
 ## Rules 
 

@@ -10,6 +10,7 @@ Classes will consist of lectures, __discussions__, practical examples, and works
 - [DataBases Foundations](#databases-foundations)
   - [Goals](#goals)
   - [Pre-requisites](#pre-requisites)
+  - [Tasks](#tasks)
   - [Grading](#grading)
   - [Rules](#rules)
   - [Code of Conduct](#code-of-conduct)
@@ -29,6 +30,23 @@ This is a basic course, so you must have some knowledge in:
 - UML and **Class Diagrams** basic concepts.
 - **Git** basic usage, and **GitHub** basic usage.
 - Use of **IDEs** like VS Code, Eclipse, or PyCharm.
+
+## Tasks
+
+As follows the list of task of the course is described. Be careful with deadlines.
+
+| Deadline   | Task ID  |   Task Description                                                                  | 
+| ---------- | -------- |   --------------------------------------------------------------------------------- | 
+| May 7th    | T11      |   What are Declarative Programming Languages?                                       | 
+| May 7th    | T12      |   What are Imputers and what are the recommended practices to built them?           | 
+| May 11th   | T13      |   Which ones are the common technical skills required for data engineer positions?  | 
+| May 11th   | T14      |   What are user grants for access into operative system context?                    | 
+| May 14th   | T15      |   What is a Database Backups and what policies are recommended to handle them?      | 
+| May 14th   | T16      |   What is a database indexes and why is it important to apply them?                 | 
+| May 18th   | T17      |   What is the difference between numerical and categorical columns in data context? | 
+| May 18th   | T18      |   What are Encoders and why do they are important in neunal networks progress?      | 
+| May 21th   | T19      |   What are Vector Databases and why are they crucial for LLM development?           | 
+| May 21th   | T20      |   What is a Feature Store and what is Data Lineage?                                 | 
 
 ## Grading
 

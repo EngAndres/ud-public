@@ -14,6 +14,7 @@ __four__ workshops, and __twenty__ additional assignments.
 - [Computer Networks](#computer-networks)
   - [Goals](#goals)
   - [Pre-requisites](#pre-requisites)
+  - [Tasks](#tasks)
   - [Grading](#grading)
   - [Rules](#rules)
   - [Code of Conduct](#code-of-conduct)
@@ -37,6 +38,23 @@ This is a basic course, so you must have some knowledge in:
 - __Command-line__ interface foundations.
 - __Git__ basic usage, and __GitHub__ basic usage.
 - Use of __IDEs__ like VS Code, Eclipse, or PyCharm.
+
+## Tasks
+
+As follows the list of task of the course is described. Be careful with deadlines.
+
+| Deadline   | Task ID  |   Task Description                                                              | 
+| ---------- | -------- |   ----------------------------------------------------------------------------- | 
+| May 11th   | T11      |   Which ones are the differences between Zigbee and Bluetooth protocols?        | 
+| May 11th   | T12      |   Whom are Columbus and IFX companies? How do they impact in Colombia internet? | 
+| May 18th   | T13      |   What human-healty problems are related with wireless networks?                | 
+| May 18th   | T14      |   What is a SSL certificate? how do this affects web communication?             | 
+| May 20th   | T15      |   What are connection keys? What is the SSH protocol?                           | 
+| May 20th   | T16      |   What are C-Panel and Domain Registry?                                         | 
+| May 25th   | T17      |   In what cases in Virtualization it is recommended to setup NAT connection?    | 
+| May 25th   | T18      |   What is Neuralink Project?                                                    | 
+| May 27th   | T19      |   What is Edge-AI? What are heterogeneous networks?                             | 
+| May 27th   | T20      |   What are Green Computation and Green AI?                                      | 
 
 ## Grading
 
