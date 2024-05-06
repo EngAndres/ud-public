@@ -12,6 +12,7 @@ In addition, there will be a __semester-long project__, as well __two__ exams, _
 - [Advanced Programming](#advanced-programming)
   - [Goals](#goals)
   - [Pre-requisites](#pre-requisites)
+  - [Tasks](#tasks)
   - [Grading](#grading)
   - [Rules](#rules)
   - [Code of Conduct](#code-of-conduct)
@@ -35,6 +36,24 @@ This is a basic course, so you must have some knowledge in:
 - __Git__ basic usage, and __GitHub__ basic usage.
 - __Data systems__ and relational model basic concepts.
 - Use of __IDEs__ like VS Code, Eclipse, or PyCharm.
+
+## Tasks
+
+As follows the list of task of the course is described. Be careful with deadlines.
+
+| Deadline   | Task ID  |   Task Description                                                                                                                       | 
+| ---------- | -------- |   -------------------------------------------------------------------------------------------------------------------------------------- | 
+| May 8th    | T11      |   What is the Model-Template Controller paradigm in Software Development? How does it is related to MVC?                                 | 
+| May 9th    | T12      |   What are sockets in web development? how they are related to web services architectures?                                               | 
+| May 15th   | T13      |   What is Continuous Delivery/Deployment in software development lifecycle?                                                              | 
+| May 15th   | T14      |   What is "Segregation of Duties" in Software Development Teams?                                                                         | 
+| May 16th   | T15      |   Why do some software tools make use command-line interfaces (CLI)?                                                                     | 
+| May 16th   | T16      |   What is scalability in software design and which ones are the current recommended practices to make pretty scalable software projects? | 
+| May 20th   | T17      |   What are unit tests and which ones are the current recommended practices to create them?                                               | 
+| May 20th   | T18      |   What are high availability in cloud architectures? which ones are the recommended strategies to implement it?                          | 
+| May 22th   | T19      |   What is a monorepo project structure? in what cases is recommemded to use it?                                                          | 
+| May 23th   | T20      |   Which ones are traditional questions in technical interviews for full-stack software developer positions?                              | 
+
 
 ## Grading
 

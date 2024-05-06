@@ -13,6 +13,7 @@ __five__ workshops, and __twenty__ additional assignments.
 - [Systems Analysis](#systems-analysis)
   - [Goals](#goals)
   - [Pre-requisites](#pre-requisites)
+  - [Tasks](#tasks)
   - [Grading](#grading)
   - [Rules](#rules)
   - [Code of Conduct](#code-of-conduct)
@@ -37,6 +38,23 @@ This is a basic course, so you must have some knowledge in:
 - __Git__ basic usage, and __GitHub__ basic usage.
 - Use of __IDEs__ like VS Code, Eclipse, or PyCharm.
 
+## Tasks
+
+As follows the list of task of the course is described. Be careful with deadlines.
+
+| Deadline   | Task ID  |   Task Description                                                            | 
+| ---------- | -------- |   --------------------------------------------------------------------------- | 
+| May 8th    | T11      |   Why a good leader must be self-aweraness of vulnerabilities?                | 
+| May 8th    | T12      |   why user stories are important?            ?                                | 
+| May 11th   | T13      |   What are business rules and business models?                                | 
+| May 11th   | T14      |   What are KPIs and how they help to improve business?                        | 
+| May 15th   | T15      |   make a summary about the agile manifest recommendations                     | 
+| May 15th   | T16      |   what are the problems with deepfakes?                                       | 
+| May 18th   | T17      |   what is the event-based simulation approach?                                | 
+| May 22th   | T18      |   What are a compilation process to create a programming language?            | 
+| May 22th   | T19      |   What are the differences between graph databases and time-series databases? | 
+| May 25th   | T20      |   Which ones are the expected skills for a Computer System Analyst?           | 
+
 ## Grading
 
 As follows there is a simple distribution of percentage of grades:
@@ -53,6 +71,7 @@ As follows there is a simple distribution of percentage of grades:
 | Period III| Workshop + Assignments | 5%         |
 |           | Final Test             | 10%        |
 |           | Course Project         | 15%        |
+
 
 ## Rules 
 
