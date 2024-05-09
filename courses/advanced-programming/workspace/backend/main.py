@@ -1,6 +1,6 @@
 """This file  has theentry point implementtion for RESTapi services."""
 from fastapi import FastAPI
-from users_sub import User, Player, Seller, Manager
+from users_subsystem import User, Player, Seller, Manager
 from news import News
 from core import VideoGame, Catalog
 from community import Community
