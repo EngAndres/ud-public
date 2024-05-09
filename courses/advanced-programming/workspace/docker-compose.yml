@@ -1,36 +1,21 @@
 version: '3.3'
 
 services:
-  database:
-    image: postgres:latest
-    container_name: postgres_pa
-    restart: always
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: P4$$w0rd
-      POSTGRES_USER: ud_ap_user
-      POSTGRES_DB: ud_ad_project
-    volumes:
-      - db_data_ap:/var/lib/postgresql/data
-    networks:
-      - local
-
-  backend:
+  ap-backend:
     build:
       context: .
       dockerfile: ap_backend.Dockerfile
-    depends_on:
-      - database
+    ports:
+      - "8080:8080"
     networks:
       - local
 
-  frontend:
+  ap-frontend:
     build:
       context: .
       dockerfile: ap_frontend.Dockerfile
     depends_on:
-      - backend
+      - ap-backend
     networks:
       - local
 
