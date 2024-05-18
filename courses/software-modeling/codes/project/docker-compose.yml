@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:
+  
+  db-rel-mp:
+    image: postgres:14.12-bullseye
+    restart: always
+    container_name: bd_rel_mp
+    environment:
+      POSTGRES_DB: mp_project
+      POSTGRES_USER: mp_user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - md-data:/var/lib/postgresql/data
+    networks:
+      - mp_project
+  
+  backend-mp:
+    image: backend
+    restart: always
+    container_name: backend_mp
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db-rel-mp
+    networks:
+      - mp_project
+
+volumes:
+  md-data:
+    driver: local
+
+networks:
+  mp_project:
+    driver: bridge
