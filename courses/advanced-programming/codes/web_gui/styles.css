@@ -1,0 +1,30 @@
+body {
+    background-color: #969ce27f;
+}
+
+header {
+    text-align: center;
+}
+
+h3 {
+    color: #DD0000;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid #000000;
+}
+
+#btnLogin {
+    background-color: #00FF00;
+}
+
+#btnCancel{
+    background-color: #FF0000;
+}
+
+.form_input {
+    border-radius: 20px;
+    color: #0000FF;
+}

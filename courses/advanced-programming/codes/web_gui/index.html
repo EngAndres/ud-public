@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>VideoGame UD Store</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Carlos A. Sierra">
+        <meta name="description" content="This is a website for a dummy videogame store">
+        <meta name="keywords" content="videogame, store, ud">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <script src="videogames.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>VideoGame UD Store</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>   
+        </nav>     
+        <main>
+            <div>
+                <p>This is a project for web development class.</p>
+            </div>
+            <div>
+                <h3>VideoGames</h3>
+                <table>
+                    <tr>
+                        <th>Game</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                    <tr>
+                        <td>CupHead</td>
+                        <td>This is a videogame of a siblings whom sell their souls to the devil.</td>
+                        <td>$<i>120.000</i>,oo <b>COP</b></td>
+                    </tr>
+                    <tr>
+                        <td>Call of Duty</td>
+                        <td>This is a videogame about war and militia strategies.</td>
+                        <td>$150.000,oo COP</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <h3>Subscribe</h3>
+                <form>
+                    <label id="lblName" name="lblName">Name</label>
+                    <input class="form_input" type="text" id="txtName" name="ẗxtName" required>
+                    <label id="lblPassword" name="lblPassword">Password</label>
+                    <input class="form_input" type="password" id="txtPassword" name="ẗxtPassword" required>
+                    <br />
+                    <button onclick="javascript:login()"  id="btnLogin" name="btnLogin">Login</button>
+                    <button id="btnCancel">Cancel</button>
+                </form>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2021 VideoGame UD Store</p>
+        </footer>  
+    </body>
+</html>
