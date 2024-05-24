@@ -2,8 +2,10 @@ FROM python:3.11-slim-buster
 
 WORKDIR /app
 
-COPY backend/ .
+COPY backend/ /app/
 
+COPY requirements.txt /app/
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8080

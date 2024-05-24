@@ -2,6 +2,17 @@ version: '3.3'
 
 services:
   
+  db-norel-mp:
+    image: mongo:latest
+    restart: always
+    container_name: db_norel_mp
+    ports:
+      - "27017:27017"
+    volumes:
+      - md-mongo-data:/data/db
+    networks:
+      - mp_project
+
   db-rel-mp:
     image: postgres:14.12-bullseye
     restart: always
@@ -13,7 +24,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - md-data:/var/lib/postgresql/data
+      - md-pg-data:/var/lib/postgresql/data
     networks:
       - mp_project
   
