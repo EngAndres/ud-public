@@ -1,0 +1,33 @@
+body {
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+}
+
+h1 {
+    color: #ea0909;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #e6ea09;
+    color: rgba(215, 21, 21, 0.697);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 10px;
+}
