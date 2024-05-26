@@ -13,7 +13,11 @@ from .engines import Engine
 class EnginesFacade:
     """
     This class is a Facade Pattern Design that provides a
-    simple interface to the complex logic of the Engines subsystem."""
+    simple interface to the complex logic of the Engines subsystem.
+
+    Methods:
+        get_engine -> Engine: This method returns an engine object based on the type and price.
+    """
 
     high_factory = HighEngineFactory()
     low_factory = LowEngineFactory()

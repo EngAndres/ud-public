@@ -11,9 +11,10 @@ from workshop_pro.engines_subsystem.engines import Engine, GasEngine, ElectricEn
 class TestEngine:
     """This class tests the Engine class"""
 
-    def setup_method(self):
+    @classmethod
+    def setup_class(cls):
         """This is a method to create dummy data for engines creation"""
-        self.data_test = {
+        cls.data_test = {
             "torque": 100,
             "maximum_speed": 200,
             "dimenssions": "100x100x100",
