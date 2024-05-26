@@ -1,0 +1,20 @@
+[
+    {
+        "username": "admin",
+        "password": "admin",
+        "grants": {
+            "add_vehicle": true,
+            "remove_vehicle": true,
+            "search_vehicle": true
+        }
+    },
+    {
+        "username": "user",
+        "password": "user",
+        "grants": {
+            "add_vehicle": false,
+            "remove_vehicle": false,
+            "search_vehicle": true
+        }
+    }
+]
