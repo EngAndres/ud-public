@@ -8,6 +8,7 @@ Author: Carlos Andrés Sierra <cavirguezs@udistrital.edu.co>
 from ..catalog_subsystem import Catalog, TimeDecorator, MemoryDecorator
 from ..observability_subsystem import Observability
 
+
 class CatalogProxy:
     """This class is a proxy for the catalog class."""
 
@@ -26,7 +27,7 @@ class CatalogProxy:
     def add_vehicle(self, username: str):
         """
         This method adds a vehicle to the catalog.
-        
+
         Args:
             username (str): The username of the user who is adding the vehicle.
         """
@@ -41,7 +42,9 @@ class CatalogProxy:
         )
         vehicle_type = input("Vehicle type: ")
         self.__catalog.add_vehicle(vehicle_type)
-        Observability.write_user_log(username.get_username(), "A new vehicle had been added.")
+        Observability.write_user_log(
+            username.get_username(), "A new vehicle had been added."
+        )
 
     def remove_vehicle(self):
         """This method removes a vehicle from the catalog."""
