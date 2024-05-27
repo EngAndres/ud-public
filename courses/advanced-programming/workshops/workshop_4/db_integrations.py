@@ -1,8 +1,4 @@
-from fastapi import FastAPI
 import uvicorn
-from fastapi import FastAPI
-import uvicorn
-import sqlite3
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 from fastapi import FastAPI

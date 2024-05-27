@@ -27,5 +27,3 @@ async function callWebService() {
         console.error('Error:', error);
     }
 }
-
-callWebService();
