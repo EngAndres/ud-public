@@ -1,0 +1,27 @@
+body {
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+}
+
+h1 {
+    color: red;
+}
+
+h2 {
+    color: blue;
+}
+
+table {
+    border: 2px solid;
+    border-collapse: collapse;
+}
+
+table td, table th {
+    border: 1px solid;
+}
+
+button {
+    border-radius: 5px;
+    background-color: green;
+    color: black;
+}
