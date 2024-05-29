@@ -2,4 +2,5 @@
 
 from .catalog import CatalogConcrete as Catalog
 from .decorator import TimePerformanceDecorator as TimeDecorator
-from .decorator import MemoryPerformanceDecorator as MemoryDecorator
+# change for linux or windows depending of the OS you are working on
+from .decorator import MemoryPerformanceDecoratorWindows as MemoryDecorator
