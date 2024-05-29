@@ -6,7 +6,6 @@ Author: Carlos Andrés Sierra <cavirguezs@udistrital.edu.co>
 """
 
 import time
-import resource
 from typing import List
 
 from .catalog_interface import Catalog
@@ -69,7 +68,60 @@ class TimePerformanceDecorator(Catalog):
         )
 
 
-class MemoryPerformanceDecorator(Catalog):
+# =========================================== Uncomment this part if you are running on linux ===========================================
+# import resource
+# class MemoryPerformanceDecoratorLinux(Catalog):
+#    """
+#    This class is a decorator to get memory performance information about the catalog functions.
+#
+#    Methods:
+#        get_all_vehicles -> list: This method returns a list of all vehicles in the catalog.
+#        get_by_speed -> List[Vehicle]: This method returns a list of vehicles that have a speed
+#                                       between min_speed and max_speed.
+#        get_by_price -> List[Vehicle]: This method returns a list of vehicles that have a price
+#                                       between min_price and max_price.
+#        add_vehicle: This method adds a vehicle to the catalog.
+#        remove_vehicle: This method removes a vehicle from the catalog.
+#    """
+#    def __init__(self, catalog: Catalog):
+#        self.__catalog = catalog
+#
+#    def get_all_vehicles(self) -> List[Vehicle]:
+#        start = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+#        self.__catalog.get_all_vehicles()
+#        end = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+#        Observability.write_performance_log(f"get_all_vehicles took {end - start} Kb")
+#
+#    def get_by_speed(self, min_speed: int, max_speed: int) -> List[Vehicle]:
+#        start = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+#        self.__catalog.get_by_speed(min_speed, max_speed)
+#        end = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+#        Observability.write_performance_log(f"get_by_speed took {end - start} Kb")
+#
+#    def get_by_price(self, min_price: int, max_price: int) -> List[Vehicle]:
+#        start = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+#        self.__catalog.get_by_price(min_price, max_price)
+#        end = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+#        Observability.write_performance_log(f"get_by_price took {end - start} Kb")
+#
+#    def add_vehicle(self, vehicle_type: str):
+#        start = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+#        self.__catalog.add_vehicle(vehicle_type)
+#        end = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+#        Observability.write_performance_log(f"add_vehicle took {end - start} Kb")
+#
+#    def remove_vehicle(self, vehicle: Vehicle):
+#        start = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+#        self.__catalog.remove_vehicle(vehicle)
+#        end = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+#        Observability.write_performance_log(f"remove_vehicle took {end - start} Kb")
+
+
+# =========================================== Uncomment this part if you are running on windows ===========================================
+import psutil
+
+
+class MemoryPerformanceDecoratorWindows(Catalog):
     """
     This class is a decorator to get memory performance information about the catalog functions.
 
@@ -85,33 +137,36 @@ class MemoryPerformanceDecorator(Catalog):
 
     def __init__(self, catalog: Catalog):
         self.__catalog = catalog
+        self.__process = psutil.Process()
 
     def get_all_vehicles(self) -> List[Vehicle]:
-        start = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        start = self.__process.memory_info().rss / 1024
         self.__catalog.get_all_vehicles()
-        end = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        Observability.write_performance_log(f"get_all_vehicles took {end - start} Kb")
+        end = self.__process.memory_info().rss / 1024
+        Observability.write_performance_log(
+            f"get_all_vehicles took {round((end - start), 2)} Kb"
+        )
 
     def get_by_speed(self, min_speed: int, max_speed: int) -> List[Vehicle]:
-        start = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        start = self.__process.memory_info().rss / 1024
         self.__catalog.get_by_speed(min_speed, max_speed)
-        end = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        Observability.write_performance_log(f"get_by_speed took {end - start} Kb")
+        end = self.__process.memory_info().rss / 1024
+        Observability.write_performance_log(f"get_by_speed took {round((end - start), 2)} Kb")
 
     def get_by_price(self, min_price: int, max_price: int) -> List[Vehicle]:
-        start = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        start = self.__process.memory_info().rss / 1024
         self.__catalog.get_by_price(min_price, max_price)
-        end = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        Observability.write_performance_log(f"get_by_price took {end - start} Kb")
+        end = self.__process.memory_info().rss / 1024
+        Observability.write_performance_log(f"get_by_price took {round((end - start), 2)} Kb")
 
     def add_vehicle(self, vehicle_type: str):
-        start = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        start = self.__process.memory_info().rss / 1024
         self.__catalog.add_vehicle(vehicle_type)
-        end = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        Observability.write_performance_log(f"add_vehicle took {end - start} Kb")
+        end = self.__process.memory_info().rss / 1024
+        Observability.write_performance_log(f"add_vehicle took {round((end - start), 2)} Kb")
 
     def remove_vehicle(self, vehicle: Vehicle):
-        start = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        start = self.__process.memory_info().rss / 1024
         self.__catalog.remove_vehicle(vehicle)
-        end = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        Observability.write_performance_log(f"remove_vehicle took {end - start} Kb")
+        end = self.__process.memory_info().rss / 1024
+        Observability.write_performance_log(f"remove_vehicle took {round((end - start), 2)} Kb")

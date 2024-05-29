@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11"
 fastapi = "^0.111.0"
 sqlalchemy = "^2.0.29"
+psutil = "^5.9.8"
 
 
 [tool.poetry.group.dev.dependencies]
