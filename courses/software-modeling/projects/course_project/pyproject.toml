@@ -1,13 +1,24 @@
 [tool.poetry]
 name = "course-project"
-version = "0.1.0"
-description = ""
-authors = ["casierrav <jerarquia04@gmail.com>"]
+version = "0.1.1"
+description = "This is an example project for Software Design course"
+authors = ["casierrav <cavirguezs@udistrital.edu.co>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+fastapi = "^0.111.0"
+sqlalchemy = "^2.0.30"
+pydantic = "^2.7.2"
+click = "^8.1.7"
+uvicorn = "^0.30.0"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.1"
+pylint = "^3.2.2"
+black = "^24.4.2"
+pre-commit = "^3.7.1"
 
 [build-system]
 requires = ["poetry-core"]
