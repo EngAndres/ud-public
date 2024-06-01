@@ -1,0 +1,41 @@
+version: '3.3'
+
+services:
+
+  mp-project-database:
+    image: postgres:13.15-bullseye
+    container_name: mp_project_db
+    restart: always
+    environment:
+      POSTGRES_DB: mp-project-db
+      POSTGRES_USER: mp-user
+      POSTGRED_PASSWORD: p$ssw0rd
+    ports:
+      -  "5432": "5432"
+    volume:
+      - mp-project-data:/var/lib/postgresql/data
+    networks:
+      - mp-project-network
+
+  mp-project-backend:
+    image: mp-project
+    container_name: mp-project-backend
+    restart: always
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    ports:
+      - "8080": "8080"
+    depends_on:
+      - mp-project-database
+    networks:
+      - mp-project-network
+
+volumes:
+  mp-project-data:
+    driver:
+      local
+
+networks:
+  mp-project-network:
+    driver: bridge
