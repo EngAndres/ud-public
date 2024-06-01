@@ -1,6 +1,8 @@
+let URL_BASE = "http://localhost:8000"
+
 async function callMessage() {
     try {
-        const response = await fetch('http://localhost/hello_ud');
+        const response = await fetch(URL_BASE + '/hello_ud');
         const data = await response.text();
         document.getElementById('result').textContent = data;
     } catch (error) {
@@ -8,9 +10,9 @@ async function callMessage() {
     }
 }
 
-async function callWebService() {
+async function callTable() {
     try {
-        const response = await fetch('http://localhost/data');
+        const response = await fetch(URL_BASE + '/products');
         const data = await response.json();
         
         let table = '<table>';
@@ -26,4 +28,26 @@ async function callWebService() {
     } catch (error) {
         console.error('Error:', error);
     }
+}
+
+async function addProduct() {
+    let form = "<form id='form_product'>";
+    form += "<label for='txtName' id='lblName'>Name:</label>";
+    form += "<input type='text' id='txtName'><br>";
+    form += "<label for='txtDescription' id='lblDescription'>Description:</label>";
+    form += "<textarea id='txtDescription' rows='3'></textarea><br>";
+    form += "<button type='button' onclick='createProduct()'>Send to DB</button>";
+    form += "</form>"
+
+    document.getElementById('result').innerHTML = form;
+}
+
+async function createProduct() {
+    let data = {
+        name: document.getElementById('txtName').value,
+        description: document.getElementById('txtDescription').value
+    }
+    console.log(data)
+    
+    let url_post = URL_BASE + '/products'
 }
