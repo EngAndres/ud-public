@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "tennis-assistant"
+version = "0.1.1"
+description = ""
+authors = ["Carlos A. Sierra <cavirguezs@udistrital.edu.co>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pypdf = "^4.2.0"
+torch = "^2.3.1"
+transformers = "^4.41.2"
+sentence-transformers = "^3.0.0"
+faiss-cpu = "^1.8.0"
+huggingface-hub = "^0.23.3"
+accelerate = "^0.30.1"
+langchain = "^0.2.2"
+llama-cpp-python = "^0.2.77"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
