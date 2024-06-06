@@ -1,0 +1,6 @@
+pydantic
+uvicorn
+mysql
+psycopg2-binary
+sqlalchemy
+fastapi
