@@ -5,12 +5,12 @@ Author: Carlos Andrés Sierra <cavirguezs@udistrital.edu.co>
 """
 
 import sys
-from langchain.chains import retrieval_qa as RetrievalQA
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.llms import llamacpp
+from langchain.chains.retrieval_qa.base import RetrievalQA
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores import FAISS
-from langchain.document_loaders import PyPDFDirectoryLoader
+from langchain_community.document_loaders import PyPDFDirectoryLoader
+from langchain_community.vectorstores import FAISS
+from langchain_community.llms import LlamaCpp
+from langchain_huggingface import HuggingFaceEmbeddings
 
 
 def load_pdf_data(path: str) -> str:
@@ -73,14 +73,15 @@ def load_llm():
     This method loads the LLM model, in this case, one of the FOSS Mistral family.
     """
     # Download from: https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/blob/main/mistral-7b-instruct-v0.2.Q3_K_M.gguf
-    return llamacpp(
+    llm = LlamaCpp(
         streaming=True,
-        model_path=".llm_model/mistral-7b-instruct-v0.2.Q3_K_M.gguf",
+        model_path="tennis_assistant/llm_model/mistral-7b-instruct-v0.2.Q3_K_M.gguf",
         temperature=0.75,
         top_p=1,
         verbose=True,
         n_ctx=4096,
     )
+    return llm
 
 
 def agent_answer(question: str, llm: object, vector_store: object):
