@@ -12,6 +12,8 @@ sqlalchemy = "^2.0.30"
 pydantic = "^2.7.2"
 click = "^8.1.7"
 uvicorn = "^0.30.0"
+python-dotenv = "^1.0.1"
+psycopg2-binary = "^2.9.9"
 
 
 [tool.poetry.group.dev.dependencies]

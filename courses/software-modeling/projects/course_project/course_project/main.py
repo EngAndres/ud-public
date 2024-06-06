@@ -3,8 +3,15 @@ This module is the main entry point where web services are defined
 to interact with all external users, including frontend clients
 """
 
+import os
 from fastapi import FastAPI
 from pydantic import BaseModel, SecretStr
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+
+from course_subsystems import CourseDE, CourseDAO
+
+# db://user:password@url:port/name_db
 
 app = FastAPI(
     title="Entertaining Backend Project",
@@ -70,3 +77,14 @@ def reserve_sport_space():
 def payment():
     """This is a service where the client could registers a payment of center servives."""
     return None
+
+@app.post("/manager/create_course", status_code=201)
+def create_course(course: CourseDE):
+    """This is a service where the manager can create a new course"""
+    CourseDAO.add_course(course)
+    return {"message": "Course created successfully"}
+
+@app.get("/manager/get_all_courses")
+def get_all_courses():
+    """This is a service where the manager can get all courses"""
+    return CourseDAO.get_all_courses()

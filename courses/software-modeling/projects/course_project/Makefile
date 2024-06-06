@@ -11,4 +11,4 @@ execute-code:
 	uvicorn main:app --reload --host 0.0.0.0 -port 8080
 
 generate-requirements:
-	poetry export --without-dashes --format=requirements.txt > requirements.txt
+	poetry export --format=requirements.txt > requirements.txt
