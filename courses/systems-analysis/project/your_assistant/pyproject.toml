@@ -1,9 +1,12 @@
 [tool.poetry]
-name = "tennis-assistant"
+name = "your-assistant"
 version = "0.1.1"
 description = ""
 authors = ["Carlos A. Sierra <cavirguezs@udistrital.edu.co>"]
 readme = "README.md"
+
+[tool.poetry.scripts]
+run-agent = "your_assistant.text_processing:main"
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -16,6 +19,8 @@ huggingface-hub = "^0.23.3"
 accelerate = "^0.30.1"
 langchain = "^0.2.2"
 llama-cpp-python = "^0.2.77"
+langchain-community = "^0.2.3"
+langchain-huggingface = "^0.0.3"
 
 
 [build-system]
