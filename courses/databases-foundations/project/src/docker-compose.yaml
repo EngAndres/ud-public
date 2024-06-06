@@ -3,7 +3,7 @@ version: '3.3'
 services:
 
   postgres-db:
-    image: postgres
+    image: postgres:latest
     restart: always
     ports:
       - "5432:5432"
@@ -17,14 +17,13 @@ services:
       - local
 
   mysql-db:
-    image: mysql
+    image: mysql:latest
     restart: always
-    expose: 3306
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: P4ssw0rd
-      MYSQL_DATABASE: ud_project
+      MYSQL_DATABASE: ud_db_project
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
