@@ -1,4 +1,4 @@
-let URL_BASE = "http://localhost:8000"
+let URL_BASE = "http://localhost:8080"
 
 async function callMessage() {
     try {
