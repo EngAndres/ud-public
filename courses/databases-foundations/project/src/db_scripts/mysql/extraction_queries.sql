@@ -26,7 +26,7 @@ WITH subscribers_count AS (
     FROM subscribers_rel
     GROUP BY channel_fk
 )
-SELECT channel.name, channel.description, users.name 
+SELECT channel.name, channel.description
 FROM channel
 JOIN subscribers_rel 
      ON subscribers_rel.channel_fk = channel.id_channel
