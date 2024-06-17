@@ -1,0 +1,6 @@
+numpy
+faker
+pytest
+black
+fastapi
+uvicorn
