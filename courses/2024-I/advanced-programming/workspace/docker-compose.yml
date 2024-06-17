@@ -2,6 +2,9 @@ version: '3.3'
 
 services:
   ap-backend:
+    image: ap-backend
+    restart: always
+    container_name: ap_backend
     build:
       context: .
       dockerfile: ap_backend.Dockerfile

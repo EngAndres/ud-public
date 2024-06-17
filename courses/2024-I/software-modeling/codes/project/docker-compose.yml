@@ -2,21 +2,21 @@ version: '3.3'
 
 services:
   
-  db-norel-mp:
+  mp-db-norel:
     image: mongo:latest
     restart: always
-    container_name: db_norel_mp
+    container_name: mp_db_norel
     ports:
       - "27017:27017"
     volumes:
-      - md-mongo-data:/data/db
+      - mp-mongo-data:/data/db
     networks:
       - mp_project
 
-  db-rel-mp:
+  mp-db-rel:
     image: postgres:14.12-bullseye
     restart: always
-    container_name: bd_rel_mp
+    container_name: mp_bd_rel
     environment:
       POSTGRES_DB: mp_project
       POSTGRES_USER: mp_user
@@ -24,26 +24,28 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - md-pg-data:/var/lib/postgresql/data
+      - mp-pg-data:/var/lib/postgresql/data
     networks:
       - mp_project
   
-  backend-mp:
-    image: backend
+  mp-backend:
+    image: mp-backend
     restart: always
-    container_name: backend_mp
+    container_name: mp_backend
     build:
       context: .
       dockerfile: backend.Dockerfile
     ports:
       - "8080:8080"
     depends_on:
-      - db-rel-mp
+      - mp-db-rel
     networks:
       - mp_project
 
 volumes:
-  md-data:
+  mp-pg-data:
+    driver: local
+  mp-mongo-data:
     driver: local
 
 networks:
