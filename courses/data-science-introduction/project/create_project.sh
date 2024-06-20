@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Create a VEnv for Python 3.11.8
-pyenv install 3.11.8
-pyenv virtualenv 3.11.8 data-science-introduction
+# Create a VEnv for Python 3.11.9
+pyenv install 3.11.9
+pyenv virtualenv 3.11.9 data-science-introduction
 pyenv activate data-science-introduction
 
 # Install General Dependencies
