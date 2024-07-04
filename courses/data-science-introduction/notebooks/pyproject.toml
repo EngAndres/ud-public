@@ -18,6 +18,9 @@ pipe = "^2.2"
 requests = "^2.32.3"
 spacy = "^3.7.5"
 numpy = "1.26"
+geopandas = "^1.0.1"
+wordcloud = "^1.9.3"
+cartopy = "^0.23.0"
 
 
 [tool.poetry.group.dev.dependencies]
