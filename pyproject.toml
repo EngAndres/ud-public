@@ -19,6 +19,9 @@ uvicorn = "^0.29.0"
 xgboost = "^2.0.3"
 scikit-learn = "^1.4.2"
 pydantic = "^2.7.1"
+requests = "^2.32.3"
+spacy = "^3.7.5"
+tensorflow = "^2.16.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"
