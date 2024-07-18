@@ -1,8 +1,0 @@
-pydantic
-uvicorn
-mysql
-mysql-connector-python
-psycopg2-binary
-sqlalchemy
-fastapi
-faker
