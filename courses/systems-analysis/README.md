@@ -1,14 +1,11 @@
 # Systems Analysis
 
-This course is designed to introduce undergraduate students to foundations of 
-__systems analysis__ and a lot of multiple science paradigms.
+This course is designed to introduce undergraduate students to foundations of __systems analysis__ and a lot of multiple science paradigms.
 This is a course focused on thinking, and __problem solving__. 
 
-Classes will consist of lectures, __discussions__, practical examples, and workshops. 
-Also, you must take some readings from _software architecture_.
+Classes will consist of lectures, __discussions__, practical examples, and workshops. Also, you must take some readings from _software systems_. 
 In addition, there will be __three__ exams, 
 __five__ workshops, and __twenty__ additional assignments. 
-
 
 - [Systems Analysis](#systems-analysis)
   - [Goals](#goals)
@@ -21,9 +18,7 @@ __five__ workshops, and __twenty__ additional assignments.
 
 ## Goals
 
-The main goal of this course is to provide undergraduate students with different __models__, 
-__concepts__, and __tools__ for understanding and solving problems using 
-__analysis systems__ based on projects requirements.
+The main goal of this course is to provide undergraduate students with different __models__, __concepts__, and __tools__ for understanding and solving problems using __analysis systems__ based on projects requirements.
 
 At the end of this course you should be able to __create__ a full  
 __engineering solution__ with a good level of __quality__ metrics. 
@@ -40,20 +35,20 @@ This is a basic course, so you must have some knowledge in:
 
 ## Tasks
 
-As follows the list of task of the course is described. Be careful with deadlines.
+As follows the list of task of the course is described. Each task should be one paragraph, between $200$ and $300$ _words_. Be careful with deadlines.
 
-| Deadline   | Task ID  |   Task Description                                                            | 
-| ---------- | -------- |   --------------------------------------------------------------------------- | 
-| May 8th    | T11      |   Why a good leader must be self-aweraness of vulnerabilities?                | 
-| May 8th    | T12      |   why user stories are important?            ?                                | 
-| May 11th   | T13      |   What are business rules and business models?                                | 
-| May 11th   | T14      |   What are KPIs and how they help to improve business?                        | 
-| May 15th   | T15      |   make a summary about the agile manifest recommendations                     | 
-| May 15th   | T16      |   what are the problems with deepfakes?                                       | 
-| May 18th   | T17      |   what is the event-based simulation approach?                                | 
-| May 22th   | T18      |   What are a compilation process to create a programming language?            | 
-| May 22th   | T19      |   What are the differences between graph databases and time-series databases? | 
-| May 25th   | T20      |   Which ones are the expected skills for a Computer System Analyst?           | 
+| Deadline       | Task ID | Task Description                                                           |
+| -------------- | ------- | -------------------------------------------------------------------------- |
+| August 14th    | T1      | What is the chaos theory from a scientific point of view?                  |
+| August 24th    | T2      | Which ones are the expected soft skills for a Computer System Analyst?     |
+| September 4th  | T3      | Which ones are the expected tecnical skills for a Computer System Analyst? |
+| September 14th | T4      | What is to be a systems engineer?                                          |
+| September 25th | T5      | What is lateral thinking and why is it important in systems design?        |
+| Octuber 5th    | T6      | How the DivideAndConquer paradigm could be applied in systems design?      |
+| Octuber 16th   | T7      | How current software architectures are related to systems design?          |
+| Octuber 26th   | T8      | What is the right workflow to perform systematic analysis to a problem?    |
+| November 6th   | T9      | Which ones are the most common approaches to create simulations?           |
+| November 16th  | T00     | Why graphs are widely used currently in computer science?                  |
 
 ## Grading
 
@@ -62,18 +57,17 @@ As follows there is a simple distribution of percentage of grades:
 
 | Period    | Item                   | Percentage |
 | --------- | ---------------------- | ---------- |
-| Period I  | Assignments            | 10%        |
-|           | Workshops              | 15%        |
+| Period I  | Assignments            |  5%        |
+|           | Workshops              | 20%        |
 |           | Partial Test 1         | 10%        |
-| Period II | Assignments            | 10%        |
-|           | Workshops              | 15%        |
+| Period II | Assignments            |  5%        |
+|           | Workshops              | 20%        |
 |           | Partial Test 2         | 10%        |
-| Period III| Workshop + Assignments | 5%         |
-|           | Final Test             | 10%        |
+| Period III| Paper + Poster         | 5%         |
+|           | Technical Report       | 10%        |
 |           | Course Project         | 15%        |
 
-
-## Rules 
+## Rules
 
 Don't hate the player, hate the game:
 
