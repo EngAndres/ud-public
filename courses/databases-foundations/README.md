@@ -1,11 +1,10 @@
 # DataBases Foundations
 
 This course is designed to introduce undergraduate students to foundations of __database systems__ and _good practices_ of databases design.
+This is __not__ a course fully focus on __software engineering__, but it is part of main concepts of software systems building.
 
-This is __not__ a course fully focus on __software engineering__, 
-but it is part of main concepts of software systems building.
-
-Classes will consist of lectures, __discussions__, practical examples, and workshops. Also, you must take some readings from _software architecture_. In addition, there will be a __semester-long project__, as well __three__ exams, __six__ workshops, and __twenty__ additional assignmens.
+Classes will consist of lectures, __discussions__, practical examples, and workshops. Also, you must take some readings from _software architecture_.
+In addition, there will be a __semester-long project__, as well _one_ __exam__, _four_ __workshops__, and _ten_ additional __assignmens__.
 
 - [DataBases Foundations](#databases-foundations)
   - [Goals](#goals)
@@ -18,9 +17,9 @@ Classes will consist of lectures, __discussions__, practical examples, and works
 
 ## Goals
 
-The main goal of this course is to provide undergraduate students with different __models__ __concepts__, and __tools__ for solving the data layer of software problems using __database systems__ based on software application project requirements.
+The main goal of this course is to provide undergraduate students with different __models concepts__, and __tools__ for solving the data layer of software problems using __database systems__ based on software application project requirements.
   
-At the end of this course you should be able to __create__ a full software __database solution__ with a good level of __quality__ metrics. Also, you should be able to __design__ robust database systems in an __agnostic__ way.
+At the end of this course you should be able to __create__ a full software __database solution__ with a good level of __quality__ . Also, you should be able to __design__ robust database systems in an __agnostic__ way.
 
 ## Pre-requisites
 
@@ -36,35 +35,34 @@ This is a basic course, so you must have some knowledge in:
 
 As follows the list of task of the course is described. Each task should be one paragraph, between $200$ and $300$ _words_. Be careful with deadlines.
 
-| Deadline       | Task ID |   Task Description                                                            |
-| -------------- | ------- |   --------------------------------------------------------------------------- |
-| August 13th    | T1      |   What are common technical skills required for data engineer positions?      |
-| August 24th    | T2      |   What is a Database Backup and what policies are recommended to manage them? |
-| September 3rd  | T3      |   What is BigData and how does it impact companies??                          |
-| September 14th | T4      |   How do you measure the performance of a database engine?                    |
-| September 24th | T5      |   What are database indexes and why is it important to apply them?            |
-| Octuber 5th    | T6      |   What are declarative programming languages?                                 |
-| Octuber 15th   | T7      |   What are ORMs and when to use them?                                         |
-| Octuber 26th   | T8      |   What are cache servers and how to use them in an application?               |
-| November 5th   | T9      |   What are vector databases and why are they crucial for LLM development?     |
-| November 16th  | T10     |   What is a function store and what is Data Lineage?                          |
+| Deadline       | Task ID |  Task Description                                                            |
+| -------------- | ------- |  --------------------------------------------------------------------------- |
+| August 10th    | T1      |  What are common technical skills required for data engineer positions?      |
+| August 24th    | T2      |  What is a Database Backup and what policies are recommended to manage them? |
+| September 3rd  | T3      |  What is BigData and how does it impact companies??                          |
+| September 14th | T4      |  How do you measure the performance of a database engine?                    |
+| September 24th | T5      |  What are database indexes and why is it important to apply them?            |
+| Octuber 5th    | T6      |  What are declarative programming languages?                                 |
+| Octuber 15th   | T7      |  What are ORMs and when to use them?                                         |
+| Octuber 26th   | T8      |  What are cache servers and how to use them in an application?               |
+| November 5th   | T9      |  What are vector databases and why are they crucial for LLM development?     |
+| November 16th  | T10     |  What is a function store and what is Data Lineage?                          |
 
 ## Grading
 
 As follows there is a simple distribution of percentage of grades:
 
-
-| Period    | Item                     | Percentage |
-| --------- | ------------------------ | ---------- |
-| Period I  | Assignments              |  5%        |
-|           | Workshops                | 20%        |
-|           | Project Partial Delivery | 10%        |
-| Period II | Assignments              |  5%        |
-|           | Workshops                | 20%        |
-|           | Course Test              | 10%        |
-| Period III| Paper + Poster           | 5%         |
-|           | Project Report           | 10%        |
-|           | Project on Production    | 15%        |
+| Period    | Item                   | Percentage |
+| --------- | ---------------------- | ---------- |
+| Period I  | Assignments            |  5%        |
+|           | Workshops              | 20%        |
+|           | Project Catch-Up       | 10%        |
+| Period II | Assignments            |  5%        |
+|           | Workshops              | 20%        |
+|           | Course Test            | 10%        |
+| Period III| Paper + Poster         | 5%         |
+|           | Project Report         | 10%        |
+|           | Project on Production  | 15%        |
 
 ## Rules
 

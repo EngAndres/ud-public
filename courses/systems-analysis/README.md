@@ -1,11 +1,10 @@
 # Systems Analysis
 
 This course is designed to introduce undergraduate students to foundations of __systems analysis__ and a lot of multiple science paradigms.
-This is a course focused on thinking, and __problem solving__. 
+This is a course focused on thinking, and __problem solving__.
 
-Classes will consist of lectures, __discussions__, practical examples, and workshops. Also, you must take some readings from _software systems_. 
-In addition, there will be __three__ exams, 
-__five__ workshops, and __twenty__ additional assignments. 
+Classes will consist of lectures, __discussions__, practical examples, and workshops. Also, you must take some readings from _software systems_.
+In addition, there will be a __semester-long project__, as well _one_ __exams__, _four_ __workshops__, and _ten_ additional __assignmens__.
 
 - [Systems Analysis](#systems-analysis)
   - [Goals](#goals)
@@ -20,9 +19,7 @@ __five__ workshops, and __twenty__ additional assignments.
 
 The main goal of this course is to provide undergraduate students with different __models__, __concepts__, and __tools__ for understanding and solving problems using __analysis systems__ based on projects requirements.
 
-At the end of this course you should be able to __create__ a full  
-__engineering solution__ with a good level of __quality__ metrics. 
-Also, you should be able to __design__ solutions in an __agnostic__ way.
+At the end of this course you should be able to __create__ a full __engineering solution__ with a good level of __quality__ metris. Also, you should be able to __design__ solutions in an __agnostic__ way.
 
 ## Pre-requisites
 
@@ -39,7 +36,7 @@ As follows the list of task of the course is described. Each task should be one 
 
 | Deadline       | Task ID | Task Description                                                           |
 | -------------- | ------- | -------------------------------------------------------------------------- |
-| August 14th    | T1      | What is the chaos theory from a scientific point of view?                  |
+| August 21th    | T1      | What is the chaos theory from a scientific point of view?                  |
 | August 24th    | T2      | Which ones are the expected soft skills for a Computer System Analyst?     |
 | September 4th  | T3      | Which ones are the expected tecnical skills for a Computer System Analyst? |
 | September 14th | T4      | What is to be a systems engineer?                                          |
@@ -48,7 +45,7 @@ As follows the list of task of the course is described. Each task should be one 
 | Octuber 16th   | T7      | How current software architectures are related to systems design?          |
 | Octuber 26th   | T8      | What is the right workflow to perform systematic analysis to a problem?    |
 | November 6th   | T9      | Which ones are the most common approaches to create simulations?           |
-| November 16th  | T00     | Why graphs are widely used currently in computer science?                  |
+| November 16th  | T10     | Why graphs are widely used currently in computer science?                  |
 
 ## Grading
 
@@ -65,7 +62,7 @@ As follows there is a simple distribution of percentage of grades:
 |           | Partial Test 2         | 10%        |
 | Period III| Paper + Poster         | 5%         |
 |           | Technical Report       | 10%        |
-|           | Course Project         | 15%        |
+|           | Project on Production  | 15%        |
 
 ## Rules
 
@@ -89,11 +86,7 @@ Don't hate the player, hate the game:
 
 Recommended bibliography:
 
-- __Systems Analysis and Design__, 
-  by Alan Dennis, Barbara Haley Wixom, and Roberta M. Roth.
-- __Systems Analysis and Design__, 
-  by Kenneth E. Kendall and Julie E. Kendall.
-- __Systems Analysis and Design__, 
-  by Scott Tilley and Harry J. Rosenblatt.
-- __Systems Analysis and Design__, 
-  by Gary B. Shelly, Harry J. Rosenblatt, and Thomas J. Cashman.
+- __Systems Analysis and Design__, by Alan Dennis, Barbara Haley Wixom, and Roberta M. Roth.
+- __Systems Analysis and Design__, by Kenneth E. Kendall and Julie E. Kendall.
+- __Systems Analysis and Design__, by Scott Tilley and Harry J. Rosenblatt.
+- __Systems Analysis and Design__, by Gary B. Shelly, Harry J. Rosenblatt, and Thomas J. Cashman.
