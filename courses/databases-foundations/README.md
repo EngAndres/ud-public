@@ -46,7 +46,7 @@ As follows the list of task of the course is described. Each task should be one 
 | Octuber 15th   | T7      |  What are ORMs and when to use them?                                         |
 | Octuber 26th   | T8      |  What are Cache Servers and how to use them in an application?               |
 | November 5th   | T9      |  What are Vector Databases and why are they crucial for LLM development?     |
-| November 16th  | T10     |  What is a Feature Store and what is Data Lineage?                          |
+| November 16th  | T10     |  What is a Feature Store and what is Data Lineage?                           |
 
 ## Grading
 
