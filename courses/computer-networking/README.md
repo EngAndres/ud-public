@@ -40,7 +40,7 @@ As follows the list of task of the course is described. Be careful with deadline
 
 | Deadline       | Task ID | Task Description                                                                                                                   |
 | -------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| August 10th    | T1      | What are the main recommendations for building a data center? Focus on the networking point of view                               |
+| August 17th    | T1      | What are the main recommendations for building a data center? Focus on the networking point of view                               |
 | August 24th    | T2      | Which ones are the main networks devices producers? Make a table for price comparison                                              |
 | September 2rd  | T3      | What is green computing and why is it important today?                                                                             |
 | September 14th | T4      | What are the main cyber attacks on computer networks and how to defend against them?                                               |
