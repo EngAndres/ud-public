@@ -37,18 +37,18 @@ This is a basic course, so you must have some knowledge in:
 
 As follows the list of task of the course is described. Be careful with deadlines. Each task should be one paragraph, between $200$ and $300$ _words_. Be careful with deadlines.
 
-| Deadline       | Task ID |  Task Description                                                            |
-| -------------- | ------- |  --------------------------------------------------------------------------- |
-| August 21th    | T1      |   |
-| August 23th    | T2      |   |
-| September 4th  | T3      |   |
-| September 13th | T4      |   |
-| September 25th | T5      |   |
-| Octuber 4th    | T6      |   |
-| Octuber 16th   | T7      |   |
-| Octuber 25th   | T8      |   |
-| November 6th   | T9      |   |
-| November 15th  | T10     |   |
+| Deadline       | Task ID |  Task Description                                                                                                  |
+| -------------- | ------- |  ----------------------------------------------------------------------------------------------------------------- |
+| August 21th    | T1      |  Why is it important to document code? What are best practices for high-quality documentation?                     |
+| August 23th    | T2      |  What are user stories and what is the best process to define and refine them?                                     |
+| September 4th  | T3      |  What are business rules and why are they important in the definition of any software project?d                    |
+| September 13th | T4      |  In which cases is it recommended to use the object-oriented paradigm? What is not recommended?                    |
+| September 25th | T5      |  What is the concept of hexagonal architectures? Why is it relevant today?                                         |
+| Octuber 4th    | T6      |  What are the technical and soft skills expected of a backend developer?                                           |
+| Octuber 16th   | T7      |  Which ones are the common quality metrics used for software measurement and what is the process to validate each? |
+| Octuber 25th   | T8      |  What are the technical and soft skills expected of a software architect?                                          |
+| November 6th   | T9      |  What is an ORM? Why is it useful to think about ORM when using object-oriented programming?                       |
+| November 15th  | T10     |  What is high performance computing and how does it relate to software design?                                     |
 
 ## Grading
 
