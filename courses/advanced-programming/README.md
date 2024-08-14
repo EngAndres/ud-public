@@ -38,7 +38,7 @@ As follows the list of task of the course is described. Be careful with deadline
 
 | Deadline       | Task ID |  Task Description                                                            |
 | -------------- | ------- |  --------------------------------------------------------------------------- |
-| August 8th     | T1      |   |
+| August 19th     | T1      |   |
 | August 22th    | T2      |   |
 | September 2nd  | T3      |   |
 | September 12th | T4      |   |
