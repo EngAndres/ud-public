@@ -36,18 +36,18 @@ This is a basic course, so you must have some knowledge in:
 
 As follows the list of task of the course is described. Be careful with deadlines.
 
-| Deadline       | Task ID |  Task Description                                                            |
-| -------------- | ------- |  --------------------------------------------------------------------------- |
-| August 19th     | T1      |   |
-| August 22th    | T2      |   |
-| September 2nd  | T3      |   |
-| September 12th | T4      |   |
-| September 23th | T5      |   |
-| Octuber 3rd    | T6      |   |
-| Octuber 16th   | T7      |   |
-| Octuber 28th   | T8      |   |
-| November 6th   | T9      |   |
-| November 18th  | T10     |   |
+| Deadline       | Task ID |  Task Description                                                                                                  |
+| -------------- | ------- |  ----------------------------------------------------------------------------------------------------------------- |
+| August 19th    | T1      |  Why is it important to document code? What are best practices for high-quality documentation?                     |
+| August 22th    | T2      |  What are the technical and soft skills expected of a full-stack developer?                                        |
+| September 2nd  | T3      |  In which cases is it recommended to use the object-oriented paradigm? What is not recommended?                    |
+| September 12th | T4      |  Which ones are the common quality metrics used for software measurement and what is the process to validate each? |
+| September 23th | T5      |  What is the difference between parallel and distributed computing?                                                |
+| Octuber 3rd    | T6      |  What are request queues, stream and cache in today's web development?                                             |
+| Octuber 16th   | T7      |  What is an ORM? Why is it useful to think about ORM when using object-oriented programming?                       |
+| Octuber 28th   | T8      |  What are best practices to increase user experience satisfaction?                                                 |
+| November 6th   | T9      |  What is the model-view-template pattern? How is it related to the model-view-controller?                          |
+| November 18th  | T10     |  What is high performance computing and how does it relate to software design?                                     |
 
 
 ## Grading
