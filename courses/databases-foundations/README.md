@@ -37,16 +37,16 @@ As follows the list of task of the course is described. Each task should be one 
 
 | Deadline       | Task ID |  Task Description                                                            |
 | -------------- | ------- |  --------------------------------------------------------------------------- |
-| August 10th    | T1      |  What are common technical skills required for data engineer positions?      |
+| August 17th    | T1      |  What are common technical skills required for data engineer positions?      |
 | August 24th    | T2      |  What is a Database Backup and what policies are recommended to manage them? |
 | September 3rd  | T3      |  What is BigData and how does it impact companies??                          |
 | September 14th | T4      |  How do you measure the performance of a database engine?                    |
 | September 24th | T5      |  What are database indexes and why is it important to apply them?            |
 | Octuber 5th    | T6      |  What are declarative programming languages?                                 |
 | Octuber 15th   | T7      |  What are ORMs and when to use them?                                         |
-| Octuber 26th   | T8      |  What are cache servers and how to use them in an application?               |
-| November 5th   | T9      |  What are vector databases and why are they crucial for LLM development?     |
-| November 16th  | T10     |  What is a function store and what is Data Lineage?                          |
+| Octuber 26th   | T8      |  What are Cache Servers and how to use them in an application?               |
+| November 5th   | T9      |  What are Vector Databases and why are they crucial for LLM development?     |
+| November 16th  | T10     |  What is a Feature Store and what is Data Lineage?                           |
 
 ## Grading
 
