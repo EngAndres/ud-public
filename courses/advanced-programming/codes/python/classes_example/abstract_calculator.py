@@ -21,6 +21,7 @@ from datetime import datetime
 from abc import ABC, abstractmethod
 import numpy as np
 
+
 class AbstractCalculator(ABC):
     """
     This class represents the behavior of an abstract calculator.
@@ -31,7 +32,7 @@ class AbstractCalculator(ABC):
 
         In this method a couple of integers are taken and sum had been calculated
         independing of size and sign.
-        
+
         Args:
             a (int): Fisrt number to be used in the addition.
             b (int): Second number to be used in the addition.
@@ -56,7 +57,9 @@ class AbstractCalculator(ABC):
             A float number with the result of the division.
         """
 
-#========================= Concrete Calculator =====================#
+
+# ========================= Concrete Calculator =====================#
+
 
 class Calculator(AbstractCalculator):
     """This an example of a simple concrete calculator."""
@@ -64,10 +67,10 @@ class Calculator(AbstractCalculator):
     def __init__(self):
         self.memory = 0
 
-    def division(self, a: float, b: float):
+    def division(self, a: float, b: float) -> float:
         """This is a concrete version of a typical division.
 
-        This method implements a simple division between two numbers but 
+        This method implements a simple division between two numbers but
         a validation to avoid zero-division is applied.
 
         Args:
@@ -81,35 +84,33 @@ class Calculator(AbstractCalculator):
             An error will arise when denomitor will be zero.
         """
         try:
-            result = a / b
+            result = round(a / b, 3)
         except Exception as e:
             print(f"ERROR. {e}")
-            with open('log.txt', 'a', encoding='utf-8') as file:
+            with open("log.txt", "a", encoding="utf-8") as file:
                 file.write(f"{datetime.now()}. Division by zero.")
             result = np.nan
         return result
 
 
-#========================= Client CLI =====================#
-if name == "__main__":
-    MENU = """1. Realizar Suma
-    2. Realizar división
-    3. Salir\n"""
+# ========================= Client CLI =====================#
+if __name__ == "__main__":
+    MENU = """1. Realizar Suma\n2. Realizar división\n3. Salir\n"""
 
     # create an instance of a calculator
     calculator = Calculator()
 
-    option = input(MENU)
+    option = int(input(MENU))
     while option != 3:
         if option == 1:
-            a = input("Provide first number of the sum:")
-            b = input("Provide second number of the sum:")
+            a = int(input("Provide first number of the sum:"))
+            b = int(input("Provide second number of the sum:"))
             print(f"Result: {calculator.sum(a, b)}")
         elif option == 2:
-            a = input("Provide numerator of the division:")
-            b = input("Provide divisor of the division:")
+            a = int(input("Provide numerator of the division:"))
+            b = int(input("Provide divisor of the division:"))
             print(f"Result: {calculator.division(a, b)}")
         else:
             print("Please, choose a valid option.\n")
 
-        option = input(MENU) # avoid infinite loop
+        option = int(input(MENU))  # avoid infinite loop
