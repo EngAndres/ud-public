@@ -38,13 +38,21 @@ if __name__ == "__main__":
             b = float(input("Add second number of the sum:"))
             print(f"Result: {calculator.sum(a, b)}")
         elif option == 2:
-            pass
+            a = float(input("Add first number of the rest:"))
+            b = float(input("Add second number of the rest:"))
+            print(f"Result: {calculator.rest(a, b)}")
         elif option == 3:
-            pass
+            a = float(input("Add first number of the multiplication:"))
+            b = float(input("Add second number of the multiplication:"))
+            print(f"Result: {calculator.multiplication(a, b)}")
         elif option == 4:
-            pass
+            a = float(input("Add first number of the division:"))
+            b = float(input("Add second number of the division:"))
+            print(f"Result: {calculator.division(a, b)}")
         elif option == 5:
-            pass
+            a = int(input("Add base of the power:"))
+            b = int(input("Add exponent of the power:"))
+            print(f"Result: {calculator.power(a, b)}")
         else:
             print("Please, choice a valid option.")
 
