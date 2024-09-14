@@ -22,6 +22,8 @@ along with PyCalculator-UD. If not, see <https://www.gnu.org/licenses/>.
 
 from datetime import datetime
 from abc import ABC, abstractmethod
+import numpy as np
+
 
 class AbstractCalculator(ABC):
     """
@@ -101,7 +103,9 @@ class AbstractCalculator(ABC):
             An integer with the result of the power.
         """
 
+
 # =============== Concrete Version of a Calculator =============== #
+
 
 class SimpleCalculator(AbstractCalculator):
     """
@@ -131,9 +135,9 @@ class SimpleCalculator(AbstractCalculator):
             result = a / b
         except Exception as e:
             print(f"ERROR. {e}")
-            with open('log.txt', 'a', encoding='utf-8') as f:
+            with open("log.txt", "a", encoding="utf-8") as f:
                 f.write(f"{datetime.now()} --- ERROR. {e}.")
-            result = None
+            result = np.nan  # Not a Number
         return result
 
     def power(self, base: int, exponent: int) -> int:
