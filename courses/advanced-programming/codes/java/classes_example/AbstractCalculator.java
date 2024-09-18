@@ -40,5 +40,5 @@ public abstract class AbstractCalculator{
      */
     public abstract float sum(float a, float b);
 
-    public abstract float division(float a, float b);
+    public abstract Float division(float a, float b);
 }
