@@ -19,24 +19,48 @@ You should have received a copy of the GNU General Public License
 along with Workshop_1_AP-UD. If not, see <https://www.gnu.org/licenses/>. 
 """
 
+from products import ElectronicDevice
+
 class ShoppingCart:
     """
     This class represents the behavior of a shopping cart.
     """
-    
+
     def __init__(self):
-        self.products = None
+        self.__products = []
 
     def add_product(self, product: ElectronicDevice):
-        self.products.append(product)
-    
+        """This method adds a product to the shopping cart.
+
+        This method takes an object of type ElectronicDevice and 
+        add into producs list.
+
+        Args:
+            product(ElectronicDevice): device to be added\\s
+        """
+        self.__products.append(product)
+
     def clean(self):
-        self.products = None
+        """This method cleans the shopping cart.\w\
+        """
+        self.__products = []
 
     def calculate_total(self):
         """This method calculates the total price of the
-        products in the sopping card"""
+        products in the sopping card.
+        
+        """
         cont = 0.0
-        for product in list(self.products):
+        for product in self.__products:
             cont += product.price
         return cont
+
+    def show(self):
+        """This method shows the products in the shopping cart.
+
+        This method shows all the products in the shopping cart
+        and calculates the total price to be paid.
+        """
+        for product in self.__products:
+            print(product)
+        print(f"Total: {self.calculate_total()}")
