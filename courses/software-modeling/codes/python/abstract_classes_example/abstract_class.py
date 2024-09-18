@@ -11,7 +11,7 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 class AbstractClass(ABC):
-    "   ""This class is a fingerprint for some concrete example classes."""
+    """This class is a fingerprint for some concrete example classes."""
 
     # type-hint
     def __init__(self, parameter: Any):
