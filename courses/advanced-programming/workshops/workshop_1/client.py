@@ -23,7 +23,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 
 # =============== Address Class ============= #
-class Address:
+class Address: # abstract data type
     """This class represents the behavior of an address.
     """
 
