@@ -34,7 +34,7 @@ class VideoGame:
             An integer with the code of the videogame.
         """
         return self.__code
-    
+
     def set_description(self, description: str):
         """This method changes the description of the videogame.
         
@@ -42,7 +42,7 @@ class VideoGame:
             description (str): New description of the videogame.
         """
         self.__description = description
-    
+
     def __str__(self) -> str:
         return f"{'='*10}\nCode: {self.__code}\n\
             Name: {self.__name}\nDescription: {self.__description}"

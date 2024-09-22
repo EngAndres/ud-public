@@ -22,6 +22,24 @@ along with Workshop-SM-UD. If not, see <https://www.gnu.org/licenses/>.
 
 from abc import ABC, abstractmethod
 
+
+# ========== Address Class ========== #
+class Address:  # abstract data type
+    """This class represents the behavior of an address in the application."""
+
+    def __init__(
+        self, street: str, zip_code: int, city: str, country: str = "Colombia"
+    ):
+        self.__street = street
+        self.__zip_code = zip_code
+        self.__city = city
+        self.__country = country
+
+    def __str__(self) -> str:
+        return f"{'='*10}\nStreet: {self.__street}\nZip Code: {self.__zip_code}\n\
+            City: {self.__city}\nCountry: {self.__country}"
+
+
 # ========== User AbstractClass ========== #
 class User(ABC):
     """This class represents the behavior of a general
@@ -32,6 +50,14 @@ class User(ABC):
         self.__name = name
         self.__email = email
         self.__grants = {}
+
+    def get_id(self) -> int:
+        """This method returns the id of the user.
+
+        Returns:
+            An integer with the id of the user.
+        """
+        return self.__id
 
     @abstractmethod
     def setup_grants(self):
@@ -54,8 +80,9 @@ class User(ABC):
 
 # ========== Client Class ========== #
 class Client(User):
+    """This class represents the behavior of a general client in the application."""
 
-    def __init__(self, id_: int, name: str, email: str, phone: str, address):
+    def __init__(self, id_: int, name: str, email: str, phone: str, address: Address):
         super().__init__(id_, name, email)
         self.__phones = [phone]
         self.__addresses = [address]
@@ -66,9 +93,47 @@ class Client(User):
             "add_machine_material": False,
             "buy_machine": True,
         }
-        
+
+    def add_phone(self, phone: str):
+        """This method adds an additional phone number to the client.
+
+        In this method a phone in string format is taken and added at the
+        end of the list of user's phones.
+
+        Args:
+            phone (str): Phone number to be added.
+        """
+        self.__phones.append(phone)
+
+    def add_address(
+        self, street: str, zip_code: int, city: str, country: str = "Colombia"
+    ):
+        """This method adds an additional address to the client.
+
+        In this method an address is created and added at the end of the
+        list of user's addresses.
+
+        Args:
+            street (str): Street of the address.
+            zip_code (int): Zip code of the address.
+            city (str): City of the address.
+            country (str): Country of the address.
+        """
+        address_temp = Address(street, zip_code, city, country)
+        self.__addresses.append(address_temp)
+
+    def get_addresses(self) -> list:
+        """This method returns the list of addresses of the client.
+
+        Returns:
+            A list with the addresses of the client.
+        """
+        return self.__addresses
+
+
 # ========== Manager Class ========== #
 class Manager(User):
+    """This class represents the behavior of a general manager in the application."""
 
     def __init__(self, id_: int, name: str, email: str):
         super().__init__(id_, name, email)
