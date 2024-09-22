@@ -26,9 +26,18 @@ class ElectronicDevice:
     """This class represents the behavior of an electronic
     device."""
 
-    def __init__(self, id_: str, name: str, price: float, description: str, stock: int):
+    def __init__(
+        self,
+        id_: str,
+        name: str,
+        brand: str,
+        price: float,
+        description: str,
+        stock: int,
+    ):
         self.id = id_
         self.name = name
+        self.brand = brand
         self.price = price
         self.description = description
         self.stock = stock
@@ -43,8 +52,13 @@ class Category:
     """This class represents the behavior of a category
     of electronic devices."""
 
-    def __init__(self):
+    def __init__(self, name: str):
+        self.__name = name
         self.__products = []
+
+    def get_name(self):
+        """This method returns the name of the category."""
+        return self.__name
 
     def add_product(self, product: ElectronicDevice):
         """This method adds a nee product to current category's defives.
@@ -75,3 +89,31 @@ class Category:
         using complete product object as reference.
         """
         self.__products.remove(product)
+
+    def search_product_by_name(self, product_name: str):
+        """This method searches a product in the category.
+
+        This method searches a product in the category
+        using the name of the product.
+
+        Args:
+            product_name(str): name of the product to be searched.
+        """
+        temp_products = []
+        for product in self.__products:
+            if product_name in product.name.lower():
+                temp_products.append(product)
+
+    def search_product_by_brand(self, brand_name: str):
+        """This method searches a product in the category.
+        
+        In this method a product is searched in the category
+        using the brand name of the product.
+
+        Args:
+            brand_name(str): brand name of the product to be searched.
+        """
+        temp_products = []
+        for product in self.__products:
+            if brand_name in product.brand.lower():
+                temp_products.append(product)
