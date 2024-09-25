@@ -72,4 +72,11 @@ class Machine:
                 print(vg)
         else:
             print("No videogames have been added.")
-            
+
+    def __str__(self) -> str:
+        temp_videogames = ""
+        for vg in self.__videogames:
+            temp_videogames += str(vg)
+        return f"{'*'*15}\nMaterial: {self.material}\n\
+            Videogames: \n{temp_videogames}"
+  

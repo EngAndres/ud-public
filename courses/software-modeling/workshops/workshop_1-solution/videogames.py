@@ -45,4 +45,4 @@ class VideoGame:
 
     def __str__(self) -> str:
         return f"{'='*10}\nCode: {self.__code}\n\
-            Name: {self.__name}\nDescription: {self.__description}"
+            Name: {self.__name}\nDescription: {self.__description}\n"

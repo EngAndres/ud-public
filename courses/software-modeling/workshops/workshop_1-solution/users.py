@@ -46,10 +46,10 @@ class User(ABC):
     user in the application, ti acts as an abstract class."""
 
     def __init__(self, id_: int, name: str, email: str):
-        self.__id = id_
-        self.__name = name
-        self.__email = email
-        self.__grants = {}
+        self._id = id_
+        self._name = name
+        self._email = email
+        self._grants = {}
 
     def get_id(self) -> int:
         """This method returns the id of the user.
@@ -57,7 +57,7 @@ class User(ABC):
         Returns:
             An integer with the id of the user.
         """
-        return self.__id
+        return self._id
 
     @abstractmethod
     def setup_grants(self):
@@ -75,7 +75,7 @@ class User(ABC):
         Returns:
             A boolean with the response of the requested grant.
         """
-        return self.__grants[grant] if grant in self.__grants else False
+        return self._grants[grant] if grant in self._grants else False
 
 
 # ========== Client Class ========== #
@@ -88,8 +88,9 @@ class Client(User):
         self.__addresses = [address]
 
     def setup_grants(self):
-        self.__grants = {
+        self._grants = {
             "add_videogames": False,
+            "remove_videogames": False,
             "add_machine_material": False,
             "buy_machine": True,
         }
@@ -130,6 +131,8 @@ class Client(User):
         """
         return self.__addresses
 
+    def __str__(self):
+        return f"Name: {self._name}\nEmail: {self._email}\nPhones:{' --- '.join(self.__phones)}"
 
 # ========== Manager Class ========== #
 class Manager(User):
@@ -139,8 +142,9 @@ class Manager(User):
         super().__init__(id_, name, email)
 
     def setup_grants(self):
-        self.__grants = {
+        self._grants = {
             "add_videogames": True,
+            "remove_videogames": True,
             "add_machine_material": True,
             "buy_machine": False,
         }
