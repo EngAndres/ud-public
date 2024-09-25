@@ -74,7 +74,7 @@ class AbstractUser(ABC):
 class Client(AbstractUser):
     """This class represents the behavior of a simple client."""
 
-    def __init__(self, name: str, email: str, birthday: str)
+    def __init__(self, name: str, email: str, birthday: str):
         super().__init__(name, email, birthday)
         self.__address = []
         self.__create_grants()
