@@ -52,9 +52,9 @@ class Machine:
         index = -1 # logic mark
         for i, vg in enumerate(self.__videogames):
             if vg.get_code() == code:
-                index = i 
+                index = i
                 break
-        
+
         if index != -1: # videogame is in machine
             self.__videogames.pop(index)
         else:
@@ -72,3 +72,11 @@ class Machine:
                 print(vg)
         else:
             print("No videogames have been added.")
+
+    def __str__(self) -> str:
+        temp_videogames = ""
+        for vg in self.__videogames:
+            temp_videogames += str(vg)
+        return f"{'*'*15}\nMaterial: {self.material}\n\
+            Videogames: \n{temp_videogames}"
+  

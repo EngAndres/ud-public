@@ -23,7 +23,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 
 # =============== Address Class ============= #
-class Address:
+class Address: # abstract data type
     """This class represents the behavior of an address.
     """
 
@@ -74,7 +74,7 @@ class AbstractUser(ABC):
 class Client(AbstractUser):
     """This class represents the behavior of a simple client."""
 
-    def __init__(self, name: str, email: str, birthday: str)
+    def __init__(self, name: str, email: str, birthday: str):
         super().__init__(name, email, birthday)
         self.__address = []
         self.__create_grants()

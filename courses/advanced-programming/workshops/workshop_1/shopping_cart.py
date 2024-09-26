@@ -21,6 +21,7 @@ along with Workshop_1_AP-UD. If not, see <https://www.gnu.org/licenses/>.
 
 from products import ElectronicDevice
 
+
 class ShoppingCart:
     """
     This class represents the behavior of a shopping cart.
@@ -32,7 +33,7 @@ class ShoppingCart:
     def add_product(self, product: ElectronicDevice):
         """This method adds a product to the shopping cart.
 
-        This method takes an object of type ElectronicDevice and 
+        This method takes an object of type ElectronicDevice and
         add into producs list.
 
         Args:
@@ -48,7 +49,7 @@ class ShoppingCart:
     def calculate_total(self):
         """This method calculates the total price of the
         products in the sopping card.
-        
+
         """
         cont = 0.0
         for product in self.__products:
@@ -64,3 +65,17 @@ class ShoppingCart:
         for product in self.__products:
             print(product)
         print(f"Total: {self.calculate_total()}")
+
+    def remove_product(self, product_id: str):
+        """This method removes a product from the shopping cart.
+
+        This method takes a product id as reference and removes
+        the product from the shopping cart.
+
+        Args:
+            product_id(str): id of the product to be removed.
+        """
+        for product in self.__products:
+            if product.is_id(product_id):
+                self.__products.remove(product)
+                break
