@@ -1,33 +1,41 @@
 version: '3.9'
 
 services:
-
-  prostgres-db:
+  postgres-db:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_PASSWORD: P4$$w0rd
+      POSTGRES_USER: pg_ud
+      POSTGRES_DB: ud_db_course
+    ports:
+      - "5432:5432"
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     networks:
-      - ud-network
+      - db-network
 
   mysql-db:
     image: mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: example
-    volumes:
-      - ./data:/var/lib/mysql
-    networks:
-      - ud-network
-
-  adminer:
-    image: adminer
-    restart: always
+      MYSQL_ROOT_PASSWORD: admin12345
+      MYSQL_DATABASE: ud_db_course
+      MYSQL_USER: mysql_ud
+      MYSQL_PASSWORD: P4$$w0rd
     ports:
-      - 8080:8080
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - db-network
+
+networks:
+  db-network:
+    driver: bridge
 
 volumes:
-  data:
+  postgres-data:
+    driver: local
+  mysql-data:
     driver: local
