@@ -11,7 +11,7 @@ public class SavingAccount {
             System.out.println("Invalid amount.");
         }
         else {
-            self.money += amount;
+            this.money += amount;
             System.out.println("Money deposited: " + amount);
         }
     }

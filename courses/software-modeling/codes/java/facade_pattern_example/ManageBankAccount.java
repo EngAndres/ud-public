@@ -19,35 +19,25 @@ public class ManageBankAccount{
         this.status = Authentication.auth(username, password);
     }
 
-    public int getBalance(){
-        if(this.status){
-            
-        }
-        else{
-            System.out.println("You need to login first.");
-            return -1;
-        }
-    }
-
     public void addCreditCard(){
         int cardNumber = 123456;
         int maximumLimit = 1000;
 
         CreditCards creditCard = new CreditCards(cardNumber, maximumLimit);
-        this.creditCards.addCreditCard(creditCard);
+        this.creditCards.add(creditCard);
     }
 
     public void addSavingAccount(){
         SavingAccount savingAccount = new SavingAccount();
-        this.savingAccount.addSavingAccount(savingAccount);
+        this.savingAccount.add(savingAccount);
     }
 
     public int getBalance(){
-        debt = 0;
+        int debt = 0;
         for(CreditCards creditCard : this.creditCards){
             debt += creditCard.getMoney();
         }
-        money = 0;
+        int money = 0;
         for(SavingAccount sa = this.savingAccount){
             money += sa.getMoney();
         }

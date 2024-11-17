@@ -1,8 +1,8 @@
-from abc import ABC, abstracmethod
+from abc import ABC, abstractmethod
 
-class FileProcessingInterfface(ABC):
+class FileProcessingInterface(ABC):
 
-    @abstracmethod
+    @abstractmethod
     def get_into(self, file_name):
         """This method gets the information of a 
         file based on path provided.
