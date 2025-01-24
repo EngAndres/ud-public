@@ -1,0 +1,19 @@
+[project]
+name = "condor"
+version = "0.1.0"
+description = "this is a rest api for academic services"
+authors = [
+    {name = "casierrav",email = "cavirguezs@udistrital.edu.co"}
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+]
+
+[tool.poetry]
+packages = [{include = "condor", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
