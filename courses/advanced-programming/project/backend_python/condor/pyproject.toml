@@ -8,11 +8,17 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
+    "fastapi (>=0.115.7,<0.116.0)",
+    "uvicorn (>=0.34.0,<0.35.0)"
 ]
 
 [tool.poetry]
 packages = [{include = "condor", from = "src"}]
 
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.9.3"
+pytest = "^8.3.4"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

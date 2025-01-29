@@ -17,7 +17,7 @@ class Courses:
 
     def __init__(self):
         self.course_data = None
-        self.file_path = 'courses.json'
+        self.file_path = 'repositories/courses.json'
         with open(self.file_path, 'r', encoding='utf-8') as file:
             self.course_data = json.load(file)
 
