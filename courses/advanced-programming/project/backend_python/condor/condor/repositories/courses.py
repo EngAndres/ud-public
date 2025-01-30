@@ -4,13 +4,13 @@ This module handles the data for courses in the enrollment process.
 Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co> - Jan 2025
 """
 import json
+from pydantic import BaseModel
 
-class CourseData:
+class CourseData(BaseModel):
     """This class represents the data structure of a course."""
-    def __init__(self, name, code, enrollments):
-        self.name = name
-        self.code = code
-        self.enrollments = enrollments
+    name:str
+    code:str
+    enrollments:int
 
 class Courses:
     """This class represents the repository of courses."""
@@ -18,8 +18,12 @@ class Courses:
     def __init__(self):
         self.course_data = None
         self.file_path = 'repositories/courses.json'
-        with open(self.file_path, 'r', encoding='utf-8') as file:
-            self.course_data = json.load(file)
+        try:
+            with open(self.file_path, 'r', encoding='utf-8') as file:
+                self.course_data = json.load(file)
+        except FileNotFoundError:
+            print('File not found')
+            self.course_data = []
 
     def get_course_by_name(self, name: str) -> list:
         """This method returns a list of courses that match 
@@ -34,7 +38,7 @@ class Courses:
         result = []
         for course in self.course_data:
             if name in course['name']:
-                course_temp = CourseData(course['name'], course['code'], course['enrollments'])
+                course_temp = CourseData(name=course['name'],code=course['code'], enrollments=course['enrollments'])
                 result.append(course_temp)
         return result
 
@@ -50,7 +54,7 @@ class Courses:
         result = None
         for course in self.course_data:
             if code == course['code']:
-                result = CourseData(course['name'], course['code'], course['enrollments'])
+                result = CourseData(name=course['name'],code=course['code'], enrollments=course['enrollments'])
                 break
         return result
 
