@@ -5,14 +5,14 @@ Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co> - Jan 2025
 """
 
 from fastapi import APIRouter
-
-from repositories import Courses
+from typing import List
+from repositories import Courses, CourseData
 
 repository = Courses()
 courses_router = APIRouter()
 
 @courses_router.get('/courses/get_by_name/{name}')
-def get_course_by_name(name: str) -> list:
+def get_course_by_name(name: str) -> List[CourseData]:
     """This method returns a list of courses that match.
     
     Args:
@@ -25,7 +25,7 @@ def get_course_by_name(name: str) -> list:
     return repository.get_course_by_name(name)
 
 @courses_router.get("/courses/get_by_code/{code}")
-def get_course_by_code(code: int) -> dict:
+def get_course_by_code(code: str) -> CourseData:
     """This method returns a course that match the code given.
     
     Args:
@@ -35,6 +35,4 @@ def get_course_by_code(code: int) -> dict:
         A course that match the code given.
     """
     print("CHECK ERROR", code)
-    if code < 0:
-        return {'error': 'Invalid code'}
     return repository.get_course_by_code(code)
