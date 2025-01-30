@@ -10,7 +10,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the FastAPI application code
-#COPY /condor/ .
+COPY /condor/ .
 
 # Expose the port the app runs on
 EXPOSE 8000
