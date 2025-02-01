@@ -1,4 +1,7 @@
-"""This module represents the behavior of a lexical analyzer."""
+"""This module represents the behavior of a lexical analyzer.
+
+Author: Carlos Andres Sierra <casierrav@udistrital.edu.co>
+"""
 
 import re
 
@@ -23,7 +26,7 @@ class LexicalAnalyzer:
         token_specification = [
             ('NOTE', r'[A-G][1-8]'),     # Notes: A-B-C-D-E-F-G followed by 1-8 (octave)
             ('DURATION', r'\d|\d//\d+'), # Duration
-            ('KEYWORDS', r'START|END'),  # Start
+            ('KEYWORDS', r'START|END'),  # Start-End
             ('SKIP', r'[ \t]+'),         # Skip over spaces and tabs
             ('MISMATCH', r'.'),          # Any other character
         ]
