@@ -24,7 +24,7 @@ class LexicalAnalyzer:
         """This method receives a code and returns a list of tokens."""
         tokens = []
         token_specification = [
-            ('NOTE', r'[A-G][1-8]'),     # Notes: A-B-C-D-E-F-G followed by 1-8 (octave)
+            ('NOTE', r'[A-G][b-s]{0,1}[1-8]'),     # Notes: A-B-C-D-E-F-G followed by 1-8 (octave)
             ('DURATION', r'\d|\d//\d+'), # Duration
             ('KEYWORDS', r'START|END'),  # Start-End
             ('SKIP', r'[ \t]+'),         # Skip over spaces and tabs
@@ -32,7 +32,9 @@ class LexicalAnalyzer:
         ]
 
         tok_regex = '|'.join(f'(?P<{pair[0]}>{pair[1]})' for pair in token_specification)
+        print(tok_regex)
         for mo in re.finditer(tok_regex, code):
+            print(mo)
             kind = mo.lastgroup
             value = mo.group()
 
