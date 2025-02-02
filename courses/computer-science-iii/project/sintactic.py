@@ -4,16 +4,16 @@ Author: Carlos Andres Sierra <casierrav@udistrital.edu.co>
 """
 
 # GRAMMAR DEFINITION:
-# <S> -> "START" <NOTE_SEQUENCE> "END"
+# <S>             -> "START" <NOTE_SEQUENCE> "END"
 # <NOTE_SEQUENCE> -> <NOTE> <NOTE_DURATION> <NOTE_SEQUENCE> | <NOTE> <NOTE_DURATION>
-# <NOTE> -> ("A" | "B" | "C" | "D" | "E" | "F" | "G") <OCTAVE>
-# <OCTAVE> -> "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8"
-# <NOTE_DURATION> -> <DURATION> | "1 /" <FAST_DURATION>
-# <DURATION> -> "1" | "2" | "4"
+# <NOTE>          -> ("A" | "B" | "C" | "D" | "E" | "F" | "G") <OCTAVE>
+# <OCTAVE>        -> "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8"
+# <NOTE_DURATION> -> <DURATION> | "1/" <FAST_DURATION>
+# <DURATION>      -> "1" | "2" | "4"
 # <FAST_DURATION> -> "2" | "4" | "8"
 
 
-class Parser:
+class SintacticAnalyzer:
     """This class represents the behavior of a syntactic analyzer."""
     def __init__(self, tokens):
         self.tokens = tokens
