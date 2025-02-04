@@ -3,8 +3,12 @@ performing CRUD operations on the users table.
 
 Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
 """
-from database_connection import PostgresDatabaseConnection
+
+from typing import List
 from pydantic import BaseModel
+
+from database_connection import PostgresDatabaseConnection
+
 
 class UserData(BaseModel):
     """This class is responsible for defining the user data structure."""
@@ -57,7 +61,7 @@ class UsersCRUD:
             print(f"Failing in the user update. {e}")
 
 
-    def update(self, id: int, data: UserData):
+    def update(self, id_: int, data: UserData):
         """This method updates the user data in the database.
         
         Args:
@@ -70,12 +74,12 @@ class UsersCRUD:
             WHERE id_user = %s;
         """
         try:
-            values = (data.username, data.password, id)
+            values = (data.username, data.password, id_)
             self._execution(query, values)
         except Exception as e:
             print(f"Failing in the user update. {e}")
 
-    def delete(self, id: int):
+    def delete(self, id_: int):
         """This method deletes the user from the database.
 
         Args:
@@ -86,30 +90,70 @@ class UsersCRUD:
             WHERE id_user = %s;
         """
         try:
-            values = (id,)
+            values = (id_,)
             self._execution(query, values)
         except Exception as e:
             print(f"Failing in the user delete. {e}")
 
-    def get_by_id(self, id: int):
+    def get_by_id(self, id_: int) -> UserData:
+        """This method gets a user from repository
+        based on the id.
+
+        Args:
+            id_ (int): Id of the user
+        
+        Returns:
+            The used who matched the id.
+        """
         query = """
             SELECT username, password, email, created_at
             FROM condor.users
             WHERE id_user = %s;
         """
+        try:
+            values = (id_, )
+            cursor = self.db_connection.connection.cursor()
+            cursor.execute(query, values)
+            user = cursor.fetchone()
+            cursor.close()
+            return user
+        except Exception as e:
+            print(f"Failing to get user by id. {e}")
 
-    def get_all(self):
+    def get_all(self) -> List(UserData):
+        """This method allows to get all the users data.
+
+        Returns:
+            A list with all the users of the database.
+        """
         query = """
             SELECT *
             FROM condor.users;
         """
+        users = []
+        try:
+            cursor = self.db_connection.connection.cursor()
+            cursor.execute(query)
+            users = cursor.fetchall()
+        except Exception as e:
+            print(f"Fail getting all the users. {e}")
+
+        return users
 
     def get_by_name(self, name: str):
         query = """
             SELECT id_user, username, password, email, created_at
             FROM condor.users
-            WHERE username LIKE '\%%s\%';
+            WHERE username LIKE '\% %s \%';
         """
+        try:
+            values = (name, )
+            cursor = self.db_connection.connection.cursor()
+            cursor.execute(query, values)
+            users = cursor.fetchall()
+            return users
+        except Exception as e:
+            print(f"Fail getting users by name. {e}")
 
     def get_by_email(self, email: str):
         query = """
@@ -117,3 +161,11 @@ class UsersCRUD:
             FROM condor.users
             WHERE email = %s;
         """
+        try:
+            values = (email, )
+            cursor = self.db_connection.connection.cursor()
+            cursor.execute(query, values)
+            user = cursor.fetchone()
+            return user
+        except Exception as e:
+            print(f"Fail getting a user by email. {e}")
