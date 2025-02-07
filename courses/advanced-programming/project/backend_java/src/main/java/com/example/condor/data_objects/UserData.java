@@ -20,6 +20,9 @@ public class UserData {
     public String location;
     public int age;
 
+    public UserData(){
+    }
+
     public UserData(int id, String name, String username, String password, String language, String location, int age){
         this.id = id;
         this.name = name;
