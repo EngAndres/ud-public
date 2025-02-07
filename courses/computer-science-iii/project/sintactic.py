@@ -15,6 +15,7 @@ Author: Carlos Andres Sierra <casierrav@udistrital.edu.co>
 
 class SintacticAnalyzer:
     """This class represents the behavior of a syntactic analyzer."""
+
     def __init__(self, tokens):
         self.tokens = tokens
         self.current_token = None
@@ -39,40 +40,44 @@ class SintacticAnalyzer:
 
     def start(self):
         """This method checks if the first token is 'START'."""
-        if self.current_token.type == 'START':
+        if (
+            self.current_token.type_ == "KEYWORDS"
+            and self.current_token.value == "START"
+        ):
             self.advance()
         else:
-            self.error('START')
+            self.error("START")
 
     def end(self):
         """This method checks if the last token is 'END'."""
-        if self.current_token.type == 'END':
+        if self.current_token.type_ == "KEYWORDS" and self.current_token.value == "END":
             self.advance()
             if self.current_token is not None:
-                self.error('END')
+                self.error("END")
 
     def note_sequence(self):
         """This method checks if the sequence of notes is correct."""
         self.note()
-        while self.current_token and self.current_token.type == 'NOTE':
+        while self.current_token and self.current_token.type_ == "NOTE":
             self.note()
 
     def note(self):
         """This method checks if the note is correct."""
-        if self.current_token.type == 'NOTE':
+        if self.current_token.type_ == "NOTE":
             self.advance()
-            if self.current_token.type == 'DURATION':
+            if self.current_token.type_ == "DURATION":
                 self.advance()
             else:
-                self.error('DURATION')
+                self.error("DURATION")
         else:
-            self.error('NOTE')
+            self.error("NOTE")
 
     def error(self, expected):
         """This method raises an exception if the current token is not the expected one.
-        
+
         Args:
             expected (str): The expected token.
         """
-        raise Exception(f"Syntax error: expected {expected}, found {self.current_token}")
-    
+        raise Exception(
+            f"Syntax error: expected {expected}, found {self.current_token}"
+        )
