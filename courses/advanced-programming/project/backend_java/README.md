@@ -2,7 +2,7 @@
 
 This is a set of services for user management, including authentication.
 This __backend__ is based on _SprintBoot_ and _Maven_, as technologies to make a simple
-both construction and deployment.
+both construction and deployment. You could start using [SpringBoot Initializr](https://start.spring.io/).
 
 ## Requirements
 
