@@ -3,6 +3,7 @@
 Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
 """
 
+
 # pylint: disable=too-few-public-methods
 class SemanticAnalyzer:
     """This class represents the behavior of a semantic analyzer."""
@@ -14,10 +15,9 @@ class SemanticAnalyzer:
     def analyze(self):
         """This method analyzes the tokens and returns the notes."""
         for token in self.tokens:
-            if token.type == 'NOTE':
+            if token.type_ == "NOTE":
                 self.notes.append((token.value, None))
-            elif token.type == 'DURATION':
+            elif token.type_ == "DURATION":
                 if self.notes:
                     self.notes[-1] = (self.notes[-1][0], token.value)
         return self.notes
-    
