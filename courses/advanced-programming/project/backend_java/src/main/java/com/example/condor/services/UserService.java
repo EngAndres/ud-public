@@ -1,16 +1,18 @@
 /**
  * This file has a class to handle user functionalities.
  * 
- * Author: Carlos Andres Sierra <
+ * Author: Carlos Andres Sierra <casierrav@udistrital.edu.co>
  */
 package com.example.condor.services;
 
 import java.util.Optional;
-import com.example.condor.data_objects.UserData;
-import com.example.condor.data_objects.AuthData;
-import com.example.condor.repositories.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.condor.data_objects.AuthData;
+import com.example.condor.data_objects.UserData;
+import com.example.condor.repositories.UserRepository;
 
 /**
  * This class is used to manage the user's data.
@@ -58,5 +60,31 @@ public class UserService {
             return null;
         }
         return userRepository.addUser(userData);
+    }
+
+    /**
+     * This method is used to update the password of a user.
+     *
+     * @param userData
+     * @return A boolean value to indicate if the password was updated.
+     */
+    public Boolean updatePassword(UserData userData) {
+        if (userData.id < 0 || userData.password == null) {
+            return false;
+        }
+        return userRepository.updatePassword(userData);
+    }
+
+    /**
+     * This method is used to delete a user by the id.
+     *
+     * @param id
+     * @return A boolean value to indicate if the user was deleted.
+     */
+    public Boolean deleteUser(Integer id) {
+        if (id < 0) {
+            return false;
+        }
+        return userRepository.deleteUser(id);
     }
 }
