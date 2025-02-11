@@ -1,3 +1,5 @@
 psycopg2-binary
+mysql-connector-python
 fastapi
 uvicorn
+faker

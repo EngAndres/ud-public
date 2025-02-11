@@ -1,19 +1,20 @@
 version: '3.9'
 
 services:
-  postgres-db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: P4$$w0rd
-      POSTGRES_USER: ud_pg
-      POSTGRES_DB: ud_db_course
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    networks:
-      - db-network
+
+  #postgres-db:
+  #  image: postgres
+  #  restart: always
+  #  environment:
+  #    POSTGRES_PASSWORD: P4$$w0rd
+  #    POSTGRES_USER: ud_pg
+  #    POSTGRES_DB: ud_db_course
+  #  ports:
+  #    - "5432:5432"
+  #  volumes:
+  #    - postgres-data:/var/lib/postgresql/data
+  #  networks:
+  #    - db-network
 
   mysql-db:
     image: mysql
@@ -30,12 +31,22 @@ services:
     networks:
       - db-network
 
+  #backend:
+  #  build: .
+  #  ports:
+  #    - "5000:5000"
+  #  networks:
+  #    - db-network
+  #  depends_on:
+  #    - postgres-db
+  #    - mysql-db
+  
 networks:
   db-network:
     driver: bridge
 
 volumes:
-  postgres-data:
-    driver: local
+  #postgres-data:
+  #  driver: local
   mysql-data:
     driver: local

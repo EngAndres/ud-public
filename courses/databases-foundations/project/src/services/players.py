@@ -1,0 +1,113 @@
+"""This module has the definitions for the endpoint related to players information.
+
+Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
+"""
+
+from typing import List
+from fastapi import APIRouter, HTTPException, status
+
+from connections.mysql_connection import MySQLDatabaseConnection
+from crud.players import PlayersCRUD
+from dao import PlayerData
+
+router = APIRouter()
+
+# Initialize MySQL DB connection and Players CRUD instance.
+db_connection = MySQLDatabaseConnection()
+players_crud = PlayersCRUD(db_connection)
+
+
+@router.get("/players", response_model=List[PlayerData])
+def get_all_players():
+    """
+    Retrieve all players from the database.
+
+    Returns:
+        List[PlayerData]: A list of player data objects.
+    """
+    players = players_crud.get_all()
+    return players
+
+
+@router.get("/players/{id_player}", response_model=PlayerData)
+def get_player_by_id(id_player: int):
+    """
+    Retrieve a player by its id.
+
+    Args:
+        id_player (int): The id of the player.
+
+    Raises:
+        HTTPException: If the player is not found.
+
+    Returns:
+        PlayerData: The player data object.
+    """
+    player = players_crud.get_by_id(id_player)
+    if not player:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Player not found"
+        )
+    return player
+
+
+@router.post("/players", response_model=int)
+def create_player(data: PlayerData):
+    """
+    Create a new player in the database.
+
+    Args:
+        data (PlayerData): The player data.
+
+    Returns:
+        int: The auto-generated id of the new player.
+    """
+    player_id = players_crud.create(data)
+    return player_id
+
+
+@router.put("/players/{id_player}", response_model=dict)
+def update_player(id_player: int, data: PlayerData):
+    """
+    Update an existing player's information.
+
+    Args:
+        id_player (int): The id of the player to update.
+        data (PlayerData): The updated player data.
+
+    Raises:
+        HTTPException: If the player cannot be updated.
+
+    Returns:
+        dict: A success message.
+    """
+    try:
+        players_crud.update(id_player, data)
+        return {"detail": "Player updated successfully"}
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Could not update player"
+        ) from exc
+
+
+@router.delete("/players/{id_player}", response_model=dict)
+def delete_player(id_player: int):
+    """
+    Delete a player from the database.
+
+    Args:
+        id_player (int): The id of the player to delete.
+
+    Raises:
+        HTTPException: If the player cannot be deleted.
+
+    Returns:
+        dict: A success message.
+    """
+    try:
+        players_crud.delete(id_player)
+        return {"detail": "Player deleted successfully"}
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Could not delete player"
+        ) from exc
