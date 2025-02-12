@@ -9,6 +9,13 @@ CREATE TABLE IF NOT EXISTS team (
     coach VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS stadium (
+    id_stadium INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    capacity INT,
+    place VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS player (
     id_player INT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
@@ -16,9 +23,9 @@ CREATE TABLE IF NOT EXISTS player (
     position VARCHAR(20) DEFAULT '',
     team_fk INT NOT NULL,
     FOREIGN KEY (team_fk) REFERENCES team(code)
-);
+); 
 
-CREATE TABLE IF NOT EXISTS match (
+CREATE TABLE IF NOT EXISTS t_match (
     id_match INT AUTO_INCREMENT PRIMARY KEY,
     match_date DATE NOT NULL,
     local_fk INT NOT NULL,
@@ -29,9 +36,3 @@ CREATE TABLE IF NOT EXISTS match (
     FOREIGN KEY (guest_fk) REFERENCES team(code)
 );
 
-CREATE TABLE IF NOT EXISTS stadium (
-    id_stadium INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30) NOT NULL,
-    capacity INT,
-    place VARCHAR(50) NOT NULL
-);

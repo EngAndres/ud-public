@@ -16,9 +16,9 @@ class MySQLDatabaseConnection(DatabaseConnection):
     """This class is responsible for connecting to the MySQL database."""
 
     def __init__(self):
-        self._dbname = "tournament"
+        self._dbname = "football"
         self._duser = "root"
-        self._dpass = "P4$$w0rd"  # Update the password accordingly
+        self._dpass = "admin12345"  # Update the password accordingly
         self._dhost = "localhost"
         self._dport = 3306
         self.connection = None

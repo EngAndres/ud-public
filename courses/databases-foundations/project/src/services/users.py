@@ -1,7 +1,7 @@
 """This module contains the services related to the users in the database."""
 
-from typing import List
-from fastapi import APIRouter
+from typing import List, Optional
+from fastapi import APIRouter, HTTPException
 
 from dao import UserData
 from crud import UsersCRUD
@@ -21,22 +21,31 @@ init = InitUsers(conn)
 def create(data: UserData):
     """This service creates a new user in the database.
     Remember that the user data must have the specified struture."""
+    print("Creating user", data)
     return crud.create(data)
 
 
-@router.put("/user/update/{id_}", response_model=UserData)
+@router.put("/user/update/{id_}", response_model=bool)
 def update(id_: int, data: UserData):
     """This service updates the user data in the database based on its id."""
-    return crud.update(id_, data)
+    try:
+        crud.update(id_, data)
+        return True
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=str(e)) from e
 
 
 @router.delete("/user/delete/{id_}", response_model=bool)
 def delete(id_: int):
     """This service deletes a user from the database based on its id."""
-    return crud.delete(id_)
+    try:
+        crud.delete(id_)
+        return True
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=str(e)) from e
 
 
-@router.get("/user/get_by_id/{id_}", response_model=UserData)
+@router.get("/user/get_by_id/{id_}", response_model=Optional[UserData])
 def get_by_id(id_: int):
     """This service gets a user from the database based on its id."""
     return crud.get_by_id(id_)
@@ -54,7 +63,7 @@ def get_by_name(name: str):
     return crud.get_by_name(name)
 
 
-@router.get("/user/get_by_email/{email}", response_model=UserData)
+@router.get("/user/get_by_email/{email}", response_model=Optional[UserData])
 def get_by_email(email: str):
     """This service gets a user from the database based on its email."""
     return crud.get_by_email(email)
