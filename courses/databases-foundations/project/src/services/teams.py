@@ -17,7 +17,7 @@ db_connection = MySQLDatabaseConnection()
 teams_crud = TeamsCRUD(db_connection)
 
 
-@router.get("/teams", response_model=List[TeamData])
+@router.get("/teams/get_all", response_model=List[TeamData])
 def get_all_teams():
     """
     Retrieve all teams from the database.
@@ -29,7 +29,7 @@ def get_all_teams():
     return teams
 
 
-@router.get("/teams/{code}", response_model=TeamData)
+@router.get("/teams/get_by_id/{code}", response_model=TeamData)
 def get_team_by_code(code: int):
     """
     Retrieve a team by its code.
@@ -51,7 +51,73 @@ def get_team_by_code(code: int):
     return team
 
 
-@router.post("/teams", response_model=int)
+@router.get("/teams/get_by_name/{name}", response_model=List[TeamData])
+def get_teams_by_name(name: str):
+    """
+    Retrieve a team by its name.
+
+    Args:
+        name (str): The name of the team.
+
+    Raises:
+        HTTPException: If the team is not found.
+
+    Returns:
+        List[TeamData]: The team data object.
+    """
+    teams = teams_crud.get_by_name(name)
+    if not teams:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Team not found"
+        )
+    return teams
+
+
+@router.get("/teams/get_by_color/{color}", response_model=List[TeamData])
+def get_teams_by_color(color: str):
+    """
+    Retrieve a team by its color.
+
+    Args:
+        color (str): The color of the team.
+
+    Raises:
+        HTTPException: If the team is not found.
+
+    Returns:
+        List[TeamData]: The team data object.
+    """
+    teams = teams_crud.get_by_color(color)
+    if not teams:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Team not found"
+        )
+    return teams
+
+
+@router.get("/teams/get_by_coach/{coach}", response_model=List[TeamData])
+def get_teams_by_coach(coach: str):
+    """
+    Retrieve a team by its coach.
+
+    Args:
+        coach (str): The coach of the team.
+
+    Raises:
+        HTTPException: If the team is not found.
+
+    Returns:
+        List[TeamData]: The team data object.
+    """
+    teams = teams_crud.get_by_coach(coach)
+    if not teams:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Team not found"
+        )
+    return teams
+
+
+@router.post("/teams/create", response_model=int)
 def create_team(data: TeamData):
     """
     Create a new team in the database.
@@ -66,7 +132,7 @@ def create_team(data: TeamData):
     return team_code
 
 
-@router.put("/teams/{code}")
+@router.put("/teams/update/{code}")
 def update_team(code: int, data: TeamData):
     """
     Update a team's information.
@@ -90,7 +156,7 @@ def update_team(code: int, data: TeamData):
         ) from exc
 
 
-@router.delete("/teams/{code}")
+@router.delete("/teams/delete/{code}")
 def delete_team(code: int):
     """
     Delete a team from the database.
