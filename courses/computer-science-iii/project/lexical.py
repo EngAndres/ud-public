@@ -32,7 +32,7 @@ class LexicalAnalyzer:
                 r"[A-G][b-s]{0,1}[1-8]",
             ),  # Notes: A-B-C-D-E-F-G followed by 1-8 (octave)
             ("DURATION", r"\d+/\d+|\d+"),  # Duration
-            ("KEYWORDS", r"START|END"),  # Start-End
+            ("KEYWORDS", r"START|END|TIME"),  # Start-End
             ("SKIP", r"[ \t]+"),  # Skip over spaces and tabs
             ("MISMATCH", r"."),  # Any other character
         ]
