@@ -66,8 +66,9 @@ class MySQLDatabaseConnection(DatabaseConnection):
 
         return id_
 
-    def update(self, query: str, values: tuple, item_id: int):
+    def update(self, query: str, values: tuple):
         try:
+            print(query, values)
             cursor = self.connection.cursor()
             cursor.execute(query, values)
             self.connection.commit()
@@ -75,9 +76,8 @@ class MySQLDatabaseConnection(DatabaseConnection):
         except Error as e:
             print(f"MySQL Update Data Error: {e}")
 
-    def delete(self, table: str, item_id: int):
+    def delete(self, query: str, item_id: int):
         try:
-            query = f"DELETE FROM {table} WHERE id = %s;"
             cursor = self.connection.cursor()
             cursor.execute(query, (item_id,))
             self.connection.commit()
@@ -91,6 +91,9 @@ class MySQLDatabaseConnection(DatabaseConnection):
             cursor = self.connection.cursor()
             cursor.execute(query, values)
             item = cursor.fetchone()
+            if item is not None:
+                columns = [desc[0] for desc in cursor.description]
+                item = dict(zip(columns, item))
             cursor.close()
         except Error as e:
             print(f"MySQL Get Data Error: {e}")
@@ -98,13 +101,15 @@ class MySQLDatabaseConnection(DatabaseConnection):
         return item
 
     def get_many(self, query: str, values: tuple = ()) -> List[ProjectDAO]:
-        items = []
+        results = []
         try:
             cursor = self.connection.cursor()
             cursor.execute(query, values)
             items = cursor.fetchall()
+            columns = [desc[0] for desc in cursor.description]
+            results = [dict(zip(columns, row)) for row in items]
             cursor.close()
         except Error as e:
             print(f"MySQL Get Data Error: {e}")
 
-        return items
+        return results

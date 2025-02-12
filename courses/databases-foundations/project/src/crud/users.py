@@ -73,11 +73,10 @@ class UsersCRUD:
         Args:
             id (int): The id of the user to be deleted.
         """
-        query = f"""
+        query = """
                 DELETE FROM football_auth.users
                 WHERE id_user = %s;
             """
-            
         self.db_connection.delete(query, id_)
 
     def get_by_id(self, id_: int) -> UserData:

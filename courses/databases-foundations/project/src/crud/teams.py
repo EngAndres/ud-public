@@ -27,8 +27,7 @@ class TeamsCRUD:
         """
         query = """
             INSERT INTO team(code, name, color, coach)
-            VALUES (%s, %s, %s, %s)
-            RETURNING code;
+            VALUES (%s, %s, %s, %s);
         """
         values = (data.code, data.name, data.color, data.coach)
         return self.db_connection.create(query, values)
@@ -46,7 +45,8 @@ class TeamsCRUD:
             WHERE code = %s;
         """
         values = (data.name, data.color, data.coach, code)
-        self.db_connection.update(query, values, code)
+        print(query, values)
+        self.db_connection.update(query, values)
 
     def delete(self, code: int):
         """This method deletes the team from the database.
@@ -54,7 +54,8 @@ class TeamsCRUD:
         Args:
             code (int): The code of the team.
         """
-        self.db_connection.delete("team", code)
+        query = "DELETE FROM team WHERE code = %s;"
+        self.db_connection.delete(query, code)
 
     def get_by_code(self, code: int) -> TeamData:
         """This method gets a team from repository based on the code.
@@ -84,3 +85,54 @@ class TeamsCRUD:
             FROM team;
         """
         return self.db_connection.get_many(query)
+
+    def get_by_name(self, name: str) -> List[TeamData]:
+        """This method gets a team from repository based on the name.
+
+        Args:
+            name (str): The name of the team.
+
+        Returns:
+            The team data.
+        """
+        query = """
+            SELECT code, name, color, coach 
+            FROM team
+            WHERE LOWER(name) LIKE LOWER(%s);
+        """
+        values = (f"%{name}%",)
+        return self.db_connection.get_many(query, values)
+
+    def get_by_color(self, color: str) -> List[TeamData]:
+        """This method gets a team from repository based on the color.
+
+        Args:
+            color (str): The color of the team.
+
+        Returns:
+            The team data.
+        """
+        query = """
+            SELECT code, name, color, coach 
+            FROM team
+            WHERE color LIKE %s;
+        """
+        values = (f"%{color}%",)
+        return self.db_connection.get_many(query, values)
+
+    def get_by_coach(self, coach: str) -> List[TeamData]:
+        """This method gets a team from repository based on the coach.
+
+        Args:
+            coach (str): The coach of the team.
+
+        Returns:
+            The team data.
+        """
+        query = """
+            SELECT code, name, color, coach 
+            FROM team
+            WHERE coach LIKE %s;
+        """
+        values = (f"%{coach}%",)
+        return self.db_connection.get_many(query, values)

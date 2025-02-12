@@ -27,8 +27,7 @@ class PlayersCRUD:
         """
         query = """
             INSERT INTO player(id_player, name, age, position, team_fk)
-            VALUES (%s, %s, %s, %s, %s)
-            RETURNING id_player;
+            VALUES (%s, %s, %s, %s, %s);
         """
         values = (data.id_player, data.name, data.age, data.position, data.team_fk)
         return self.db_connection.create(query, values)
@@ -46,7 +45,7 @@ class PlayersCRUD:
             WHERE id_player = %s;
         """
         values = (data.name, data.age, data.position, data.team_fk, id_player)
-        self.db_connection.update(query, values, id_player)
+        self.db_connection.update(query, values)
 
     def delete(self, id_player: int):
         """This method deletes the player from the database.
@@ -54,7 +53,11 @@ class PlayersCRUD:
         Args:
             id_player (int): The id of the player.
         """
-        self.db_connection.delete("player", id_player)
+        query = """
+        DELETE FROM player
+        WHERE id_player = %s
+        """
+        self.db_connection.delete(query, id_player)
 
     def get_by_id(self, id_player: int) -> PlayerData:
         """This method gets a player from repository based on the id.
@@ -66,8 +69,10 @@ class PlayersCRUD:
             The player data.
         """
         query = """
-            SELECT id_player, name, age, position, team_fk 
+            SELECT player.id_player, player.name, player.age, player.position, player.team_fk,
+                team.name AS team_name 
             FROM player 
+            JOIN team ON player.team_fk = team.code
             WHERE id_player = %s;
         """
         values = (id_player,)
@@ -80,7 +85,9 @@ class PlayersCRUD:
             A list of all the players data.
         """
         query = """
-            SELECT id_player, name, age, position, team_fk 
-            FROM player;
+            SELECT player.id_player, player.name, player.age, player.position, player.team_fk,
+                    team.name AS team_name 
+            FROM player
+            JOIN team ON player.team_fk = team.code;
         """
         return self.db_connection.get_many(query)

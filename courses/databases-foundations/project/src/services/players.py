@@ -17,7 +17,7 @@ db_connection = MySQLDatabaseConnection()
 players_crud = PlayersCRUD(db_connection)
 
 
-@router.get("/players", response_model=List[PlayerData])
+@router.get("/players/get_all", response_model=List[PlayerData])
 def get_all_players():
     """
     Retrieve all players from the database.
@@ -29,7 +29,7 @@ def get_all_players():
     return players
 
 
-@router.get("/players/{id_player}", response_model=PlayerData)
+@router.get("/players/get_by_id/{id_player}", response_model=PlayerData)
 def get_player_by_id(id_player: int):
     """
     Retrieve a player by its id.
@@ -51,7 +51,7 @@ def get_player_by_id(id_player: int):
     return player
 
 
-@router.post("/players", response_model=int)
+@router.post("/players/create", response_model=int)
 def create_player(data: PlayerData):
     """
     Create a new player in the database.
@@ -66,7 +66,7 @@ def create_player(data: PlayerData):
     return player_id
 
 
-@router.put("/players/{id_player}", response_model=dict)
+@router.put("/players/update/{id_player}", response_model=dict)
 def update_player(id_player: int, data: PlayerData):
     """
     Update an existing player's information.
@@ -90,7 +90,7 @@ def update_player(id_player: int, data: PlayerData):
         ) from exc
 
 
-@router.delete("/players/{id_player}", response_model=dict)
+@router.delete("/players/delete/{id_player}", response_model=dict)
 def delete_player(id_player: int):
     """
     Delete a player from the database.
