@@ -65,7 +65,7 @@ class UsersCRUD:
         """
         values = (data.username, data.password, data.email, data.created_at, id_)
         # The update method in pg_connection expects the id separately.
-        self.db_connection.update(query, values, id_)
+        self.db_connection.update(query, values)
 
     def delete(self, id_: int):
         """This method deletes the user from the database.
@@ -73,8 +73,12 @@ class UsersCRUD:
         Args:
             id (int): The id of the user to be deleted.
         """
-        table = "football_auth.users"
-        self.db_connection.delete(table, id_)
+        query = f"""
+                DELETE FROM football_auth.users
+                WHERE id_user = %s;
+            """
+            
+        self.db_connection.delete(query, id_)
 
     def get_by_id(self, id_: int) -> UserData:
         """This method gets a user from repository
@@ -87,8 +91,8 @@ class UsersCRUD:
             The used who matched the id.
         """
         query = """
-            SELECT username, password, email, created_at
-            FROM condor.users
+            SELECT id_user, username, password, email, created_at
+            FROM football_auth.users
             WHERE id_user = %s;
         """
         values = (id_,)
@@ -122,7 +126,7 @@ class UsersCRUD:
             WHERE username LIKE %s;
         """
         values = (f"%{name}%",)
-        return self.db_connection.get_one(query, values)
+        return self.db_connection.get_many(query, values)
 
     def get_by_email(self, email: str):
         """This method gets a user from repository

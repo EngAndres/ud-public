@@ -70,7 +70,7 @@ class PostgresDatabaseConnection(DatabaseConnection):
 
         return id_
 
-    def update(self, query: str, values: tuple, item_id: int):
+    def update(self, query: str, values: tuple):
         try:
             cursor = self.connection.cursor()
             cursor.execute(query, values)
@@ -79,12 +79,8 @@ class PostgresDatabaseConnection(DatabaseConnection):
         except psycopg2.DatabaseError as e:
             print(f"Postgres Update Data Error. {e}")
 
-    def delete(self, table: str, item_id: int):
+    def delete(self, query: str, item_id: int):
         try:
-            query = f"""
-                DELETE FROM {table}
-                WHERE id = %s;
-            """
             cursor = self.connection.cursor()
             cursor.execute(query, (item_id,))
             self.connection.commit()
@@ -92,15 +88,29 @@ class PostgresDatabaseConnection(DatabaseConnection):
         except psycopg2.DatabaseError as e:
             print(f"Postgres Delete Data Error. {e}")
 
+    def _convert_value(self, value):
+        """This method validates if the value is datetime,
+        and convert it into a string.
+        
+        Args:
+            value: The value to be converted.
+
+        Returns:
+            The value converted.
+        """
+        if isinstance(value, datetime):
+            return value.strftime("%Y-%m-%d %H:%M:%S")
+        return value
+
     def get_one(self, query: str, values: tuple) -> ProjectDAO:
         item = None
         try:
             cursor = self.connection.cursor()
-            print(cursor.mogrify(query, values))
             cursor.execute(query, values)
-            print(query)
-            print(values)
-            item = cursor.fetchone()
+            row = cursor.fetchone()
+            if row is not None:
+                col_names = [desc[0] for desc in cursor.description]
+                item = {col: self._convert_value(val) for col, val in zip(col_names, row)}
             cursor.close()
         except psycopg2.DatabaseError as e:
             print(f"Postgres Get Data Error. {e}")
@@ -115,17 +125,12 @@ class PostgresDatabaseConnection(DatabaseConnection):
             col_names = [desc[0] for desc in cursor.description]
             rows = cursor.fetchall()
 
-            def convert_value(value):
-                if isinstance(value, datetime):
-                    return value.strftime("%Y-%m-%d %H:%M:%S")
-                return value
-
+            # convert rows to a list of dictionaries
             items = [
-                {col: convert_value(val) for col, val in zip(col_names, row)}
+                {col: self._convert_value(val) for col, val in zip(col_names, row)}
                 for row in rows
             ]
 
-            print(items)
             cursor.close()
         except psycopg2.DatabaseError as e:
             print(f"Postgres Get Data Error. {e}")

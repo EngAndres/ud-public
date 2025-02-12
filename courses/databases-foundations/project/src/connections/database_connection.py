@@ -31,7 +31,7 @@ class DatabaseConnection:
             The auto-generated id of the new user
         """
 
-    def update(self, query: str, values: tuple, item_id: int):
+    def update(self, query: str, values: tuple):
         """This method updates an item data in the database.
 
         Args:
@@ -40,12 +40,12 @@ class DatabaseConnection:
             item_id (int): The id of the item to be updated.
         """
 
-    def delete(self, table: str, item_id: int):
+    def delete(self, query: str, item_id: int):
         """This method deletes an item from a table in the  database
         based on the id.
 
         Args:
-            table (str): The table where the item is.
+            query (str): The query to be executed.
             item_id (int): The id of the item to be deleted.
         """
 
