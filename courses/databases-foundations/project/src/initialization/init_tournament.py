@@ -22,6 +22,7 @@ class InitTournament:
         """This method is used to create the data."""
         self._create_teams()
         self._create_players()
+        self._create_stadiums()
 
     def _create_teams(self):
         """This method is used to create the teams."""
@@ -224,5 +225,28 @@ class InitTournament:
         self.players_crud.create(
             PlayerData(
                 id_player=123465, name="Casemiro", age=29, position="Medio", team_fk=126
+            )
+        )
+
+    def _create_stadiums(self):
+        """This method is used to create the stadiums."""
+        print("Create Stadiums...")
+
+        self.stadiums_crud.create(
+            StadiumData(id_stadium=1, name="Anfield", capacity=54074, place="Liverpool")
+        )
+        self.stadiums_crud.create(
+            StadiumData(
+                id_stadium=2, name="Camp Nou", capacity=99354, place="Barcelona"
+            )
+        )
+        self.stadiums_crud.create(
+            StadiumData(
+                id_stadium=3, name="Villa Park", capacity=42788, place="Birmingham"
+            )
+        )
+        self.stadiums_crud.create(
+            StadiumData(
+                id_stadium=4, name="Santiago Bernabeu", capacity=81044, place="Madrid"
             )
         )

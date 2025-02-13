@@ -35,7 +35,7 @@ class InitUsers:
         """
         crud = UsersCRUD(self.conn)
         fake = Faker()
-        
+
         try:
             for _ in range(n):
                 id_user = -1
@@ -57,4 +57,3 @@ class InitUsers:
         except Exception as e:
             print(f"An error occurred: {e}")
             return False
-        

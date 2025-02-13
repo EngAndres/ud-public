@@ -91,7 +91,7 @@ class PostgresDatabaseConnection(DatabaseConnection):
     def _convert_value(self, value):
         """This method validates if the value is datetime,
         and convert it into a string.
-        
+
         Args:
             value: The value to be converted.
 
@@ -110,7 +110,9 @@ class PostgresDatabaseConnection(DatabaseConnection):
             row = cursor.fetchone()
             if row is not None:
                 col_names = [desc[0] for desc in cursor.description]
-                item = {col: self._convert_value(val) for col, val in zip(col_names, row)}
+                item = {
+                    col: self._convert_value(val) for col, val in zip(col_names, row)
+                }
             cursor.close()
         except psycopg2.DatabaseError as e:
             print(f"Postgres Get Data Error. {e}")
