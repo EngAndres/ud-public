@@ -23,3 +23,10 @@ While most of the inheritance is fine, it also inherits unwanted elements like `
 To prevent this, the project POM contains empty overrides for these elements.
 If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
 
+steps
+- install java jdk
+- install maven
+- install the "Java Extension Pack"  extension
+- mvn clean install
+-  mvn exec:java -Dexec.mainClass="com.example.condor.AuthenticationServiceApplication"
+
