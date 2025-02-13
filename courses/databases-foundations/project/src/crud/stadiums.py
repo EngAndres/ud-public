@@ -27,8 +27,7 @@ class StadiumsCRUD:
         """
         query = """
             INSERT INTO stadium(name, capacity, place)
-            VALUES (%s, %s, %s)
-            RETURNING id_stadium;
+            VALUES (%s, %s, %s);
         """
         values = (data.name, data.capacity, data.place)
         return self.db_connection.create(query, values)
@@ -45,7 +44,7 @@ class StadiumsCRUD:
             WHERE id_stadium = %s;
         """
         values = (data.name, data.capacity, data.place, id_stadium)
-        self.db_connection.update(query, values, id_stadium)
+        self.db_connection.update(query, values)
 
     def delete(self, id_stadium: int):
         """This method deletes the stadium from the database.
@@ -53,7 +52,11 @@ class StadiumsCRUD:
         Args:
             id_stadium (int): The id of the stadium.
         """
-        self.db_connection.delete("stadium", id_stadium)
+        query = """
+            DELETE FROM stadium
+            WHERE id_stadium = %s;
+        """
+        self.db_connection.delete(query, id_stadium)
 
     def get_by_id(self, id_stadium: int) -> StadiumData:
         """This method gets a stadium from repository based on the id.
@@ -83,3 +86,54 @@ class StadiumsCRUD:
             FROM stadium;
         """
         return self.db_connection.get_many(query)
+
+    def get_by_place(self, place: str) -> List[StadiumData]:
+        """This method gets all the stadiums data based on the place.
+
+        Args:
+            place (str): The place of the stadium.
+
+        Returns:
+            A list of StadiumData objects.
+        """
+        query = """
+            SELECT id_stadium, name, capacity, place 
+            FROM stadium
+            WHERE LOWER(place) LIKE (%s);
+        """
+        values = (f"%{place}%",)
+        return self.db_connection.get_many(query, values)
+
+    def get_by_capacity(self, capacity: int) -> List[StadiumData]:
+        """This method gets all the stadiums data based on the capacity.
+
+        Args:
+            capacity (int): The capacity of the stadium.
+
+        Returns:
+            A list of StadiumData objects.
+        """
+        query = """
+            SELECT id_stadium, name, capacity, place 
+            FROM stadium
+            WHERE capacity >= %s;
+        """
+        values = (capacity,)
+        return self.db_connection.get_many(query, values)
+
+    def get_by_name(self, name: str) -> List[StadiumData]:
+        """This method gets all the stadiums data based on the name.
+
+        Args:
+            name (str): The name of the stadium.
+
+        Returns:
+            A list of StadiumData objects.
+        """
+        query = """
+            SELECT id_stadium, name, capacity, place 
+            FROM stadium
+            WHERE LOWER(name) LIKE LOWER(%s);
+        """
+        values = (f'%{name}%',)
+        return self.db_connection.get_many(query, values)

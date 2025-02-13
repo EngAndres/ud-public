@@ -111,3 +111,100 @@ def delete_player(id_player: int):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="Could not delete player"
         ) from exc
+
+
+@router.get("/players/get_by_team/{team_fk}", response_model=List[PlayerData])
+def get_players_by_team(team_fk: int):
+    """
+    Retrieve all players from a team.
+
+    Args:
+        team_fk (int): The id of the team.
+
+    Returns:
+        List[PlayerData]: A list of player data objects.
+    """
+    players = players_crud.get_by_team(team_fk)
+    return players
+
+
+@router.get("/players/get_by_name/{name}", response_model=List[PlayerData])
+def get_players_by_name(name: str):
+    """
+    Retrieve all players by name.
+
+    Args:
+        name (str): The name of the player.
+
+    Returns:
+        List[PlayerData]: A list of player data objects.
+    """
+    players = players_crud.get_by_name(name)
+    return players
+
+
+@router.get("/players/get_by_position/{position}", response_model=List[PlayerData])
+def get_players_by_position(position: str):
+    """
+    Retrieve all players by position.
+
+    Args:
+        position (str): The position of the player.
+
+    Returns:
+        List[PlayerData]: A list of player data objects.
+    """
+    players = players_crud.get_by_position(position)
+    return players
+
+
+@router.get("/players/get_by_age/{age}", response_model=List[PlayerData])
+def get_players_by_age(age: int):
+    """
+    Retrieve all players by age.
+
+    Args:
+        age (int): The age of the player.
+
+    Returns:
+        List[PlayerData]: A list of player data objects.
+    """
+    players = players_crud.get_by_age(age)
+    return players
+
+
+@router.get(
+    "/players/get_by_team_and_position/{team_fk}/{position}",
+    response_model=List[PlayerData],
+)
+def get_players_by_team_and_position(team_fk: int, position: str):
+    """
+    Retrieve all players by team and position.
+
+    Args:
+        team_fk (int): The id of the team.
+        position (str): The position of the player.
+
+    Returns:
+        List[PlayerData]: A list of player data objects.
+    """
+    players = players_crud.get_by_team_and_position(team_fk, position)
+    return players
+
+
+@router.get(
+    "/players/get_by_age_range/{min_age}/{max_age}", response_model=List[PlayerData]
+)
+def get_players_by_age_range(min_age: int, max_age: int):
+    """
+    Retrieve all players by age range.
+
+    Args:
+        min_age (int): The minimum age of the player.
+        max_age (int): The maximum age of the player.
+
+    Returns:
+        List[PlayerData]: A list of player data objects.
+    """
+    players = players_crud.get_by_age_range(min_age, max_age)
+    return players

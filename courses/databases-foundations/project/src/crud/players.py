@@ -91,3 +91,121 @@ class PlayersCRUD:
             JOIN team ON player.team_fk = team.code;
         """
         return self.db_connection.get_many(query)
+
+    def get_by_team(self, team_fk: int) -> List[PlayerData]:
+        """This method gets all the players data from a specific team.
+
+        Args:
+            team_fk (int): The team code.
+
+        Returns:
+            A list of all the players data from the team.
+        """
+        query = """
+            SELECT player.id_player, player.name, player.age, player.position, player.team_fk,
+                    team.name AS team_name 
+            FROM player
+            JOIN team ON player.team_fk = team.code
+            WHERE team_fk = %s;
+        """
+        values = (team_fk,)
+        return self.db_connection.get_many(query, values)
+
+    def get_by_name(self, name: str) -> List[PlayerData]:
+        """This method gets all the players data by name.
+
+        Args:
+            name (str): The name of the player.
+
+        Returns:
+            A list of all the players data by name.
+        """
+        query = """
+            SELECT player.id_player, player.name, player.age, player.position, player.team_fk,
+                    team.name AS team_name 
+            FROM player
+            JOIN team ON player.team_fk = team.code
+            WHERE LOWER(player.name) LIKE LOWER(%s);
+        """
+        values = (f"%{name}%",)
+        return self.db_connection.get_many(query, values)
+
+    def get_by_position(self, position: str) -> List[PlayerData]:
+        """This method gets all the players data by position.
+
+        Args:
+            position (str): The position of the player.
+
+        Returns:
+            A list of all the players data by position.
+        """
+        query = """
+            SELECT player.id_player, player.name, player.age, player.position, player.team_fk,
+                    team.name AS team_name 
+            FROM player
+            JOIN team ON player.team_fk = team.code
+            WHERE LOWER(position) LIKE LOWER(%s);
+        """
+        values = (f"%{position}%",)
+        return self.db_connection.get_many(query, values)
+
+    def get_by_age(self, age: int) -> List[PlayerData]:
+        """This method gets all the players data by age.
+
+        Args:
+            age (int): The age of the player.
+
+        Returns:
+            A list of all the players data by age.
+        """
+        query = """
+            SELECT player.id_player, player.name, player.age, player.position, player.team_fk,
+                    team.name AS team_name 
+            FROM player
+            JOIN team ON player.team_fk = team.code
+            WHERE age = %s;
+        """
+        values = (age,)
+        return self.db_connection.get_many(query, values)
+
+    def get_by_team_and_position(self, team_fk: int, position: str) -> List[PlayerData]:
+        """This method gets all the players data by team and position.
+
+        Args:
+            team_fk (int): The team code.
+            position (str): The position of the player.
+
+        Returns:
+            A list of all the players data by team and position.
+        """
+        query = """
+            SELECT player.id_player, player.name, player.age, player.position, player.team_fk,
+                    team.name AS team_name 
+            FROM player
+            JOIN team ON player.team_fk = team.code
+            WHERE team_fk = %s 
+                AND LOWER(player.position) LIKE LOWER(%s);
+        """
+        values = (team_fk, f"%{position}%")
+        return self.db_connection.get_many(query, values)
+
+    def get_by_age_range(self, min_age: int, max_age: int) -> List[PlayerData]:
+        """This method gets all the players data by team and age.
+
+        Args:
+            team_fk (int): The team code.
+            age (int): The age of the player.
+
+        Returns:
+            A list of all the players data by team and age.
+        """
+        query = """
+            SELECT player.id_player, player.name, player.age, player.position, player.team_fk,
+                    team.name AS team_name 
+            FROM player
+            JOIN team ON player.team_fk = team.code
+            WHERE player.age >= %s
+                AND player.age <= %s;
+        """
+        values = (min_age, max_age)
+        return self.db_connection.get_many(query, values)

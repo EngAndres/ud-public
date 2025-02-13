@@ -17,7 +17,7 @@ db_connection = MySQLDatabaseConnection()
 stadiums_crud = StadiumsCRUD(db_connection)
 
 
-@router.get("/stadiums", response_model=List[StadiumData])
+@router.get("/stadiums/get_all", response_model=List[StadiumData])
 def get_all_stadiums():
     """
     Retrieve all stadiums from the database.
@@ -29,7 +29,7 @@ def get_all_stadiums():
     return stadiums
 
 
-@router.get("/stadiums/{id_stadium}", response_model=StadiumData)
+@router.get("/stadiums/get_by_id/{id_stadium}", response_model=StadiumData)
 def get_stadium_by_id(id_stadium: int):
     """
     Retrieve a stadium by its id.
@@ -51,7 +51,7 @@ def get_stadium_by_id(id_stadium: int):
     return stadium
 
 
-@router.post("/stadiums", response_model=int)
+@router.post("/stadiums/create", response_model=int)
 def create_stadium(data: StadiumData):
     """
     Create a new stadium in the database.
@@ -66,7 +66,7 @@ def create_stadium(data: StadiumData):
     return stadium_id
 
 
-@router.put("/stadiums/{id_stadium}")
+@router.put("/stadiums/update/{id_stadium}")
 def update_stadium(id_stadium: int, data: StadiumData):
     """
     Update a stadium's information.
@@ -87,7 +87,7 @@ def update_stadium(id_stadium: int, data: StadiumData):
         ) from e
 
 
-@router.delete("/stadiums/{id_stadium}")
+@router.delete("/stadiums/delete/{id_stadium}")
 def delete_stadium(id_stadium: int):
     """
     Delete a stadium from the database.
@@ -105,3 +105,69 @@ def delete_stadium(id_stadium: int):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="Could not delete stadium"
         ) from e
+
+
+@router.get("/stadiums/get_by_place/{place}", response_model=List[StadiumData])
+def get_stadium_by_place(place: str):
+    """
+    Retrieve a stadium by its place.
+
+    Args:
+        place (str): The place of the stadium.
+
+    Raises:
+        HTTPException: If the stadium is not found.
+
+    Returns:
+        StadiumData: The stadium data object.
+    """
+    stadium = stadiums_crud.get_by_place(place)
+    if not stadium:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Stadium not found"
+        )
+    return stadium
+
+
+@router.get("/stadiums/get_by_capacity/{capacity}", response_model=List[StadiumData])
+def get_stadium_by_capacity(capacity: int):
+    """
+    Retrieve a stadium by its capacity.
+
+    Args:
+        capacity (int): The capacity of the stadium.
+
+    Raises:
+        HTTPException: If the stadium is not found.
+
+    Returns:
+        StadiumData: The stadium data object.
+    """
+    stadium = stadiums_crud.get_by_capacity(capacity)
+    if not stadium:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Stadium not found"
+        )
+    return stadium
+
+
+@router.get("/stadiums/get_by_name/{name}", response_model=List[StadiumData])
+def get_stadium_by_name(name: str):
+    """
+    Retrieve a stadium by its name.
+
+    Args:
+        name (str): The name of the stadium.
+
+    Raises:
+        HTTPException: If the stadium is not found.
+
+    Returns:
+        StadiumData: The stadium data object.
+    """
+    stadium = stadiums_crud.get_by_name(name)
+    if not stadium:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Stadium not found"
+        )
+    return stadium

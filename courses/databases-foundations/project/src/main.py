@@ -35,6 +35,7 @@ async def root():
     """This method is used to get the root of the API."""
     return {"message": "Welcome to the Football API!"}
 
+
 @app.get("/tournament/init_data")
 def init_data():
     """This method is used to initialize the tournament data."""
