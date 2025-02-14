@@ -1,4 +1,10 @@
-package com.example.condor;
+/**
+ * This is the main class of the application.
+ * 
+ * Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
+ */
+
+package com.ud.machines;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

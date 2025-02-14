@@ -5,7 +5,7 @@
  * Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
  */
 
-package com.example.condor.data_objects;
+ package com.ud.machines.data_objects;
 
  /**
   * This class is used to define a DAO to handle user information data structure.
@@ -31,5 +31,13 @@ public class UserData {
         this.language = language;
         this.location = location;
         this.age = age;
+    }
+
+    public int getId(){
+        return this.id;
+    }
+
+    public String getName(){
+        return this.name;
     }
 }

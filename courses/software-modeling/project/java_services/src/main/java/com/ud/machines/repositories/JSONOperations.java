@@ -4,20 +4,19 @@
  * Author: Carlos Andres Sierra <casierrav@udistrital.edu.co>
  */
 
- package com.example.condor.repositories;
+package com.ud.machines.repositories;
 
- import java.io.File;
- import java.io.FileWriter;
- import java.io.IOException;
- import java.io.InputStream;
- import java.lang.reflect.Field;
- import java.nio.charset.StandardCharsets;
- import java.util.ArrayList;
- import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
  
- import org.json.JSONArray;
+import org.json.JSONArray;
 import org.json.JSONException;
- import org.json.JSONObject;
+import org.json.JSONObject;
  
  /**
   * This class is responsible for all the JSON operations that are needed in the project.
