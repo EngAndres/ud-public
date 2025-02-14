@@ -1,10 +1,9 @@
 /**
  * This file has a class to handle user data.
- * 
+ *
  * Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co?
  */
-
-package com.example.condor.repositories;
+package com.ud.machines.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +13,8 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.condor.data_objects.AuthData;
-import com.example.condor.data_objects.UserData;
+import com.ud.machines.data_objects.AuthData;
+import com.ud.machines.data_objects.UserData;
 
 @Repository
 public class UserRepository {
@@ -24,7 +23,7 @@ public class UserRepository {
     private final String filePath = "data/users.json";
 
     @PostConstruct
-    public void init(){
+    public void init() {
         System.out.println("Loading users data...");
         this.users = JSONOperations.loadData(this.filePath, UserData.class);
     }
@@ -36,10 +35,12 @@ public class UserRepository {
      * @return user information
      */
     public Optional<UserData> getUserById(int id) {
-        for(UserData user : this.users) 
-            if(user.id == id) 
+        for (UserData user : this.users) {
+            if (user.id == id) {
                 return Optional.of(user);
-        
+            }
+        }
+
         return Optional.empty();
     }
 
@@ -50,10 +51,12 @@ public class UserRepository {
      * @return An object with user data if it is authenticated.
      */
     public Optional<UserData> authUser(AuthData authData) {
-        for(UserData user : this.users) 
-            if (user.username.equals(authData.username) && user.password.equals(authData.password)) 
+        for (UserData user : this.users) {
+            if (user.username.equals(authData.getUsername()) && user.password.equals(authData.getPassword())) {
                 return Optional.of(user);
-        
+            }
+        }
+
         return Optional.empty();
     }
 
@@ -65,10 +68,12 @@ public class UserRepository {
      */
     public UserData addUser(UserData userData) {
         int last_id = -1;
-        for(UserData user : this.users) 
-            if (user.id > last_id) 
+        for (UserData user : this.users) {
+            if (user.id > last_id) {
                 last_id = user.id;
-        
+            }
+        }
+
         userData.id = last_id + 1;
         this.users.add(userData);
         JSONOperations.saveData(this.filePath, this.users);
@@ -84,14 +89,15 @@ public class UserRepository {
      */
     public Boolean updatePassword(UserData userData) {
         Boolean result = false;
-        for(int i = 0; i < this.users.size(); i++) 
+        for (int i = 0; i < this.users.size(); i++) {
             if (this.users.get(i).id == userData.id) {
                 this.users.get(i).password = userData.password;
                 JSONOperations.saveData(this.filePath, this.users);
                 result = true;
                 break;
             }
-        
+        }
+
         return result;
     }
 
@@ -103,14 +109,15 @@ public class UserRepository {
      */
     public Boolean deleteUser(int id) {
         Boolean result = false;
-        for(int i = 0; i < this.users.size(); i++) 
+        for (int i = 0; i < this.users.size(); i++) {
             if (this.users.get(i).id == id) {
                 this.users.remove(i);
                 JSONOperations.saveData(this.filePath, this.users);
                 result = true;
                 break;
             }
-        
+        }
+
         return result;
     }
 }

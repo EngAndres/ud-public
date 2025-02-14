@@ -5,18 +5,26 @@
  * Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
  */
 
-package com.example.condor.data_objects;
+package com.ud.machines.data_objects;
 
  /**
   * This class is used to move information required for authentication.
   */
 public class AuthData {
 
-    public String username;
-    public String password;
+    private String username;
+    private String password;
 
     public AuthData(String username, String password){
         this.username = username;
         this.password = password;
+    }
+
+    public String getUsername(){
+        return this.username;
+    }
+
+    public String getPassword(){
+        return this.password;
     }
 }
