@@ -10,7 +10,7 @@ import faiss
 from datasets import Dataset
 import fitz
 from transformers import (
-    AutoModelForSequenceClassification,
+    AutoModelForCausalLM,
     AutoTokenizer,
     Trainer,
     TrainingArguments,
@@ -24,13 +24,13 @@ class Chatbot:
     def __init__(self):
         self.fresh_data = ["docs/updates.pdf"]
         self.model_save_path = "./results/model"
-        model_name = "distilbert-base-uncased"
+        model_name = "gpt2"
 
         self.tokenizer = self._generate_tokenizer(model_name)
 
         if os.path.exists(self.model_save_path):
             print("Load trained model...")
-            self.model = AutoModelForSequenceClassification.from_pretrained(
+            self.model = AutoModelForCausalLM.from_pretrained(
                 self.model_save_path
             )
         else:
@@ -65,12 +65,12 @@ class Chatbot:
         with torch.no_grad():
             outputs = self.model(**inputs)
         # Mean pooling on the token embeddings.
-        embeddings = outputs.last_hidden_state.mean(dim=1)
+        embeddings = outputs.hidden_states[-1].mean(dim=1)
         return embeddings.cpu().numpy()[0]
 
     def _load_foundational_model(
         self, model_name: str
-    ) -> AutoModelForSequenceClassification:
+    ) -> AutoModelForCausalLM:
         """This method loads the foundational model to fine-tune it.
 
         Args:
@@ -80,7 +80,7 @@ class Chatbot:
             The model.
         """
         # model_name = "distilbert-base-uncased"
-        model = AutoModelForSequenceClassification.from_pretrained(
+        model = AutoModelForCausalLM.from_pretrained(
             model_name, output_hidden_states=True
         )
         return model
