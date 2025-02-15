@@ -6,6 +6,7 @@ Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
 
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 
 from chatbot import Chatbot
 
@@ -26,7 +27,7 @@ class Answer(BaseModel):
 @app.get("/", response_model=dict)
 def read_root():
     """This is just a service to present the project in the root."""
-    return {"Message": "Welcome to my chatbot project"}
+    return FileResponse('templates/index.html')
 
 @app.get("/healthcheck", response_model=dict)
 def healthcheck():

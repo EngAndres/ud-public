@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+PyMuPDF
+torch
+transformers
+transformers[torch]
+datasets 
+faiss-cpu   
