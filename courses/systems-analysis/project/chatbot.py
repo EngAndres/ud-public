@@ -27,19 +27,20 @@ class Chatbot:
         model_name = "distilbert-base-uncased"
 
         self.tokenizer = self._generate_tokenizer(model_name)
-        
+
         if os.path.exists(self.model_save_path):
+            print("Load trained model...")
             self.model = AutoModelForSequenceClassification.from_pretrained(
                 self.model_save_path
             )
         else:
+            print("Training new model...")
             concepts_path = "docs/concepts.pdf"
             self.concepts = self._generate_dataset(concepts_path)
             self.model = self._load_foundational_model(model_name)
-            self._fine_tunning()
+            self._fine_tuning()
 
         self.index = self._load_fresh_data(self.fresh_data)
-
 
     def _extract_text_from_pdf(self, pdf_path: str) -> str:
         doc = fitz.open(pdf_path)
@@ -79,7 +80,9 @@ class Chatbot:
             The model.
         """
         # model_name = "distilbert-base-uncased"
-        model = AutoModelForSequenceClassification.from_pretrained(model_name)
+        model = AutoModelForSequenceClassification.from_pretrained(
+            model_name, output_hidden_states=True
+        )
         return model
 
     def _generate_tokenizer(self, model_name: str) -> AutoTokenizer:
@@ -91,7 +94,7 @@ class Chatbot:
         Returns:
             The tokenizer.
         """
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        tokenizer = AutoTokenizer.from_pretrained(model_name, output_hidden_states=True)
         return tokenizer
 
     def _generate_dataset(self, path_concepts: str) -> Dataset:
@@ -99,10 +102,15 @@ class Chatbot:
         dataset = Dataset.from_dict({"text": [text_concepts], "labels": [0]})
         return dataset
 
-    def _tokenize_function(self, concepts: Dataset) -> dict:
-        return self.tokenizer(concepts["text"], padding="max_length", truncation=True)
+    def _tokenize_function(self, examples: dict) -> dict:
+        outputs = self.tokenizer(
+            examples["text"], padding="max_length", truncation=True
+        )
+        # Pass through the labels so the model can compute the loss
+        outputs["labels"] = examples["labels"]
+        return outputs
 
-    def _fine_tunning(self):
+    def _fine_tuning(self):
         training_args = TrainingArguments(
             output_dir="./results",
             num_train_epochs=3,
