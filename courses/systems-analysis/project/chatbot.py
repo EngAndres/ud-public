@@ -1,4 +1,4 @@
-"""This module has a class to train the chatbot.
+"""This module implements a chatbot using transformers for fine-tuning and RAG.
 
 Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
 """
@@ -6,155 +6,146 @@ Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
 import os
 import numpy as np
 import torch
-import faiss
-from datasets import Dataset
 import fitz
+from datasets import Dataset, concatenate_datasets
 from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer,
     Trainer,
     TrainingArguments,
+    DataCollatorForLanguageModeling
 )
 
-
 class Chatbot:
-    """This class represents the behavior of a chatbot using
-    both fine-tunning and RAG to adjust it."""
-
     def __init__(self):
-        self.fresh_data = ["docs/updates.pdf"]
+        self.model_name = "gpt2"
         self.model_save_path = "./results/model"
-        model_name = "gpt2"
-
-        self.tokenizer = self._generate_tokenizer(model_name)
-
+        self.concepts_path = "docs/concepts.pdf"
+        self.updates_path = "docs/updates.pdf"
+        self.max_length = 512
+        
+        # Initialize tokenizer
+        self.tokenizer = self._setup_tokenizer()
+        
+        # Load or train model
         if os.path.exists(self.model_save_path):
-            print("Load trained model...")
-            self.model = AutoModelForCausalLM.from_pretrained(
-                self.model_save_path
-            )
+            print("Loading trained model...")
+            self.model = AutoModelForCausalLM.from_pretrained(self.model_save_path)
         else:
             print("Training new model...")
-            concepts_path = "docs/concepts.pdf"
-            self.concepts = self._generate_dataset(concepts_path)
-            self.model = self._load_foundational_model(model_name)
-            self._fine_tuning()
+            self.model = AutoModelForCausalLM.from_pretrained(self.model_name)
+            self._train_model()
 
-        self.index = self._load_fresh_data(self.fresh_data)
-
-    def _extract_text_from_pdf(self, pdf_path: str) -> str:
-        doc = fitz.open(pdf_path)
-        text = ""
-        for page in doc:
-            text += page.get_text()
-        return text
-
-    def _embed(self, text: str) -> np.ndarray:
-        """
-        Computes a 768-dimensional embedding for the given text.
-
-        Args:
-            text (str): The text to embed.
-
-        Returns:
-            np.ndarray: The embedding vector.
-        """
-        inputs = self.tokenizer(
-            text, return_tensors="pt", truncation=True, max_length=512
-        )
-        with torch.no_grad():
-            outputs = self.model(**inputs)
-        # Mean pooling on the token embeddings.
-        embeddings = outputs.hidden_states[-1].mean(dim=1)
-        return embeddings.cpu().numpy()[0]
-
-    def _load_foundational_model(
-        self, model_name: str
-    ) -> AutoModelForCausalLM:
-        """This method loads the foundational model to fine-tune it.
-
-        Args:
-            model_name (str): The name of the model to load.
-
-        Returns:
-            The model.
-        """
-        # model_name = "distilbert-base-uncased"
-        model = AutoModelForCausalLM.from_pretrained(
-            model_name, output_hidden_states=True
-        )
-        return model
-
-    def _generate_tokenizer(self, model_name: str) -> AutoTokenizer:
-        """This method generates the tokenizer for the model.
-
-        Args:
-            model_name (str): The name of the model to load.
-
-        Returns:
-            The tokenizer.
-        """
-        tokenizer = AutoTokenizer.from_pretrained(model_name, output_hidden_states=True)
+    def _setup_tokenizer(self):
+        """Initialize and configure the tokenizer"""
+        tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token
         return tokenizer
 
-    def _generate_dataset(self, path_concepts: str) -> Dataset:
-        text_concepts = self._extract_text_from_pdf(path_concepts)
-        dataset = Dataset.from_dict({"text": [text_concepts], "labels": [0]})
+    def _extract_text_from_pdf(self, pdf_path: str) -> str:
+        """Extract text content from PDF file"""
+        with fitz.open(pdf_path) as doc:
+            text = " ".join([page.get_text() for page in doc])
+        return text
+
+    def _prepare_dataset(self) -> Dataset:
+        """Prepare training dataset from PDF files"""
+        # Extract text from both PDFs
+        concepts_text = self._extract_text_from_pdf(self.concepts_path)
+        updates_text = self._extract_text_from_pdf(self.updates_path)
+        
+        # Create chunks of text
+        def chunk_text(text, chunk_size=512):
+            words = text.split()
+            chunks = []
+            for i in range(0, len(words), chunk_size):
+                chunk = " ".join(words[i:i + chunk_size])
+                chunks.append(chunk)
+            return chunks
+
+        # Create datasets from both texts
+        concepts_chunks = chunk_text(concepts_text)
+        updates_chunks = chunk_text(updates_text)
+        
+        # Combine both datasets
+        dataset = Dataset.from_dict({
+            "text": concepts_chunks + updates_chunks
+        })
+        
         return dataset
 
-    def _tokenize_function(self, examples: dict) -> dict:
-        outputs = self.tokenizer(
-            examples["text"], padding="max_length", truncation=True
+    def _tokenize_function(self, examples):
+        """Tokenize text examples"""
+        return self.tokenizer(
+            examples["text"],
+            truncation=True,
+            max_length=self.max_length,
+            padding="max_length",
+            return_special_tokens_mask=True
         )
-        # Pass through the labels so the model can compute the loss
-        outputs["labels"] = examples["labels"]
-        return outputs
 
-    def _fine_tuning(self):
+    def _train_model(self):
+        """Fine-tune the model on our data"""
+        # Prepare dataset
+        dataset = self._prepare_dataset()
+        tokenized_dataset = dataset.map(
+            self._tokenize_function,
+            batched=True,
+            remove_columns=dataset.column_names
+        )
+
+        # Data collator
+        data_collator = DataCollatorForLanguageModeling(
+            tokenizer=self.tokenizer,
+            mlm=False  # We're not using masked language modeling
+        )
+
+        # Training arguments
         training_args = TrainingArguments(
             output_dir="./results",
-            num_train_epochs=3,
-            per_device_train_batch_size=8,
-            per_device_eval_batch_size=4,
-            warmup_steps=500,
+            num_train_epochs=5,             # Increase epochs
+            per_device_train_batch_size=2,  # Reduce if memory issues
+            learning_rate=2e-5,            # Slightly higher learning rate
+            warmup_steps=200,              # More warmup steps
             weight_decay=0.01,
             logging_dir="./logs",
+            logging_steps=10,
+            save_strategy="epoch",
         )
 
-        tokenized_dataset = self.concepts.map(self._tokenize_function, batched=True)
-
+        # Initialize trainer
         trainer = Trainer(
-            model=self.model, args=training_args, train_dataset=tokenized_dataset
+            model=self.model,
+            args=training_args,
+            train_dataset=tokenized_dataset,
+            data_collator=data_collator
         )
 
+        # Train model
         trainer.train()
-        trainer.save_model(self.model_save_path)
-
-    def _load_fresh_data(self, documents: list):
-        index = faiss.IndexFlatL2(768)
-        embeddings = np.vstack(
-            [self._embed(self._extract_text_from_pdf(doc)) for doc in documents]
-        ).astype(np.float32)
-        index.add(embeddings)
-        return index
-
-    def _retrieve(self, query: str, documents: list):
-        query_embedding = self._embed(query)
-        _, i_ = self.index.search(np.array([query_embedding]), 1)
-        return [documents[i] for i in i_[0]]
+        
+        # Save model
+        self.model.save_pretrained(self.model_save_path)
+        self.tokenizer.save_pretrained(self.model_save_path)
 
     def generate_response(self, prompt: str) -> str:
-        """This method generates a response for a given prompt.
-
-        Args:
-            prompt (str): The prompt to generate the response.
-
-        Returns:
-            The response.
-        """
-        retrieved_document = self._retrieve(prompt, self.fresh_data)
-        context = " ".join(retrieved_document)
-        input_text = f"{context} {prompt}"
-        inputs = self.tokenizer(input_text, return_tensors="pt")
-        output = self.model.generate(**inputs)
-        return self.tokenizer.decode(output[0], skip_special_tokens=True)
+        """Generate a response for the given prompt"""
+        # Prepare input
+        inputs = self.tokenizer(prompt, return_tensors="pt", truncation=True, max_length=self.max_length)
+        
+        # Generate response
+        with torch.no_grad():
+            outputs = self.model.generate(
+                **inputs,
+                max_length=self.max_length,
+                num_return_sequences=1,
+                temperature=0.7,
+                top_p=0.9,
+                do_sample=True,
+                pad_token_id=self.tokenizer.pad_token_id
+            )
+        
+        # Decode and return response
+        response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+        return response.replace(prompt, "").strip()
