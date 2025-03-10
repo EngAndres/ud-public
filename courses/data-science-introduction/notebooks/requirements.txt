@@ -1,2 +1,0 @@
-mkdocs==1.5.3
-psycopg2-binary
