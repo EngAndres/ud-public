@@ -52,15 +52,15 @@ Below is a distribution of topics and sessions. Each topic has a link to the cor
 |              | [Systems Analysis](./slides/SystemAnalysis.pdf)                      | 4            |
 |              | [Workshop on Systems Thinking](./workshops/Workshop_1.pdf)          | 1            |
 |              | [Systems Design](./slides/SystemsDesign.pdf)                        | 4            |
-|              | Workshop on Systems Design            | 1            |
+|              | [Workshop on Systems Design](./workshops/Workshop_2.pdf)            | 1            |
 |              | Projects Catch-Up                     | 1            |
 | Period II    | [Robust System Design](./slides/RobustSystemsDesign.pdf)                  | 4            |
 |              | General Systems Theory Paradigms      | 3            |
 |              | Systems Projects Management           | 3            |
 |              | Systems Simulation                    | 4            |
-|              | Workshop on Systems Simulation        | 1            |
+|              | [Workshop on Systems Simulation](./workshops/Workshop_3.pdf)        | 1            |
 |              | Final Test                            | 1            |
-| Period III   | Project Dissertations                 | 2            |
+| Period III   | [Project Dissertations](./project/CourseProject.pdf)                 | 2            |
 
 ## Grading
 

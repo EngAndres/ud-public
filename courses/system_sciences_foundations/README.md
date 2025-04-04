@@ -36,17 +36,17 @@ This is a basic course, so you should have some knowledge of:
 
 | **Period**   | **Topic**                           | **Sessions** |
 |--------------|-------------------------------------|--------------|
-| Period I     | Systems Sciences Introduction       | 6            |
-|              | Workshop on Systems Design          | 1            |
+| Period I     | [Systems Sciences Introduction](./slides/SystemsSciencesIntroduction.pdf)       | 6            |
+|              | [Workshop on Systems Design](./workshops/Workshop_1.pdf)          | 1            |
 |              | Systems Sciences Fundamentals I     | 7            |
-|              | Workshop on Dynamical Systems       | 1            |
+|              | [Workshop on Dynamical Systems](./workshops/Workshop_2.pdf)       | 1            |
 |              | Course Project Catch-Up             | 1            |
 | Period II    | Systems Sciences Fundamentals II    | 6            |
-|              | Workshop on Machine Learning        | 1            |
+|              | [Workshop on Machine Learning](./workshops/Workshop_3.pdf)        | 1            |
 |              | Systems Sciences Applications       | 7            |
 |              | Workshop on Cybernetics             | 1            |
 |              | Final Test                          | 1            |
-| Period III   | Projects Dissertation               | 2            |
+| Period III   | [Projects Dissertation](./project/CourseProject.pdf)               | 2            |
 
 ## Grading
 
