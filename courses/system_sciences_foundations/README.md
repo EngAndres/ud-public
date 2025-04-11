@@ -38,7 +38,7 @@ This is a basic course, so you should have some knowledge of:
 |--------------|-------------------------------------|--------------|
 | Period I     | [Systems Sciences Introduction](./slides/SystemsSciencesIntroduction.pdf)       | 6            |
 |              | [Workshop on Systems Design](./workshops/Workshop_1.pdf)          | 1            |
-|              | Systems Sciences Fundamentals I     | 7            |
+|              | [Systems Sciences Fundamentals I](./slides/SystemsSciences.pdf)     | 7            |
 |              | [Workshop on Dynamical Systems](./workshops/Workshop_2.pdf)       | 1            |
 |              | Course Project Catch-Up             | 1            |
 | Period II    | Systems Sciences Fundamentals II    | 6            |
