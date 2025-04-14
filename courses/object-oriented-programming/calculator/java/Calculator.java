@@ -1,3 +1,10 @@
+/* 
+This file has an example of a Calculator file.
+
+Author: Carlos A Sierra <cavirguezs@udistrital.edu.co> - Abr/2025
+*/
+
+
 /**
  * This is a simple example of a calculador as an object 
  */
@@ -31,7 +38,7 @@ public class Calculator {
      * @return The substracion of two numbers
      */
     public Double substract(Double num1, Double num2){
-        return num1 - num2
+        return num1 - num2;
     }
 
     /**
@@ -60,6 +67,7 @@ public class Calculator {
         }
         catch(Exception e){
             System.out.println("Error in the division." + e);
+            return null;
         }
     }
 }

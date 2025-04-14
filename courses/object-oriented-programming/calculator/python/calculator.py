@@ -1,3 +1,8 @@
+"""
+This file has an example of a Calculator file.
+
+Author: Carlos A Sierra <cavirguezs@udistrital.edu.co> - Abr/2025
+"""
 class Calc:
     """This is an example of a calculator as an object"""
 
@@ -15,7 +20,7 @@ class Calc:
             The sum of the two numbers.
         """
         return a1 + b2
-    
+
     def substract(self, num1: float, num2: float) -> float:
         """
         This method makes a substraction of the second
@@ -27,9 +32,9 @@ class Calc:
 
         Returns:
             The result of the substraction.
-        """    
+        """
         return num1 - num2
-    
+
     def multiplication(self, num1: float, num2: float) -> float:
         """
         This method multiplies two numbers.
@@ -42,7 +47,7 @@ class Calc:
             The result of the multiplication
         """
         return num1 * num2
-    
+
     def division(self, num1: float, num2: float) -> float:
         """
         This method makes the division of two numbers.
@@ -54,3 +59,7 @@ class Calc:
         Returns:
             The result of the division.
         """
+        try:
+            return num1 / num2
+        except Exception as e:
+            print(f"Error in division. {e}")
