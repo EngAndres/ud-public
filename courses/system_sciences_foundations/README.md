@@ -41,7 +41,7 @@ This is a basic course, so you should have some knowledge of:
 |              | [Systems Sciences Fundamentals I](./slides/SystemsSciences.pdf)     | 7            |
 |              | [Workshop on Dynamical Systems](./workshops/Workshop_2.pdf)       | 1            |
 |              | Course Project Catch-Up             | 1            |
-| Period II    | Systems Sciences Fundamentals II    | 6            |
+| Period II    | [Systems Sciences Fundamentals II](./slides/IntroductionToMachineLearning.pdf)    | 6            |
 |              | [Workshop on Machine Learning](./workshops/Workshop_3.pdf)        | 1            |
 |              | Systems Sciences Applications       | 7            |
 |              | Workshop on Cybernetics             | 1            |
