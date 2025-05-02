@@ -1,0 +1,9 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'Workshop_1.blg'
+[71] biber:340> INFO - === vie abr  4, 2025, 07:26:55
+[84] Biber.pm:418> INFO - Reading 'Workshop_1.bcf'
+[158] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[172] bbl.pm:654> INFO - Writing 'Workshop_1.bbl' with encoding 'UTF-8'
+[173] bbl.pm:757> INFO - Output to Workshop_1.bbl
+[173] Biber.pm:130> WARN - The file 'Workshop_1.bcf' does not contain any citations!
+[173] Biber.pm:132> INFO - WARNINGS: 1
