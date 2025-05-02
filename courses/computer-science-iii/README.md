@@ -54,12 +54,10 @@ Below is a simple distribution of the grade percentages:
 
 | **Period** | **Item**               | **Percentage** |
 | ---------- | ---------------------- | -------------- |
-| Period I   | Assignments            | 5%             |
-|            | Workshops              | 20%            |
-|            | Project Catch-Up       | 10%            |
-| Period II  | Assignments            | 5%             |
-|            | Workshop               | 15%            |
-|            | Course Test            | 15%            |
+| Period I   | Workshops              | 21%            |
+|            | Project Catch-Up       | 14%            |
+| Period II  | Workshop               | 17.5%          |
+|            | Course Test            | 17.5%          |
 | Period III | Paper + Poster         | 5%             |
 |            | Project Report         | 15%            |
 |            | Project Implementation | 10%            |
