@@ -43,7 +43,7 @@ This is a basic course, so you should have some knowledge of:
 |              | Course Project Catch-Up             | 1            |
 | Period II    | [Systems Sciences Fundamentals II](./slides/IntroductionToMachineLearning.pdf)    | 6            |
 |              | [Workshop on Machine Learning](./workshops/Workshop_3.pdf)        | 1            |
-|              | Systems Sciences Applications       | 7            |
+|              | [Systems Sciences Applications](./slides/SystemsSciencesApplications.pdf)       | 7            |
 |              | Workshop on Cybernetics             | 1            |
 |              | Final Test                          | 1            |
 | Period III   | [Projects Dissertation](./project/CourseProject.pdf)               | 2            |

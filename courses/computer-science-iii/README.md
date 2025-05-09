@@ -35,7 +35,7 @@ Additionally, it is desirable to have some knowledge of:
 | __Period__ | __Topic__                             | __Sessions__ |
 | ---------- | ------------------------------------- | ------------ |
 | Period I   | [Introduction to Programming Languages](./slides/ProgrammingLanguagesFoundations.pdf) |  3           |
-|            | Workshop on Theory of the Computation |  1           |
+|            | [Workshop on Theory of the Computation](./workshops/Workshop_1.pdf) |  1           |
 |            | Compilers                             |  1           |
 |            | Lexical Analizers                     |  1           |
 |            | Workshop on Lexical Analyzers         |  1           |
