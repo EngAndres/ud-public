@@ -43,18 +43,18 @@ As follows there is a distribution of topics and sessions. Each topic has a link
 | __Period__ | __Topic__                              | __Sessions__ |
 | ---------- | -------------------------------------- | ------------ |
 | Period I   | [Introduction to Databases](./slides/Introduction.pdf)              |  3           |
-|            | Database Systems Architecture          |  4           |
+|            | [Database Systems Architecture](./slides/DatabaseSystemArchitecture.pdf)          |  4           |
 |            | Database Administration                |  3           |
 |            | Advanced Query Concepts                |  4           |
-|            | Workshop on Queries & Transactions     |  1           |
+|            | [Workshop on Queries & Transactions](./workshops/Workhops_1.pdf)     |  1           |
 |            | Concurrency Management                 |  3           |
 |            | Transaction Management                 |  4           |
-|            | Workshop on Concurrency & Transactions |  1           |
+|            | [Workshop on Concurrency & Transactions](./workshops/Workshop_2.pdf) |  1           |
 |            | Course Project Catch-Up                |  1           |
 | Period II  | Object-Oriented Databases              |  3           |
 |            | NoSQL Databases                        |  3           |
 |            | Parallel Databases                     |  5           |
-|            | Workshop on Parallel Databases         |  1           |
+|            | [Workshop on Parallel Databases](./workshops/Workshop_3.pdf)         |  1           |
 |            | Distributed Databases                  |  5           |
 |            | Multi-dimensional Databases            |  5           |
 |            | Workshop on Data Systems               |  1           |
