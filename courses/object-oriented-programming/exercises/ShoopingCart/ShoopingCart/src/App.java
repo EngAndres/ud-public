@@ -18,14 +18,14 @@ public class App {
      * @throws Exception
      */
     public static Pizza createPizza(Scanner scanner) throws Exception {
-        System.out.println("Add flavor:");
+        System.out.print("Add flavor:");
         String flavor = scanner.nextLine();
 
-        System.out.println("Add size:");
-        Integer size = Integer.parseInt(scanner.nextLine()); // Changed from System.in.read() to scanner.nextLine()
+        System.out.print("Add size:");
+        Integer size = Integer.parseInt(scanner.nextLine()); 
 
-        System.out.println("Add how many days since preparation?:");
-        Integer days = Integer.parseInt(scanner.nextLine()); // Changed from System.in.read() to scanner.nextLine()
+        System.out.print("Add how many days since preparation?:");
+        Integer days = Integer.parseInt(scanner.nextLine()); 
 
         return new Pizza(flavor, size, days);
     }
@@ -39,11 +39,10 @@ public class App {
      * @throws Exception
      */
     public static Burguer createBurguer(Scanner scanner) throws Exception {
-        System.out.println("Add weight:");
-        Integer weight = Integer.parseInt(scanner.nextLine()); // Changed from System.in.read() to scanner.nextLine()
+        System.out.print("Add weight:");
+        Integer weight = Integer.parseInt(scanner.nextLine()); 
 
-        Burguer newBurguer = new Burguer(weight);
-        return newBurguer;
+        return new Burguer(weight);
     }
 
     /**
@@ -55,11 +54,11 @@ public class App {
      * @return Hotdog
      */
     public static Hotdog createHotdog(Scanner scanner) throws Exception {
-        System.out.println("Add sausage type (American/Choriperro):");
-        String sausage = scanner.nextLine(); // Changed from System.in.read() to scanner.nextLine()
+        System.out.print("Add sausage type (American/Choriperro):");
+        String sausage = scanner.nextLine(); 
 
-        System.out.println("Add how many days since preparation?:");
-        Integer days = Integer.parseInt(scanner.nextLine()); // Changed from System.in.read() to scanner.nextLine()
+        System.out.print("Add how many days since preparation?:");
+        Integer days = Integer.parseInt(scanner.nextLine()); 
 
         return new Hotdog(sausage, days);
     }
@@ -70,7 +69,7 @@ public class App {
      * emptying the cart, and exiting the application.
      */
     public static void printMenu() {
-        System.out.println("Welcome to the Food Store! Choose an option:");
+        System.out.println("Choose an option:");
         System.out.println("1. Add Pizza");
         System.out.println("2. Add Burguer");
         System.out.println("3. Add Hotdog");
@@ -83,25 +82,33 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         ShoopingCart cart = new ShoopingCart();
 
+        System.out.println("===== Welcome to the Food Store! =====");
+
         do{
             printMenu();
             int option = Integer.parseInt(scanner.nextLine());
 
             if(option == 1){ // Add pizza
                 cart.addProduct( createPizza(scanner) );
+                System.out.println("Pizza added to cart.\n\n");
             }
             else if(option == 2){ // Add burguer
                 cart.addProduct( createBurguer(scanner) );
+                System.out.println("Burguer added to cart.\n\n");
             } 
             else if(option == 3){ // Add hotdog
             
                 cart.addProduct( createHotdog(scanner) );
+                System.out.println("Hotdog added to cart.\n\n")
             }
             else if(option == 4){ // Show cart
+                System.out.println("\nCurrent Shopping Cart:")
                 cart.showProducts();
+
             }
             else if(option == 5){ // Empty Cart
                 cart.emptyCart();
+                System.out.println("Cart now is empty.");
             }
             else if(option == 6){
                 System.out.println("Exiting the store. Thank you!");
