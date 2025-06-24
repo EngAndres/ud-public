@@ -12,10 +12,10 @@ public class Car {
     private Integer price;
     private String color;
 
-    public Car(Integer cc, String chassis_type, String color){
+    public Car(Integer cc, String chassisType, String color){
         this.color = color;
         this.engine = new Engine(cc);
-        this.chassis = new Chassis(chassis_type);
+        this.chassis = new Chassis(chassisType);
         this.calculatePrice();
     }
 
@@ -30,5 +30,9 @@ public class Car {
 
     public Boolean isSame(Integer cc, String chassis_type, String color){
         return this.engine.cc.equals(cc) && this.chassis.type.equals(chassis_type) && this.color.equals(color);
+    }
+
+    public Integer getPrice() {
+        return this.price;
     }
 }

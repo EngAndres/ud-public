@@ -30,6 +30,15 @@ public class ShoopingCart {
         }
     }
 
+    public Integer getCurrentPrice(){
+        Integer acum = 0;
+
+        for(Product product: this.products)
+            acum += product.getPrice();
+
+        return acum;
+    }
+
     public void emptyCart(){
         this.products.clear();
     }

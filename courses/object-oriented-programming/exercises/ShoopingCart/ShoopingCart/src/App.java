@@ -99,12 +99,12 @@ public class App {
             else if(option == 3){ // Add hotdog
             
                 cart.addProduct( createHotdog(scanner) );
-                System.out.println("Hotdog added to cart.\n\n")
+                System.out.println("Hotdog added to cart.\n\n");
             }
             else if(option == 4){ // Show cart
-                System.out.println("\nCurrent Shopping Cart:")
+                System.out.println("\nCurrent Shopping Cart:");
                 cart.showProducts();
-
+                System.out.println("Total Price: " + cart.getCurrentPrice() + "\n");
             }
             else if(option == 5){ // Empty Cart
                 cart.emptyCart();

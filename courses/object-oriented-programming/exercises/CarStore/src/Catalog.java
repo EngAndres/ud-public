@@ -1,10 +1,13 @@
 import java.util.List;
+import java.util.ArrayList;
 
 public class Catalog {
 
     public List<Car> cars;
 
-    public Catalog(){}
+    public Catalog(){
+        this.cars = new ArrayList<>();
+    }
 
     public void addCar(Integer cc, String chassis_type, String color){
         this.validateCar(cc, chassis_type, color);
