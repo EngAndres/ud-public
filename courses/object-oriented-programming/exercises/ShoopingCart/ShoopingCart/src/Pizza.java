@@ -30,11 +30,11 @@ public class Pizza implements Product {
         int costPerUnit = 0;
 
         if(this.flavor.equals("Hawain"))
-            costPerUnit = 2;
+            costPerUnit = 40;
         else if(this.flavor.equals("Pepperoni"))
-            costPerUnit = 3;
+            costPerUnit = 50;
         else
-            costPerUnit = 1;
+            costPerUnit = 35;
 
         this.price = costPerUnit * this.size;
     }

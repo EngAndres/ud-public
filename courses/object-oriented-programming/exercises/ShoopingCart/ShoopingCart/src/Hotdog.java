@@ -17,9 +17,9 @@ public class Hotdog implements Product{
         this.sausage = sausage;
 
         if(this.sausage.equals("American")) 
-            this.price = 10;
+            this.price = 400;
         else if(this.sausage.equals("Choriperro"))
-            this.price = 12;
+            this.price = 500;
     }
 
     /**
