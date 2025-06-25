@@ -1,4 +1,4 @@
-import Product;
+
 
 /**
  * This class represents a Hotdog product in the store.

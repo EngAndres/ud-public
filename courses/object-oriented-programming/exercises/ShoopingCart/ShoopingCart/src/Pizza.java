@@ -4,7 +4,7 @@
  * Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
  */
 
-import Product;
+
 
 /**
  * This class represents a Pizza product in the store.
