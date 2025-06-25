@@ -1,7 +1,3 @@
-import ShoopingCart;
-import Pizza;
-import Burguer;
-import Hotdog;
 
 import java.util.Scanner;
 

@@ -1,4 +1,3 @@
-import Product;
 
 /**
  * This class represents a Burguer product in the store.
