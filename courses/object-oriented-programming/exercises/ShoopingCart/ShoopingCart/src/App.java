@@ -1,116 +1,88 @@
-
-import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
 
 public class App {
-    
-    /**
-     * This method creates a Pizza object based on user input.
-     * It prompts the user for the flavor, size, and days s]
-     * \lop00ce preparation,
-     * and returns a new Pizza object.
-     * 
-     * @param scanner
-     * @return Pizza
-     * @throws Exception
-     */
-    public static Pizza createPizza(Scanner scanner) throws Exception {
-        System.out.print("Add flavor:");
-        String flavor = scanner.nextLine();
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Food Store");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 400);
 
-        System.out.print("Add size:");
-        Integer size = Integer.parseInt(scanner.nextLine()); 
+            // Shopping cart logic
+            ShoopingCart cart = new ShoopingCart();
+            DefaultListModel<String> cartModel = new DefaultListModel<>();
+            JList<String> cartList = new JList<>(cartModel);
 
-        System.out.print("Add how many days since preparation?:");
-        Integer days = Integer.parseInt(scanner.nextLine()); 
+            // Left panel: Product menu
+            JPanel menuPanel = new JPanel();
+            menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
 
-        return new Pizza(flavor, size, days);
-    }
+            JButton pizzaBtn = new JButton("Add Pizza");
+            pizzaBtn.addActionListener(e -> {
+                String flavor = JOptionPane.showInputDialog(frame, "Pizza flavor:");
+                String sizeStr = JOptionPane.showInputDialog(frame, "Pizza size:");
+                String daysStr = JOptionPane.showInputDialog(frame, "Days since preparation:");
+                if (flavor != null && sizeStr != null && daysStr != null) {
+                    try {
+                        int size = Integer.parseInt(sizeStr);
+                        int days = Integer.parseInt(daysStr);
+                        Pizza pizza = new Pizza(flavor, size, days);
+                        cart.addProduct(pizza);
+                        cartModel.addElement(pizza.toString());
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frame, "Invalid input.");
+                    }
+                }
+            });
 
-    /**
-     * This method creates a Burguer object based on user input.
-     * It prompts the user for the weight of the burger and returns a new Burguer object.
-     * 
-     * @param scanner
-     * @return Burguer
-     * @throws Exception
-     */
-    public static Burguer createBurguer(Scanner scanner) throws Exception {
-        System.out.print("Add weight:");
-        Integer weight = Integer.parseInt(scanner.nextLine()); 
+            JButton burgerBtn = new JButton("Add Burger");
+            burgerBtn.addActionListener(e -> {
+                String weightStr = JOptionPane.showInputDialog(frame, "Burger weight:");
+                if (weightStr != null) {
+                    try {
+                        int weight = Integer.parseInt(weightStr);
+                        Burguer burger = new Burguer(weight);
+                        cart.addProduct(burger);
+                        cartModel.addElement(burger.toString());
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frame, "Invalid input.");
+                    }
+                }
+            });
 
-        return new Burguer(weight);
-    }
+            JButton hotdogBtn = new JButton("Add Hotdog");
+            hotdogBtn.addActionListener(e -> {
+                String sausage = JOptionPane.showInputDialog(frame, "Sausage type:");
+                String daysStr = JOptionPane.showInputDialog(frame, "Days since preparation:");
+                if (sausage != null && daysStr != null) {
+                    try {
+                        int days = Integer.parseInt(daysStr);
+                        Hotdog hotdog = new Hotdog(sausage, days);
+                        cart.addProduct(hotdog);
+                        cartModel.addElement(hotdog.toString());
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(frame, "Invalid input.");
+                    }
+                }
+            });
 
-    /**
-     * This method creates a Hotdog object based on user input.
-     * It prompts the user for the type of sausage and how many days since preparation,
-     * and returns a new Hotdog object.
-     * 
-     * @param scanner
-     * @return Hotdog
-     */
-    public static Hotdog createHotdog(Scanner scanner) throws Exception {
-        System.out.print("Add sausage type (American/Choriperro):");
-        String sausage = scanner.nextLine(); 
+            menuPanel.add(pizzaBtn);
+            menuPanel.add(burgerBtn);
+            menuPanel.add(hotdogBtn);
 
-        System.out.print("Add how many days since preparation?:");
-        Integer days = Integer.parseInt(scanner.nextLine()); 
+            // Right panel: Shopping cart
+            JPanel cartPanel = new JPanel(new BorderLayout());
+            cartPanel.add(new JLabel("Shopping Cart:"), BorderLayout.NORTH);
+            cartPanel.add(new JScrollPane(cartList), BorderLayout.CENTER);
 
-        return new Hotdog(sausage, days);
-    }
+            // Layout
+            frame.setLayout(new GridLayout(1, 2));
+            frame.add(menuPanel);
+            frame.add(cartPanel);
 
-    /**
-     * This method prints the main menu of the food store.
-     * It displays options for adding products, showing the cart,
-     * emptying the cart, and exiting the application.
-     */
-    public static void printMenu() {
-        System.out.println("Choose an option:");
-        System.out.println("1. Add Pizza");
-        System.out.println("2. Add Burguer");
-        System.out.println("3. Add Hotdog");
-        System.out.println("4. Show Products in Cart");
-        System.out.println("5. Empty Cart");
-        System.out.println("6. Exit");
-    }
-    
-    public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
-        ShoopingCart cart = new ShoopingCart();
-
-        System.out.println("===== Welcome to the Food Store! =====");
-
-        do{
-            printMenu();
-            int option = Integer.parseInt(scanner.nextLine());
-
-            if(option == 1){ // Add pizza
-                cart.addProduct( createPizza(scanner) );
-                System.out.println("Pizza added to cart.\n\n");
-            }
-            else if(option == 2){ // Add burguer
-                cart.addProduct( createBurguer(scanner) );
-                System.out.println("Burguer added to cart.\n\n");
-            } 
-            else if(option == 3){ // Add hotdog
-            
-                cart.addProduct( createHotdog(scanner) );
-                System.out.println("Hotdog added to cart.\n\n");
-            }
-            else if(option == 4){ // Show cart
-                System.out.println("\nCurrent Shopping Cart:");
-                cart.showProducts();
-                System.out.println("Total Price: " + cart.getCurrentPrice() + "\n");
-            }
-            else if(option == 5){ // Empty Cart
-                cart.emptyCart();
-                System.out.println("Cart now is empty.");
-            }
-            else if(option == 6){
-                System.out.println("Exiting the store. Thank you!");
-                break;
-            }
-        }
-        while(true);
+            frame.setVisible(true);
+        });
     }
 }
