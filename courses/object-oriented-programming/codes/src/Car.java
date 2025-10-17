@@ -1,45 +1,45 @@
-import java.util.List;
-import java.util.ArrayList;
+/*
+ * Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
+ */
 
+/**
+ * This class represents the behavior of a car in the application.
+ */
 public class Car {
-    
-    public List<Sticker> stickers = null;
-    public Engine engine;
 
-    public Car(Engine engine){
-        this.stickers = new ArrayList<>();
-        this.engine = engine;
+    public int year;
+    public String model;
+
+    public Car(int year, String model){
+        this.model = model;
+        this.setYear(year);
     }
-
-    public void addSticker(Sticker newStiker){
-        newStiker.glue_to_car();
-        this.stickers.add(newStiker);
+    
+    /**
+     * This method sets the year of the car validating than
+     * the year should be greater or equal than 1900.
+     * @param newYear
+     */
+    public void setYear(int newYear){
+        if(newYear >= 1900){
+            this.year = newYear;
+        }
+        else{
+            System.out.println("Error. The value of the year is wrong.");
+        }
     }
 
     /**
-     * This method show all the stickers in the car.
+     * This method presses the gas pedal of the car.
      */
-    public void showStickers(){
-        if(this.stickers.isEmpty()){
-            System.out.println("=== No stickers ===");
-        }
-        else{
-            for(Sticker s: this.stickers){
-                System.out.println(s.text);
-            }
-        }
+    public void gas(){
+        System.out.println("Rnnnnnn car!");
     }
-    public void paintCar(){
-        this.stickers.clear();
+    
+    /**
+     * This method presses the brake pedal of the car.
+     */
+    public void break_(){
+        System.out.println("Shshshsh car!");
     }
-
-    public void turnOn(){
-        System.out.println("Turning on the car");
-        this.engine.start();
-    }
-
-    public void turnOff(){
-        System.out.println("Turning off the car");
-        this.engine.stop();
-    }
-}       
+}
