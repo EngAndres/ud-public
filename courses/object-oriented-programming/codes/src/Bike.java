@@ -5,12 +5,13 @@
  /**
   * This class represents the behavior of a bike in the application.
   */
-public class Bike {
+public class Bike extends Vehicle {
 
     public String color;
     public int cc = 0;
 
-    public Bike(String color, int cc){
+    public Bike(String color, int cc, String brand, double maxSpeed){
+        super(brand, maxSpeed);
         this.color = color;
         this.setCC(cc);
     }

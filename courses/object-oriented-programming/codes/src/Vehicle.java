@@ -45,7 +45,7 @@ public class Vehicle{
             System.out.println("Vehicle is already on.");
         }
         else {
-            System.out.println("Vehicle is turning on!");
+            System.out.println("Turning On Vehicle!");
             this.on = true;
         }
         
