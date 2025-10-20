@@ -5,12 +5,13 @@
 /**
  * This class represents the behavior of a car in the application.
  */
-public class Car {
+public class Car extends Vehicle {
 
     public int year;
     public String model;
 
-    public Car(int year, String model){
+    public Car(int year, String model, String brand, double maxSpeed){
+        super(brand, maxSpeed);
         this.model = model;
         this.setYear(year);
     }
