@@ -1,11 +1,15 @@
-public class Kitana implements MortalKombatCharacter{
+public class Kitana extends CharacterLife implements MortalKombatCharacter{
+
+    public Kitana(){}
 
     public int launchKick(){
-        return 0;
+        System.out.println("Kitana has launched a kick.");
+        return 15;
     }
 
     public int launchPunch(){
-        return 0;
+        System.out.println("Kitana has launched a punch");
+        return 5;
     }
 
     public boolean launchPower(){

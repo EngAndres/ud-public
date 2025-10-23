@@ -1,4 +1,4 @@
-public class LiuKahn implements MortalKombatCharacter {
+public class LiuKahn extends CharacterLife implements MortalKombatCharacter {
 
     private int kickDamage;
     private int punchDamage;
