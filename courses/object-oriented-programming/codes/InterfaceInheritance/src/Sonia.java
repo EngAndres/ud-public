@@ -1,26 +1,21 @@
 /*
- * This a class of an character called Liu Kahn.
+ * This a class of an character called Sonia.
  * 
  * Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
  */
 
 /**
- * This class represent the character Liu Kahn in the video game.
+ * This class represent the character Sonia in the video game.
  * This one inheriths from CharacterLife to handle life properties, 
  * and from MortalKombatCharacter to implements some attacks.
  */
-public class LiuKahn extends Character implements MortalKombatCharacter {
+public class Sonia extends Character implements MortalKombatCharacter{
 
     private int kickDamage;
     private int punchDamage;
     private int powerAcum;
 
-    /**
-     * This is the constructor Liu Kahn character.
-     * @param damage of a kick
-     * @param damage of a punch
-     */
-    public LiuKahn(String name, int kickDamage, int punchDamage){
+    public Sonia(String name, int kickDamage, int punchDamage){
         super(name);
         this.kickDamage = kickDamage;
         this.punchDamage = punchDamage;
@@ -33,13 +28,13 @@ public class LiuKahn extends Character implements MortalKombatCharacter {
      * @return damage of the kick
      */
     public int launchKick(){
-        System.out.println("Liu has been launched a kick. Damage: " + this.kickDamage);
-        this.powerAcum += 20;
+        System.out.println("Sonia has been launched a kick.");
+        this.powerAcum += 15;
         return kickDamage;
     }
 
     public int launchPunch(){
-        System.out.println("Liu has been launched a punch. Damage: " + this.punchDamage);
+        System.out.println("Sonia has been launched a punch.");
         this.powerAcum += 15;
         return this.punchDamage;
     }
