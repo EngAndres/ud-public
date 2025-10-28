@@ -13,21 +13,16 @@ class DBConnector(ABC):
 
     @abstractmethod
     def connect(self):
-        pass
+        """Open DB connection."""
 
     @abstractmethod
-    def close(self):\
-        pass
-        
-    @abstractmethod
-    def extract(self, query, params):
-        pass
+    def close(self):
+        """Close DB connection."""
 
     @abstractmethod
-    def insert(self, query):
-        pass
+    def extract(self, query):
+        """Retrive information from DB."""
 
     @abstractmethod
-    def delete(self, table, id):
-        pass
-    
+    def insert(self, query, params):
+        """Insert new data into the DB."""
