@@ -1,10 +1,19 @@
+"""Main application file for the World Demographic Info API."""
+
 from fastapi import FastAPI
-from models import Country
+from routers import data_insertion_router, data_extraction_router
 
-app = FastAPI(title="World Demographic Info",
-    description="This is a set of endpoints to get demographic information.",
-    version=0.1)
+app = FastAPI(
+    title="World Demographic Info",
+    description="This is a set of endpoints to get demographic information using DDD architecture.",
+    version="0.1.0"
+)
 
-@app.post('/add_country')
-def add_country(country: Country):
-    pass
+# Include routers
+app.include_router(data_insertion_router)
+app.include_router(data_extraction_router)
+
+@app.get("/", summary="Health check")
+async def root():
+    """Health check endpoint."""
+    return {"message": "World Demographic API is running!"}
