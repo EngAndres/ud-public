@@ -1,27 +1,34 @@
-public class ElectricPokemon implements Pokemon {
+public class ElectricPokemon extends PokemonFeatures implements Pokemon {
+
+    public ElectricPokemon(int attackDamage, int baseDefense){
+        super(attackDamage, baseDefense);
+    }
 
     @Override
     public int attack() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'attack'");
+        return this.attackDamage;
     }
 
     @Override
     public Pokemon evolute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'evolute'");
+        return null;
     }
 
     @Override
     public void defense(String typeAdversary, int attackValue) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'defense'");
+        if(typeAdversary.equals("rock")){
+            this.health -= attackValue * 1.1;
+        } else if(typeAdversary.equals("water")){
+            this.health -= attackValue * 0.8;
+        } else {
+            this.health -= attackValue;
+        }
     }
 
     @Override
     public void healthRecovery() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'healthRecovery'");
+        this.health += 5;
+        if(this.health > 100)
+            this.health = 100;
     }
-    
 }
