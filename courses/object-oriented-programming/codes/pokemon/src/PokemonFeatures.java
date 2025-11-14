@@ -3,7 +3,7 @@ public class PokemonFeatures {
     protected int attackDamage;
     protected int baseDefense;
     protected int health;
-
+    
     public PokemonFeatures(int attackDamage, int baseDefense){
         this.attackDamage = attackDamage;
         this.baseDefense = baseDefense;
