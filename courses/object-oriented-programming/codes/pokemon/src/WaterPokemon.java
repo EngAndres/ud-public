@@ -1,4 +1,4 @@
-public class WaterPokemon extends PokemonFeatures implements Pokemon {
+public class WaterPokemon extends Pokemon {
 
     public WaterPokemon(int attackDamage, int baseDefense){
         super(attackDamage, baseDefense);

@@ -1,4 +1,4 @@
-public class RockPokemon extends PokemonFeatures implements Pokemon {
+public class RockPokemon extends Pokemon {
 
     public RockPokemon(int attackDamage, int baseDefense){
         super(attackDamage, baseDefense);
@@ -7,11 +7,6 @@ public class RockPokemon extends PokemonFeatures implements Pokemon {
     @Override
     public int attack() {
         return this.attackDamage;
-    }
-
-    @Override
-    public Pokemon evolute() {
-        return null;
     }
 
     @Override

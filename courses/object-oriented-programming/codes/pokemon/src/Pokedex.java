@@ -8,6 +8,16 @@ public class Pokedex {
     }
 
     public boolean addPokemon(Pokemon newPokemon){
-        return true;
+        boolean isFound = false;
+        for(Pokemon p: this.pokemones)
+            if(p.equals(newPokemon)){
+                isFound = true;
+                break;
+            }
+        
+        if(!isFound)
+            this.pokemones.add(newPokemon);
+
+        return isFound;
     }
 }
