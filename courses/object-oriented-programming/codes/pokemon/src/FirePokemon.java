@@ -1,4 +1,4 @@
-public class FirePokemon extends PokemonFeatures implements Pokemon {
+public class FirePokemon extends Pokemon {
 
     public FirePokemon(int attackDamage, int baseDefense){
         super(attackDamage, baseDefense);
@@ -9,10 +9,6 @@ public class FirePokemon extends PokemonFeatures implements Pokemon {
         return this.attackDamage * this.health;
     }
 
-    @Override
-    public Pokemon evolute() {
-        return null;
-    }
 
     @Override
     public void defense(String typeAdversary, int attackValue) {

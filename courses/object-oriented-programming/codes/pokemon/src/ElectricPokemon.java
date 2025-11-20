@@ -1,4 +1,4 @@
-public class ElectricPokemon extends PokemonFeatures implements Pokemon {
+public class ElectricPokemon extends  Pokemon {
 
     public ElectricPokemon(int attackDamage, int baseDefense){
         super(attackDamage, baseDefense);
@@ -7,11 +7,6 @@ public class ElectricPokemon extends PokemonFeatures implements Pokemon {
     @Override
     public int attack() {
         return this.attackDamage;
-    }
-
-    @Override
-    public Pokemon evolute() {
-        return null;
     }
 
     @Override
