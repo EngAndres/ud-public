@@ -1,3 +1,11 @@
+/*
+ * 
+ */
+
+
+/**
+ * 
+ */
 public class WaterPokemon extends Pokemon {
 
     public WaterPokemon(int attackDamage, int baseDefense){
@@ -7,11 +15,6 @@ public class WaterPokemon extends Pokemon {
     @Override
     public int attack() {
         return (this.attackDamage * this.health) / 100;
-    }
-
-    @Override
-    public Pokemon evolute() {
-        return null;
     }
 
     @Override
@@ -28,6 +31,5 @@ public class WaterPokemon extends Pokemon {
         this.health += 3;
         if(this.health > 100)
             this.health = 100;
-    }
-    
+    } 
 }

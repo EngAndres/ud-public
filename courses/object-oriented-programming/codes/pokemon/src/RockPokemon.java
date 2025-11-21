@@ -1,4 +1,4 @@
-public class RockPokemon extends Pokemon {
+public class RockPokemon extends     Pokemon {
 
     public RockPokemon(int attackDamage, int baseDefense){
         super(attackDamage, baseDefense);

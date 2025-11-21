@@ -1,3 +1,10 @@
+/*
+ * 
+ */
+
+ /**
+  * 
+  */
 public class FirePokemon extends Pokemon {
 
     public FirePokemon(int attackDamage, int baseDefense){

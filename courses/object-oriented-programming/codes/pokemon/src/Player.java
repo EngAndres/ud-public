@@ -1,15 +1,19 @@
+/*
+ * 
+ */
+
 import java.util.ArrayList;
 
-public class Player {
+/**
+ * 
+ */
+public class Player extends Character {
     
-    public String name;
     protected ArrayList<Badge> badges;
-    private Pokedex pokedex;
-
+        
     public Player(String name, Pokedex newPokedex){
-        this.name = name;
+        super(name, newPokedex);
         this.badges = new ArrayList<>();
-        this.pokedex = newPokedex;
     }
 
     public void catchPokemon(Pokemon newPokemon){
