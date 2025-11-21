@@ -1,3 +1,10 @@
+/*
+ * 
+ */
+
+ /**
+  * 
+  */
 public class ElectricPokemon extends  Pokemon {
 
     public ElectricPokemon(int attackDamage, int baseDefense){

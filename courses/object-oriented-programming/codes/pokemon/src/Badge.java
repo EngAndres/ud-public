@@ -1,3 +1,10 @@
+/*
+ * 
+ */
+
+/**
+ * 
+ */
 public class Badge {
     
     private String element;

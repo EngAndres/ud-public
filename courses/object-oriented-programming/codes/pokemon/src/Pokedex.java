@@ -1,5 +1,12 @@
+/*
+ * 
+ */
+
 import java.util.ArrayList;
 
+/**
+ * 
+ */
 public class Pokedex {
     private ArrayList<Pokemon> pokemones;
 
@@ -19,5 +26,9 @@ public class Pokedex {
             this.pokemones.add(newPokemon);
 
         return isFound;
+    }
+
+    public Pokemon getPokemon(){
+        return this.pokemones.get(0);
     }
 }
