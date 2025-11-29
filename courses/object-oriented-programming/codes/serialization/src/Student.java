@@ -1,5 +1,5 @@
 import java.io.Serializable;
-
+import java.util.Base64;
 public class Student implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -7,11 +7,21 @@ public class Student implements Serializable {
     private String name;
     private int code;
     private String email;
+    private String password_;
 
-    public Student(String name, int code, String email){
+    public Student(String name, int code, String email, String password){
         this.name = name;
         this.code = code;
         this.email = email;
+        this.password_ = encrypt(password);
+    }
+
+    private String encrypt(String password){
+        return Base64.getEncoder().encodeToString(password.getBytes());
+    }
+
+    public String decrypt(){
+        return new String(Base64.getDecoder().decode(this.password_));
     }
 
     public String getName() {
@@ -45,6 +55,6 @@ public class Student implements Serializable {
     public String toString(){
         return "I am a student. My name is " + this.name +
                 ", my code is " + this.code + ", and my email is " +
-                this.email;
+                this.email + " with "+ password_ + "(" + decrypt() +")";
     }
 }
