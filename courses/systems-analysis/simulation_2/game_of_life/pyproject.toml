@@ -1,0 +1,17 @@
+[project]
+name = "game-of-life"
+version = "0.1.0"
+description = "THis is a simple simulation of classic game of life"
+authors = [
+    {name = "Andres Sierra",email = "cavirguezs@udistrital.edu.udu.co"}
+]
+license = {text = "GNU/GPL"}
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

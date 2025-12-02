@@ -1,2 +1,2 @@
 """Valid importations from this module"""
-from calculator import Calculator
+from .application import calculator_router

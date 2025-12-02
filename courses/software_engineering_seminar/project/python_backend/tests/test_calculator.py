@@ -23,3 +23,6 @@ def test_sum(calc):
 )
 def test_sum_mutilple(calc, a, b, expected_result):
     assert calc.sum(a, b) == expected_result
+
+def test_sum_character(calc, a, b_string):
+    assert calc.sum(a, b_string) == ValueError()
