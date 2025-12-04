@@ -7,12 +7,11 @@ authors = [
 ]
 license = {text = "GNU/GPL"}
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.11"
 dependencies = [
-    "numpy (>=2.3.5,<3.0.0)",
     "pandas (>=2.3.3,<3.0.0)",
-    "scikit-learn (>=1.7.2,<2.0.0)",
-    "xgboost (>=3.1.2,<4.0.0)"
+    "xgboost (>=3.1.2,<4.0.0)",
+    "scikit-learn (>=1.7.2,<2.0.0)"
 ]
 
 
