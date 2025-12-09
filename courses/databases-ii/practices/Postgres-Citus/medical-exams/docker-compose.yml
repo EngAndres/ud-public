@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  citus-coordinator:
+    image: citusdata/citus:alpine
+    container_name: citus-coordinator
+    environment:
+      POSTGRES_DB: medical_exams
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: P4$$w0rd
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGUSER: postgres
+      PGPASSWORD: P4$$word
+    ports:
+      - "6543:5432"
+    volumes:
+      - ./init-citus.sql:/docker-entrypoint-initdb.d/init-citus.sql
+    networks:
+      - citus-network
+
+  citus-worker-1:
+    image: citusdata/citus:alpine
+    container_name: citus-worker-1
+    environment:
+      POSTGRES_DB: medical_exams
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: P4$$w0rd
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGUSER: postgres
+      PGPASSWORD: P4$$word
+    ports:
+      - "6544:5432"
+    networks:
+      - citus-network
+
+  citus-worker-2:
+    image: citusdata/citus:alpine
+    container_name: citus-worker-2
+    environment:
+      POSTGRES_DB: medical_exams
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: P4$$w0rd
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGUSER: postgres
+      PGPASSWORD: P4$$word
+    ports:
+      - "6545:5432"
+    networks:
+      - citus-network
+
+  medical-exams-api:
+    build: .
+    container_name: medical-exams-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - citus-coordinator
+    networks:
+      - citus-network
+  
+networks:
+  citus-network:
+    driver: bridge

@@ -23,7 +23,6 @@ public class MedicalExam {
     @Column(nullable = false)
     private Instant createdAt;
 
-
     public MedicalExam(Long patientId, String examType, String result){
         this.patientId = patientId;
         this.examType = examType;
