@@ -17,7 +17,7 @@ public class MedicalExamService {
     public Optional<MedicalExam> save(MedicalExam medicalExam){
         try{
             return (MedicalExam) repo.save(medicalExam);
-        } catch(Exception as e){
+        } catch(Exception e){
             return null;
         }
     }
@@ -28,6 +28,10 @@ public class MedicalExamService {
 
     public List<MedicalExam> findAll(){
         return (List<MedicalExam>) repo.findAll();
+    }
+
+    public Optional<MedicalExam> findById(Integer id){
+        return (Optional<MedicalExam>) repo.findById(id);
     }
 
     public void delete(Integer examId){

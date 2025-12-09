@@ -24,4 +24,20 @@ public class MedicalExamController {
     public Optional<MedicalExam> createExam(@Valid @RequestBody MedicalExam medicalExam){
         return service.save(medicalExam);
     }
+
+    @GetMapping("/get_all")
+    public List<MedicalExam> getAllExams(){
+        return service.findAll();
+    }
+
+    @GetMapping("/get_by_id/{id}")
+    public Optional<MedicalExam> getExamById(@PathVariable Integer id){
+        return service.findById(id);
+    }
+
+    @GetMapping("/get_by_patient/{patientId}")
+    public List<MedicalExam> getExamsByPatient(@PathVariable Long patientId){
+        return service.findByPatientId(patientId);
+    }
+
 }
