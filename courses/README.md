@@ -2,35 +2,29 @@
 
 This space has a set of materials for different courses, all focused on teaching _good practices_, _systems thinking approach_, _software development techniques_, all trying to solve _real-world problems_ using __Python__ programming language, and related tools.
 
-
 - [Courses](#courses)
   - [How to Setup your Python Workspace](#how-to-setup-your-python-workspace)
-  - [How to Setup required Tools](#how-to-setup-required-tools)
+  - [How to Setup Required Tools](#how-to-setup-required-tools)
     - [Setup Local Git and GitHub Account](#setup-local-git-and-github-account)
       - [Installing Git on Windows](#installing-git-on-windows)
       - [Installing Git on Linux](#installing-git-on-linux)
       - [Setup Git Local Credentials](#setup-git-local-credentials)
-      - [Creating a Project Folder with Git Client](#creating-a-project-folder-with-git-client)
-    - [Installing Docker](#installing-docker)
-      - [Installing Docker on Windows](#installing-docker-on-windows)
-      - [Installing Docker on Linux](#installing-docker-on-linux)
+      - [Cloning and Working with Repositories](#cloning-and-working-with-repositories)
   - [List of Courses](#list-of-courses)
 
-***
-***
+---
 
 ## How to Setup your Python Workspace
 
-It is strongly recommended to work with _Python 3.13.1_. Also, to use virtual environments to get the right isolated work environemnts.
+It is strongly recommended to work with _Python 3.13.1_. Also, use virtual environments to get the right isolated work environments.
 
-In this sense, tools as __PyEnv__, __Poetry__, __PyTest__, will be used in all courses. For more information related to Python, and how to install/setup anything you need, you could go to [python course](python-for-everyone/README.md)
+In this sense, tools such as __PyEnv__, __Poetry__, and __PyTest__ will be used in all courses. For more information related to Python, and how to install/setup anything you need, you can go to the [python course](python-for-everyone/README.md).
 
-***
-***
+---
 
-## How to Setup required Tools
+## How to Setup Required Tools
 
-As computer engineer, you need to know powerful, useful, and state-of-the-art tools in order to give your best in both college and companies. Here, we will start using _git_ and _docker_ to promote teamwork and good collaborative practices.
+As a computer engineer, you need to know powerful, useful, and state-of-the-art tools in order to give your best in both college and companies. Here, we will start using _git_ and _docker_ to promote teamwork and good collaborative practices.
 
 ### Setup Local Git and GitHub Account
 
@@ -40,19 +34,15 @@ Git is important for team collaboration because it enables developers to work on
 
 By using Git, teams can work together efficiently, manage code changes effectively, and ensure that everyone is working on the latest version of the code. It promotes transparency, accountability, and seamless integration of work done by different team members.
 
-***
-
 #### Installing Git on Windows
 
 To install Git on Windows, you can follow these steps:
 
-1. Visit the official Git [website](https://git-scm.com/downloads).Click on the __Download for Windows__ button to download the _Git installer_.
+1. Visit the official Git [website](https://git-scm.com/downloads). Click on the __Download for Windows__ button to download the _Git installer_.
 2. Once the download is complete, locate the downloaded file and double-click on it to run the installer.
 3. Follow the instructions in the installer wizard. You can choose the default options or customize the installation according to your preferences.
 4. During the installation, make __sure to select__ the option to _add Git to your system's PATH environment variable_. This will allow you to use __Git__ from the command line.
 5. Complete the installation process by clicking on the __Finish__ button.
-
-***
 
 #### Installing Git on Linux
 
@@ -69,123 +59,84 @@ sudo apt update
 ```bash
 sudo apt install git
 ```
- ***
 
 #### Setup Git Local Credentials
 
-Before you clone a repo in your machine, you need to setup your local Git username and email. This information will be used to identify your commits in the repository's history.
+Before you clone a repository on your machine, you need to setup your local Git username and email. This information will be used to identify your commits in the repository's history.
 
-To set your Git username, open a terminal or PowerShell window and run the following command:
+To set your Git username, open a terminal or PowerShell window and run the following commands:
 ```bash
-git config --global user.name "Your GitHUb User"
+git config --global user.name "Your GitHub Username"
 git config --global user.email "your-email-in-github@example.com"
 ```
 
 If you want to use _SSH_ connection, recommended for secure connections, follow instructions in this [link](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).
 
- 
+#### Cloning and Working with Repositories
 
- #### Creating a Project Folder with Git Client
+To clone an existing repository and set up your workspace, follow these steps:
 
-To create a folder using _mkdir_ and _clone a Git repository_ using _git remote add origin_ in a _PowerShell_ or _Terminal_ window, you can follow these instructions:
+**Option 1: Clone an existing repository (recommended for students)**
 
-1. Open a PowerShell or terminal window. Navigate to the desired location where you want to create the folder using the _cd_ command. Once there, you could create the project folder using next command:
-
+1. Navigate to the desired location where you want to clone the repository:
 ```bash
-mkdir your-project
+cd /path/to/your/workspace
 ```
 
-2. Navigate into the newly created folder using the _cd_ command. For example:
-
+2. Clone the repository:
 ```bash
+git clone https://github.com/username/repository.git
+```
+
+3. Navigate into the cloned folder:
+```bash
+cd repository-name
+```
+
+4. Create your development branch:
+```bash
+git checkout -b your-dev-branch
+```
+
+**Option 2: Create a new project with Git (for new projects)**
+
+1. Create and navigate to your project folder:
+```bash
+mkdir your-project
 cd your-project
 ```
 
-3. Set the remote origin for the cloned repository using the _git remote add origin_ command followed by the repository _URL_. For example:
-
+2. Initialize Git and set up the remote repository:
 ```bash
 git init
 git remote add origin https://github.com/username/repository.git
 ```
 
-4. Now, you can use _fetch_ command to download brances and repository information:
-
+3. If the remote repository exists and has content, fetch and set up branches:
 ```bash
-git fetch
+git fetch origin
+git checkout -b main origin/main
+git checkout -b your-dev-branch
 ```
 
-5. Finally, to create branches to work, you could use next commands:
-
+**Working with branches:**
+- Always work on your development branch, not on `main`
+- To update your branch with the latest changes:
 ```bash
-git checkout -b main
+git checkout main
 git pull origin main
-git checkout -b your-dev-branh
-git pull origin main
+git checkout your-dev-branch
+git merge main
 ```
 
-***
-
-### Installing Docker
-
-Docker is an open-source platform that allows you to automate the deployment, scaling, and management of applications using containerization. Containers are lightweight, isolated environments that package everything needed to run an application, including the code, runtime, system tools, and libraries. 
-
-Docker simplifies the process of creating, distributing, and running applications by providing a consistent and reproducible environment. It allows developers to package their applications and dependencies into containers, which can then be deployed on any system that has Docker installed. This eliminates the "it works on my machine" problem and ensures that applications run consistently across different environments.
-
-Docker is important for team collaboration because it enables developers to work on the same codebase using identical environments. Each developer can create a container with all the required dependencies and configurations, ensuring that everyone is working with the same setup. This reduces the chances of compatibility issues and makes it easier to share code and collaborate on projects.
-
-***
-
-#### Installing Docker on Windows
-
-To install Docker and Docker Compose on Windows, you can follow these steps:
-
-1. Visit the official Docker [website](https://www.docker.com/products/docker-desktop). Click on the __Download for Windows__ button to download the Docker installer.
-2. Once the download is complete, locate the downloaded file and double-click on it to run the installer.
-3. Follow the instructions in the installer wizard. You can choose the default options or customize the installation according to your preferences.
-4. During the installation, __make sure__ to select the option _to enable Hyper-V_ if prompted. Docker requires Hyper-V to run containers on Windows.
-5. Complete the installation process by clicking on the __Finish__ button.
-
-***
-
-#### Installing Docker on Linux
-
-To install Docker and Docker Compose on Linux, you can use the following instructions for Ubuntu/Debian:
-1. Open a terminal. Run the following command to update the package lists:
-
+- To push your changes:
 ```bash
-sudo apt update
+git add .
+git commit -m "Your commit message"
+git push origin your-dev-branch
 ```
 
-2. Run the following command to _install_ __Docker__:
-
-```bash
-sudo apt install docker.io
-```
-
-3. After the installation is complete, start the __Docker__ service by running the following command:
-
-```bash
-sudo systemctl start docker
-```
-
-4. Run the following command to add your user to the __docker__ group, which will allow you to run Docker commands without using _sudo_:
-
-```bash
-sudo usermod -aG docker $USER
-```
-
-5. To install __Docker Compose__, run the following commands:
-
-```bash
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-sudo chmod +x /usr/local/bin/docker-compose
-```
-
-After following these instructions, Docker and Docker Compose should be installed and ready to use on both Windows and Linux systems.
-
-***
-***
+---
 
 ## List of Courses
 
@@ -193,9 +144,13 @@ Here you will find course materials, including Python notebooks, slides, course 
 
 Available courses:
 
-1. [Databases II](databases-ii/README.md): Advanced topics in database systems, including distributed databases, NoSQL, parallel databases, and database administration.
-2. [Object-Oriented Programming](object-oriented-programming/README.md): Object-oriented design, analysis, modeling, design patterns, concurrency, and software architecture.
-3. [Python for Everyone](python-for-everyone/README.md): Notebooks and examples covering Python basics—conditionals, loops, functions, tuples, lists, strings, dictionaries, files, and exceptions.
-4. [Software Engineering Seminar](software_engineering_seminar/README.md): Software engineering fundamentals, requirements engineering, agile methodologies, testing, project management, and documentation.
-5. [Systems Analysis](systems-analysis/README.md): Systems thinking, systems paradigms, analysis and design, simulation, project management, and leadership.
+1. [Computer Sciences I](computer-sciences-i/README.md): Algorithmic problem-solving, algorithm design, complexity analysis, data structures (linear and tree), and computational efficiency optimization.
+
+2. [Data Analysis Programming](data-analysis-programming/README.md): Data manipulation with Pandas and Polars, ETL processes, descriptive analysis, data visualization, natural language processing, and exploratory data analysis.
+
+3. [Machine Learning](machine-learning/README.md): Advanced machine learning techniques, reinforcement learning fundamentals, generative models, deep learning optimization, online learning, and ML interpretability.
+
+4. [Python for Everyone](python-for-everyone/README.md): Notebooks and examples covering Python basics—conditionals, loops, functions, tuples, lists, strings, dictionaries, files, and exceptions.
+
+5. [Systems Analysis](systems-analysis/README.md): Systems thinking, systems engineering, analysis and design, robust system design, general systems theory paradigms, project management, and systems simulation.
 

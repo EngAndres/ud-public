@@ -1,37 +1,40 @@
-# Public Reposository of Universidad Distrital Francisco José de Caldas 
+# Public Repository of Universidad Distrital Francisco José de Caldas 
 
-This is a public repository related to my personal work for this college.
+This is a public repository related to my personal work for this university.
 
 ## Courses
 
-So, here there are some courses material, including python notebooks with code, slides, courses definitions, among others. You could dive in the folder _courses_ to explore specific courses and contents.
+Here you will find course materials, including Python notebooks with code, slides, course definitions, and more. You can dive into the _courses_ folder to explore specific courses and contents.
 
-For now there is information for next courses:
-1. [Advanced Programming](courses/advanced-programming/README.md): related to object-oriented desing, template-controller-view model, and monoliths.
-1. [Computer Networks](courses/computer-netqorks/README.md): foundations of computer networking, devices, protocols, subnetting
-1. [Databases Foundations](courses/databases-foundations/README.md): Basic of DataBase design, ER model, relational databases, relational algebra.
-1. [Python for Everyone](courses/python-for-everyone/README.md): A set of notebooks with examples related to conditionals, loops, tuples, lists, dictionaries, anything useful to someone who wants to learn python.
-1. [Software Modeling](courses/software-modeling/README.md): Not the best name, but this course is oriented to teach advandec topic of object-oriented design, including design patterns and good practices.
-1. [Systems Analysis](courses/systems-analysis/README.md): systems thinking, systems paradigms, swarm intelligence, IT projects management and leadership.
+Currently, there is information for the following courses:
 
+1. [Computer Sciences I](courses/computer-sciences-i/README.md): Algorithmic problem-solving, algorithm design, complexity analysis, data structures (linear and tree), and computational efficiency optimization.
+2. [Data Analysis Programming](courses/data-analysis-programming/README.md): Data manipulation with Pandas and Polars, ETL processes, descriptive analysis, data visualization, natural language processing, and exploratory data analysis.
+3. [Machine Learning](courses/machine-learning/README.md): Advanced machine learning techniques, reinforcement learning fundamentals, generative models, deep learning optimization, online learning, and ML interpretability.
+4. [Python for Everyone](courses/python-for-everyone/README.md): A set of notebooks with examples related to conditionals, loops, functions, tuples, lists, strings, dictionaries, files, and exceptions—everything useful for someone who wants to learn Python.
+5. [Systems Analysis](courses/systems-analysis/README.md): Systems thinking, systems engineering, analysis and design, robust system design, general systems theory paradigms, project management, and systems simulation.
 
-## Researches
+## Research
 
-Also, there are some documentation related to researches, projects, and anything we want to open share with anyone interested. You could dive in the folder _researches_.
+Also, there is documentation related to research, projects, and anything we want to openly share with anyone interested. You can dive into the _research_ folder for more information.
 
 ## Contact 
 
 This repository is under construction, so I will be updating the content as soon as I can.
 
-As follows there is a simple description about me:
-- **Computer Engineer**, M.Sc. in Computer Engineering, researcher for 15 years.
-- 7 years as **full-time associate professor** at colleges, for Computer Engineering programs.
-- 3 years as **lecturer professor** for both colleges and government STEM programs.
-- **Speaker** in Colombia, Brasil, Bolivia, at IEEE events and colleges.
-- PyCon Colombia and Python Bogotá __co-organizer__. Collaborations in ScipyLATAM and Jupyter LATAM.
-- 3 years as __software engineer__ for several companies in Colombia.
-- 3 years as __Technical Leader__ of Machine Learning and Data Science in a USA startup.
-- 1 year as __MLOps Engineer__ for a Fintech in LATAM.
+Here is a brief description about me:
 
+### Academic Experience
+- **Computer Engineer**, M.Sc. in Computer Engineering, and researcher for **16 years**.
+- **8 years** as **full-time associate professor** at universities, in Computer Engineering programs.
+- **3 years** as **lecturer professor** for both universities and government STEM programs.
+- **Speaker** at IEEE events and universities in Colombia, Brazil, and Bolivia.
 
-Any concern, comment, interest, you could reach me by email: __cavirguezs@udistrital.edu.co__.
+### Professional Experience
+- **PyCon Colombia** and **Python Bogotá** co-organizer.
+- **3 years** as **software engineer** for several tech companies in Colombia.
+- **3 years** as **Technical Leader** of Machine Learning and Data Science at a USA startup.
+- **1.5 years** as **MLOps Engineer** for a Fintech company in LATAM.
+- Currently, **Senior Engineering Manager** of Data Engineering and Machine Learning at **Blend 360**.
+
+For any concerns, comments, or interests, you can reach me by email: **cavirguezs@udistrital.edu.co**.
