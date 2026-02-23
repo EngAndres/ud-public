@@ -1,16 +1,16 @@
 # Systems Analysis & Design
 
-his course is designed to introduce undergraduate students to **foundations** of **systems analysis and design** and multiple **computer science paradigms**.
+This course is designed to introduce undergraduate students to **foundations** of **systems analysis and design** and multiple **computer science paradigms**.
 This is a course focused on **thinking** and **problem solving**.
 
 Classes will consist of **lectures**, **discussions**, and **practical examples**.
-Also, you must take some readings from *theory of systems*.
+Also, you must complete some readings from *theory of systems*.
 
 In addition, there will be a **semester-long project**, as well as **one final course test**, and **four workshops**.
 
-- [Systems Analysis \& Design](#systems-analysis--design)
+- [Systems Analysis & Design](#systems-analysis--design)
   - [Goals](#goals)
-  - [Pre-requisites](#pre-requisites)
+  - [Prerequisites](#prerequisites)
   - [Syllabus](#syllabus)
   - [Grading](#grading)
   - [Rules](#rules)
@@ -21,20 +21,21 @@ In addition, there will be a **semester-long project**, as well as **one final c
 
 The main goal of this course is to provide undergraduate students with different **models**, **concepts**, and **tools** for **understanding** and **solving problems** using **systems analysis and design** based on project requirements.
 
-At the end of this **course**, you should be able to **create** a full **systems engineering solution** with a good level of **quality** metrics. Also, you should be able to **design** **solutions** in an **agnostic** way.
+At the end of this **course**, you should be able to **create** a full **systems engineering solution** with a good level of **quality** metrics. Also, you should be able to **design** **solutions** in an **agnostic** way that can be applied across different domains and technologies.
 
-## Pre-requisites
+## Prerequisites
 
 This is a basic course, so you must have some knowledge of:
 
 - **Programming** in **Python** or **Java**
-- **Drawing diagrams** to represent **anything**
+- **Drawing diagrams** to represent **systems** and **processes**
 - Use of **IDEs** like **VS Code**, Eclipse, or PyCharm
 
 Also, it is recommended to have some knowledge of:
 
 - **Data Structures** and **Algorithms**
-- **Git** **basic usage**, and **GitHub** basic usage
+- **Git** basic usage, and **GitHub** basic usage
+- **Basic mathematics** and **logical thinking**
 
 ## Syllabus
 
@@ -44,17 +45,17 @@ Below is a distribution of topics and sessions. Each topic has a link to the cor
 |--------------|---------------------------------------|--------------|
 | Period I     | [Systems Thinking](./slides/SystemsThinking.pdf)                      | 2            |
 |              | [Systems Engineering](./slides/SystemsEngineering.pdf)                   | 3            |
-|              | [Systems Analysis](./slides/SystemAnalysis.pdf)                      | 4            |
-|              | [Workshop on Systems Thinking](./workshops/Workshop_1.pdf)          |             |
+|              | [Systems Analysis](./slides/SystemsAnalysis.pdf)                      | 4            |
+|              | [Workshop 1: Systems Thinking](./workshops/Workshop_1.pdf)          |              |
 |              | [Systems Design](./slides/SystemsDesign.pdf)                        | 4            |
-|              | [Workshop on Systems Design](./workshops/Workshop_2.pdf)            |             |
+|              | [Workshop 2: Systems Design](./workshops/Workshop_2.pdf)            |              |
 |              | [Projects Catch-Up](./project/ProjectDocumentationGuidelines.pdf)                     | 1            |
 | Period II    | [Robust System Design](./slides/RobustSystemsDesign.pdf)                  | 3            |
 |              | [General Systems Theory Paradigms](./slides/GeneralSystemsTheory.pdf)      | 3            |
-|              | [Workshop on Systems Paradigms](./workshops/Workshop_3.pdf)        |             |
-|              | [Systems Projects Management](./slides/SystemsProjectManagement.pdf)           | 3            |
+|              | [Workshop 3: Systems Paradigms](./workshops/Workshop_3.pdf)        |              |
+|              | [Systems Project Management](./slides/SystemsProjectManagement.pdf)           | 3            |
 |              | [Systems Simulation](./slides/SystemsSimulation.pdf)                    | 4            |
-|              | [Workshop on Systems Simulation](./workshops/Workshop_4.pdf)        |             |
+|              | [Workshop 4: Systems Simulation](./workshops/Workshop_4.pdf)        |              |
 |              | Final Test                            | 1            |
 | Period III   | [Project Dissertations](./project/CourseProject.pdf)                 | 2            |
 
@@ -62,23 +63,21 @@ Below is a distribution of topics and sessions. Each topic has a link to the cor
 
 As follows there is a simple distribution of percentage of grades:
 
-
-| Period    | Item                   | Percentage |
-| --------- | ---------------------- | ---------- |
-| Period I  | Workshops              | 15%        |
-|           | Projects Catch-Up      | 20%        |
-| Period II | Workshops              | 15%        |
-|           | Final Test             | 20%        |
-| Period III| Paper + Poster         | 5%         |
-|           | Report + Implementation| 20%        |
-|           | Presentation           | 5 %        |
-
+| Period    | Item                        | Percentage |
+| --------- | --------------------------- | ---------- |
+| Period I  | Workshops                   | 15%        |
+|           | Projects Catch-Up           | 20%        |
+| Period II | Workshops                   | 15%        |
+|           | Final Test                  | 20%        |
+| Period III| Paper + Poster              | 5%         |
+|           | Report + Implementation     | 20%        |
+|           | Presentation                | 5%         |
 
 ## Rules
 
 Don't hate the player, hate the game:
 
-- **All assignments** must be submitted **handwritten**, on **time**, and in **English**. Grammar and spelling will **not** be evaluated.
+- **All assignments** must be submitted **handwritten**, **on time**, and in **English**. Grammar and spelling will **not** be evaluated.
 - **Copying** and **pasting** from the internet are **forbidden**. Please **develop** your **own ideas and solutions**.
 - Class attendance is **not mandatory**. If you **miss** classes, you must *study independently*.
 - No cell phones, no smartwatches, no WhatsApp, no Tinder, no **smart-anything**. **Just you and your brain**. **Pay attention in class**.
@@ -96,7 +95,9 @@ Don't hate the player, hate the game:
 
 Recommended bibliography:
 
-- **Systems Analysis and Design**, by _Alan Dennis_, _Barbara Haley Wixom_, and _Roberta M. Roth_.
-- **Systems Analysis and Design**, by _Kenneth E. Kendall_ and _Julie E. Kendall_.
-- **Systems Analysis and Design**, by _Scott Tilley_ and _Harry J. Rosenblatt_.
-- **Systems Analysis and Design**, by _Gary B. Shelly_, _Harry J. Rosenblatt_, and _Thomas J. Cashman_.
+- **Systems Analysis and Design**, by _Alan Dennis, Barbara Haley Wixom, and Roberta M. Roth_.
+- **Systems Analysis and Design**, by _Kenneth E. Kendall and Julie E. Kendall_.
+- **Systems Analysis and Design**, by _Scott Tilley and Harry J. Rosenblatt_.
+- **Systems Analysis and Design**, by _Gary B. Shelly, Harry J. Rosenblatt, and Thomas J. Cashman_.
+- **Thinking in Systems: A Primer**, by _Donella H. Meadows_.
+- **The Fifth Discipline: The Art and Practice of the Learning Organization**, by _Peter M. Senge_.
