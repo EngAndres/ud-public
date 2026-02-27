@@ -1,0 +1,21 @@
+[project]
+name = "dataanalysisproject"
+version = "0.1.0"
+description = "This is a course project based on data analysis using python tools."
+authors = [
+    {name = "Prof. Carlos Andres Sierra",email = "cavirguezs@udistrital.edu.co"}
+]
+license = {text = "GNU/GPL 3.0"}
+requires-python = ">=3.14"
+dependencies = [
+    "numpy (>=2.4.2,<3.0.0)",
+    "pandas (>=3.0.1,<4.0.0)",
+    "matplotlib (>=3.10.8,<4.0.0)",
+    "seaborn (>=0.13.2,<0.14.0)",
+    "scikit-learn (>=1.8.0,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
