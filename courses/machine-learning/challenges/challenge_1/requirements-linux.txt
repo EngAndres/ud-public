@@ -1,0 +1,18 @@
+# Linux (Ubuntu 24.04) — pinned from ml_old (Python 3.11.10 / pyenv)
+# Install with:
+#   pip install -r requirements-linux.txt
+#
+# NOTE: opencv-python-headless is used instead of opencv-python
+#       because Linux servers/headless environments lack a display server.
+#       Both can coexist but headless takes priority for cv2 imports.
+
+numpy==1.26.4
+torch==2.11.0
+stable_baselines3==2.7.1
+gymnasium[atari,accept-rom-license]==1.0.0
+ale-py==0.10.1
+autorom[accept-rom-license]==0.6.1
+opencv-python-headless==4.8.1.78
+tqdm==4.67.3
+rich==14.3.3
+tensorboard==2.20.0
