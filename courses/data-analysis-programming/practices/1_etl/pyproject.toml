@@ -7,9 +7,9 @@ build-backend = "setuptools.build_meta"
 packages = []
 
 [project]
-name = "nasa-neo-etl"
+name = "earthquakes-etl"
 version = "0.1.0"
-description = "EarthShake ETL pipeline — class practice with Apache Airflow"
+description = "EarthQuakes ETL pipeline — class practice with Apache Airflow"
 requires-python = ">=3.8"
 dependencies = [
     "requests>=2.31.0",
