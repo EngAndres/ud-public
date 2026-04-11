@@ -1,0 +1,1 @@
+CREATE DATABASE earthquake_db;
