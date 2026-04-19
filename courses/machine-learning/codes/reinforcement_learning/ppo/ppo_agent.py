@@ -1,6 +1,6 @@
 """
 PPO Agent — Proximal Policy Optimization
-Actor-Critic implementation for discrete action spaces (LunarLander-v2).
+Actor-Critic implementation for discrete action spaces (LunarLander-v3).
 Here are some concepts from the course, the last we see for optimal policies:
   - Clipped surrogate objective (ε-clip)
   - Generalized Advantage Estimation (GAE, λ)
