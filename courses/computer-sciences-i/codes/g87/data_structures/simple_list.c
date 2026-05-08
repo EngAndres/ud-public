@@ -29,6 +29,31 @@ void list_init(LinkedList *list) {
     list->size = 0;
 }
 
+/// Insertions
+
+void insert_begin(LinkedList *list, int new_code, double new_avg_grade){
+    Student *s = new_student(new_code, new_avg_grade);
+    s->next = list->head;
+    list->head = s;
+    list->size++;
+}
+
+void insert_end(LinkedList *list, int new_code, double new_avg_grade){
+    Student *s = new_student(new_code, new_avg_grade);
+    if(!list->head){
+        list->head = s;
+    } else {
+        Student *current = list->head;
+        while(current->next)
+            current = current->next;
+        current->next = s;
+    }
+    list->size++;
+}
+
+void insert_middle(LinkedList *list, int new_code, double new_avg_grade){
+
+}
 
 
 
