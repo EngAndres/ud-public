@@ -21,7 +21,7 @@ Author: Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
 
 /* Node definition */
 typedef struct WebPage {
-    char url[URL_MAX];
+    char url[URL_MAX]; //String
     struct WebPage *prev;
     struct WebPage *next;
 } WebPage;
@@ -125,7 +125,8 @@ void print_history(const BrowserHistory *h) {
 
     /* Walk to head */
     const WebPage *node = h->current;
-    while (node->prev) node = node->prev;
+    while (node->prev) 
+        node = node->prev;
 
     printf("  History : ");
     while (node) {
