@@ -162,3 +162,12 @@ cython_debug/
 
 *.json
 *.DS_Store
+
+# macOS debug symbol bundles
+**/*.dSYM/
+
+# macOS app bundle Contents folders
+**/Contents/
+
+# DWARF debug binaries inside .dSYM bundles
+**/DWARF/
