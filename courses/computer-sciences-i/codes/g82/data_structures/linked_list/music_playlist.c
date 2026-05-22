@@ -235,7 +235,10 @@ void shuffle_list(Playlist *list) {
     srand((unsigned)time(NULL));
 
     Song **nodes = malloc(list->size * sizeof(Song *));
-    if (!nodes) { perror("Malloc fails."); return; }
+    if (!nodes) { 
+        perror("Malloc fails."); 
+        return; 
+    }
 
     Song *cur = list->head;
     for (int i = 0; i < list->size; i++) {
