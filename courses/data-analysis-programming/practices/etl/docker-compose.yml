@@ -11,11 +11,11 @@ x-airflow-common: &airflow-common
     AIRFLOW__CORE__FERNET_KEY: ""
     # Use PostgreSQL for Airflow metadata
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${AIRFLOW_DB}
-    # Connection for the EarthShake application database (used by DAGs)
+    # Connection for the earthquake data (ud schema inside earthquake_db)
     # Scheme must be 'postgres' (Airflow hook type), not 'postgresql+psycopg2' (SQLAlchemy)
-    AIRFLOW_CONN_POSTGRES_ES: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${ES_DB}
+    AIRFLOW_CONN_POSTGRES_EARTHQUAKE: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${EARTHQUAKE_DB}?options=-csearch_path%3Dud
     # Webserver
-    AIRFLOW__WEBSERVER__SECRET_KEY: "nasa-es-etl-secret-key"
+    AIRFLOW__WEBSERVER__SECRET_KEY: "earthquake-etl-secret-key"
   volumes:
     - ./airflow/dags:/opt/airflow/dags
     - ./airflow/sql:/opt/airflow/sql
@@ -25,9 +25,7 @@ x-airflow-common: &airflow-common
       condition: service_healthy
 
 services:
-  # ─────────────────────────────────────────────
-  # PostgreSQL — hosts both airflow DB and es_db
-  # ─────────────────────────────────────────────
+  # PostgreSQL - hosts the airflow metadata DB and the earthquake_db application DB
   postgres:
     image: postgres:15
     env_file:
@@ -38,8 +36,8 @@ services:
       POSTGRES_DB: ${AIRFLOW_DB}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      # Init script creates the es_db alongside the airflow DB
-      - ./airflow/sql/init_es_db.sql:/docker-entrypoint-initdb.d/init_es_db.sql
+      # Init script creates earthquake_db and the 'ud' schema inside it on first startup
+      - ./airflow/sql/init_earthquake_db.sql:/docker-entrypoint-initdb.d/init_earthquake_db.sql
     ports:
       - "5432:5432"
     healthcheck:
@@ -47,9 +45,39 @@ services:
       interval: 5s
       retries: 10
 
-  # ─────────────────────────────────────────────
+  # DB Init — ensures earthquake_db, the 'ud' schema, and all tables exist on every startup
+  db-init:
+    image: postgres:15
+    env_file:
+      - .env
+    volumes:
+      - ./airflow/sql:/sql
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint: bash
+    command:
+      - -c
+      - |
+        PGPASSWORD=$$POSTGRES_PASSWORD psql \
+          -h $$POSTGRES_HOST \
+          -U $$POSTGRES_USER \
+          -d $$AIRFLOW_DB \
+          -tc "SELECT 1 FROM pg_database WHERE datname='$$EARTHQUAKE_DB'" \
+          | grep -q 1 \
+          || PGPASSWORD=$$POSTGRES_PASSWORD psql \
+               -h $$POSTGRES_HOST \
+               -U $$POSTGRES_USER \
+               -d $$AIRFLOW_DB \
+               -c "CREATE DATABASE $$EARTHQUAKE_DB"
+        PGPASSWORD=$$POSTGRES_PASSWORD psql \
+          -h $$POSTGRES_HOST \
+          -U $$POSTGRES_USER \
+          -d $$EARTHQUAKE_DB \
+          -f /sql/create_tables.sql
+    restart: "no"
+
   # Airflow Init — one-shot: migrate DB + create admin user
-  # ─────────────────────────────────────────────
   airflow-init:
     <<: *airflow-common
     entrypoint: /bin/bash
@@ -73,9 +101,7 @@ services:
       - ./pyproject.toml:/opt/airflow/pyproject.toml
     restart: "no"
 
-  # ─────────────────────────────────────────────
   # Airflow Webserver — UI at http://localhost:8080
-  # ─────────────────────────────────────────────
   airflow-webserver:
     <<: *airflow-common
     command: bash -c "pip install --no-cache-dir /opt/airflow/ && airflow webserver"
@@ -89,6 +115,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      db-init:
+        condition: service_completed_successfully
       airflow-init:
         condition: service_completed_successfully
     healthcheck:
@@ -97,9 +125,7 @@ services:
       retries: 10
     restart: always
 
-  # ─────────────────────────────────────────────
   # Airflow Scheduler — runs DAGs
-  # ─────────────────────────────────────────────
   airflow-scheduler:
     <<: *airflow-common
     command: bash -c "pip install --no-cache-dir /opt/airflow/ && airflow scheduler"
@@ -111,6 +137,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      db-init:
+        condition: service_completed_successfully
       airflow-init:
         condition: service_completed_successfully
     restart: always
