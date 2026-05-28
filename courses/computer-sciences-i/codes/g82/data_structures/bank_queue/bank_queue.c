@@ -28,8 +28,8 @@ typedef struct QNode {
 
 /* Queue */
 typedef struct {
-    QNode *front;
-    QNode *rear;
+    QNode *front; //read
+    QNode *rear; //add
     int    size;
 } Queue;
 
@@ -39,11 +39,16 @@ void queue_init(Queue *q) {
     q->size  = 0;
 }
 
-int queue_empty(const Queue *q) { return q->front == NULL; }
+int queue_empty(const Queue *q) { 
+    return q->front == NULL; 
+}
 
 void enqueue(Queue *q, int ticket, const char *name) {
     QNode *n = malloc(sizeof(QNode));
-    if (!n) { perror("malloc"); exit(EXIT_FAILURE); }
+    if (!n) { 
+        perror("malloc"); 
+        exit(EXIT_FAILURE); 
+    }
     n->ticket = ticket;
     strncpy(n->name, name, NAME_MAX - 1);
     n->name[NAME_MAX - 1] = '\0';
@@ -58,10 +63,12 @@ void enqueue(Queue *q, int ticket, const char *name) {
 
 /* Returns the dequeued node (caller frees it) */
 static QNode *dequeue_node(Queue *q) {
-    if (queue_empty(q)) return NULL;
+    if (queue_empty(q))
+        return NULL;
     QNode *tmp = q->front;
     q->front   = tmp->next;
-    if (!q->front) q->rear = NULL;
+    if (!q->front) 
+        q->rear = NULL;
     q->size--;
     return tmp;
 }

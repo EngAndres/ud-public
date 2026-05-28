@@ -42,11 +42,16 @@ void stack_init(Stack *s) {
     s->size = 0;
 }
 
-int stack_empty(const Stack *s) { return s->top == NULL; }
+int stack_empty(const Stack *s) { 
+    return s->top == NULL; 
+}
 
 void stack_push(Stack *s, EditAction a) {
     SNode *n = malloc(sizeof(SNode));
-    if (!n) { perror("malloc"); exit(EXIT_FAILURE); }
+    if (!n) { 
+        perror("malloc"); 
+        exit(EXIT_FAILURE); 
+    }
     n->action = a;
     n->next   = s->top;
     s->top    = n;
@@ -67,7 +72,8 @@ EditAction stack_pop(Stack *s) {
 }
 
 void stack_clear(Stack *s) {
-    while (!stack_empty(s)) stack_pop(s);
+    while (!stack_empty(s)) 
+        stack_pop(s);
 }
 
 void stack_print(const Stack *s, const char *label) {
