@@ -13,9 +13,16 @@ typedef struct AVLNode {
     struct AVLNode *left, *right;
 } AVLNode;
 
-static int avlHeight(AVLNode *n)      { return n ? n->height : 0; }
-static int imax(int a, int b)         { return a > b ? a : b; }
-static int balanceFactor(AVLNode *n)  { return avlHeight(n->left) - avlHeight(n->right); }
+static int avlHeight(AVLNode *n)  { 
+    return n ? n->height : 0; 
+}
+static int imax(int a, int b) { 
+    return a > b ? a : b; 
+}
+
+static int balanceFactor(AVLNode *n)  { 
+    return avlHeight(n->left) - avlHeight(n->right); 
+}
 
 static void updateHeight(AVLNode *n) {
     if (n)
@@ -35,8 +42,8 @@ static AVLNode *newAVLNode(int data) {
  *     y                x
  *    / \     RR       / \
  *   x   T3  ---->   T1   y
- *  / \               \  / \
- * T1 T2             T2  T3
+ *  / \                  / \
+ * T1 T2                T2  T3
  */
 static AVLNode *rotateRight(AVLNode *y) {
     AVLNode *x  = y->left;
@@ -49,7 +56,7 @@ static AVLNode *rotateRight(AVLNode *y) {
 }
 
 /*
- *   x                  y
+ *   x                   y
  *  / \     RL          / \
  * T1  y   ---->       x   T3
  *    / \             / \

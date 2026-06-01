@@ -55,14 +55,17 @@ void fs_add_child(FSNode *parent, FSNode *child) {
         return;
     }
     FSNode *cur = parent->first_child;
-    while (cur->next_sibling) cur = cur->next_sibling;
+    while (cur->next_sibling) 
+        cur = cur->next_sibling;
     cur->next_sibling = child;
 }
 
 /* Postorder traversal: compute total size of a directory subtree — O(n) */
 int fs_total_size(const FSNode *node) {
-    if (!node) return 0;
-    if (node->type == FS_FILE) return node->size_kb;
+    if (!node) 
+        return 0;
+    if (node->type == FS_FILE) 
+        return node->size_kb;
 
     int total = 0;
     const FSNode *child = node->first_child;
@@ -81,7 +84,8 @@ FSNode *fs_find(FSNode *node, const char *name) {
     FSNode *child = node->first_child;
     while (child) {
         FSNode *found = fs_find(child, name);
-        if (found) return found;
+        if (found) 
+            return found;
         child = child->next_sibling;
     }
     return NULL;

@@ -20,26 +20,40 @@ static Node *newNode(int data) {
 
 /* ── Core operations ───────────────────────────────────────── */
 Node *bst_insert(Node *root, int data) {
-    if (!root) return newNode(data);
-    if      (data < root->data) root->left  = bst_insert(root->left,  data);
-    else if (data > root->data) root->right = bst_insert(root->right, data);
+    if (!root) // subtree root
+        return newNode(data);
+    
+    if(data < root->data) 
+        root->left  = bst_insert(root->left,  data);
+    else if (data > root->data) 
+        root->right = bst_insert(root->right, data);
     return root;   /* duplicate: ignore */
 }
 
 static Node *minNode(Node *n) {
-    while (n->left) n = n->left;
+    while (n->left)
+        n = n->left;
     return n;
 }
 
 Node *bst_delete(Node *root, int data) {
     if (!root) return NULL;
 
-    if      (data < root->data) root->left  = bst_delete(root->left,  data);
-    else if (data > root->data) root->right = bst_delete(root->right, data);
+    if(data < root->data) 
+        root->left  = bst_delete(root->left,  data);
+    else if (data > root->data) 
+        root->right = bst_delete(root->right, data);
     else {
         /* node with one or no child */
-        if (!root->left)  { Node *t = root->right; free(root); return t; }
-        if (!root->right) { Node *t = root->left;  free(root); return t; }
+        if (!root->left)  { 
+            Node *t = root->right; 
+            free(root); 
+            return t; }
+        if (!root->right) { 
+            Node *t = root->left;  
+            free(root); 
+            return t; 
+        }
         /* node with two children: replace with in-order successor */
         Node *succ   = minNode(root->right);
         root->data   = succ->data;
