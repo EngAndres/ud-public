@@ -1,260 +1,202 @@
 """
-Bank Queue – Discrete Event Simulation
-========================================
-Event-based simulation of a bank with N tellers (as described in the slides).
+Bank Queue Simulation
+A simple discrete-event simulation of a bank with multiple tellers.
 
-Model
------
-  - Customers arrive according to a Poisson process
-    (inter-arrival time ~ Exponential(1/lambda)).
-  - Service time ~ Exponential(1/mu).
-  - Single waiting queue; customers are assigned to the first free teller.
-  - Simulation runs for a fixed virtual time horizon.
+Concepts used:
+  - Queue: a waiting line where the first customer in is the first served (FIFO)
+  - Events: things that happen at a specific point in time (arrival, departure)
+  - Simulation: we skip time from event to event instead of ticking every second
 
-Concepts from the slides
-------------------------
-  - Event-based models with stochastic behaviour (Murphy's Law)
-  - Embrace randomness: every run produces slightly different results
-
-Usage
------
-  python bank_simulation.py
-  python bank_simulation.py --tellers 3 --arrival 2.0 --service 4.5 --time 480
-
-Dependencies: standard library only (no third-party packages required).
+How it works:
+  1. Customers arrive at random times throughout the day.
+  2. If a teller is free, the customer is served right away.
+  3. If all tellers are busy, the customer joins the waiting queue.
+  4. When a teller finishes, the next customer in the queue is served.
 """
 
-import heapq
 import random
-import math
-import argparse
-
-# ---------------------------------------------------------------------------
-# Simulation parameters (defaults)
-# ---------------------------------------------------------------------------
-DEFAULT_TELLERS      = 2
-DEFAULT_ARRIVAL_RATE = 1.5    # customers per minute
-DEFAULT_SERVICE_RATE = 0.8    # customers per minute per teller
-DEFAULT_SIM_TIME     = 480    # minutes (an 8-hour bank day)
-SEED                 = None   # set an int for reproducibility
 
 
-# ---------------------------------------------------------------------------
-# Event types
-# ---------------------------------------------------------------------------
-ARRIVAL  = "ARRIVAL"
+# Simulation settings
+NUM_TELLERS  = 2
+ARRIVAL_RATE = 1.5   # average customers arriving per minute
+SERVICE_RATE = 0.8   # average customers a single teller serves per minute
+SIM_TIME     = 480   # total simulation time in minutes (8-hour bank day)
+SEED         = 42    # fixed seed so results are the same every run
+
+
+# Event type labels
+ARRIVAL   = "ARRIVAL"
 DEPARTURE = "DEPARTURE"
 
 
-# ---------------------------------------------------------------------------
-# Exponential random variate helper
-# ---------------------------------------------------------------------------
-def exp_variate(rate: float) -> float:
-    """Return a sample from Exponential(rate)."""
-    return random.expovariate(rate)
+class Customer:
+    """Represents one bank customer."""
+
+    def __init__(self, customer_id, arrival_time):
+        self.customer_id  = customer_id
+        self.arrival_time = arrival_time
 
 
-# ---------------------------------------------------------------------------
-# Simulation
-# ---------------------------------------------------------------------------
-def run_simulation(
-    n_tellers: int,
-    arrival_rate: float,
-    service_rate: float,
-    sim_time: float,
-    seed: int | None = None,
-    verbose: bool = False,
-) -> dict:
-    if seed is not None:
-        random.seed(seed)
+class Queue:
+    """
+    A simple FIFO queue built on a Python list.
 
-    # Event queue: (time, event_type, customer_id)
-    events: list = []
-    customer_id  = 0
+    enqueue  -> add to the back
+    dequeue  -> remove from the front
+    """
 
-    # Teller state: True = free
-    tellers_free = n_tellers
+    def __init__(self):
+        self.items = []
 
-    # Waiting queue (FIFO): list of (arrival_time, customer_id)
-    waiting: list = []
+    def enqueue(self, item):
+        self.items.append(item)
 
-    # Statistics collectors
-    total_customers  = 0
-    total_wait_time  = 0.0
-    total_service_time = 0.0
-    max_queue_length = 0
-    teller_busy_time = [0.0] * n_tellers
-    teller_free_since = [0.0] * n_tellers   # time each teller became free
+    def dequeue(self):
+        return self.items.pop(0)
 
-    now = 0.0
+    def is_empty(self):
+        return len(self.items) == 0
 
-    # Schedule first arrival
-    heapq.heappush(events, (exp_variate(arrival_rate), ARRIVAL, customer_id))
+    def size(self):
+        return len(self.items)
 
-    while events:
-        t, etype, cid = heapq.heappop(events)
 
-        if t > sim_time:
-            break
+class EventQueue:
+    """
+    Keeps simulation events ordered by time.
 
-        now = t
+    Each event is stored as a list: [time, event_type, data].
+    After adding a new event, we sort by time so the earliest
+    event is always at index 0.
+    """
 
-        if etype == ARRIVAL:
-            total_customers += 1
-            customer_id += 1
+    def __init__(self):
+        self.events = []
 
-            # Schedule next arrival
-            heapq.heappush(
-                events,
-                (now + exp_variate(arrival_rate), ARRIVAL, customer_id),
-            )
+    def schedule(self, time, event_type, data=None):
+        self.events.append([time, event_type, data])
+        self.events.sort(key=lambda e: e[0])
 
-            if tellers_free > 0:
-                # Assign immediately to the first free teller
-                teller_idx = next(
-                    i for i in range(n_tellers) if teller_free_since[i] >= 0
-                )
-                tellers_free -= 1
-                wait = 0.0
-                total_wait_time += wait
-                svc = exp_variate(service_rate)
-                total_service_time += svc
-                departure_t = now + svc
-                teller_free_since[teller_idx] = -departure_t  # negative = busy
-                heapq.heappush(
-                    events,
-                    (departure_t, DEPARTURE, teller_idx),
-                )
-                if verbose:
-                    print(f"  t={now:7.2f}  Customer {cid:4d} → teller {teller_idx}"
-                          f"  wait=0.00  svc={svc:.2f}")
-            else:
-                waiting.append((now, cid))
-                max_queue_length = max(max_queue_length, len(waiting))
-                if verbose:
-                    print(f"  t={now:7.2f}  Customer {cid:4d} waits"
-                          f"  queue={len(waiting)}")
+    def next_event(self):
+        return self.events.pop(0)
 
-        elif etype == DEPARTURE:
-            teller_idx = cid   # 'cid' stores teller index for departures
-            dep_time   = -teller_free_since[teller_idx]
-            teller_busy_time[teller_idx] += dep_time - max(0.0, dep_time - exp_variate(service_rate))
+    def is_empty(self):
+        return len(self.events) == 0
 
-            if waiting:
-                arr_time, wcid = waiting.pop(0)
-                wait = now - arr_time
-                total_wait_time += wait
-                svc = exp_variate(service_rate)
-                total_service_time += svc
-                departure_t = now + svc
-                teller_free_since[teller_idx] = -departure_t
-                heapq.heappush(
-                    events,
-                    (departure_t, DEPARTURE, teller_idx),
-                )
-                if verbose:
-                    print(f"  t={now:7.2f}  Customer {wcid:4d} → teller {teller_idx}"
-                          f"  wait={wait:.2f}  svc={svc:.2f}")
-            else:
-                tellers_free += 1
-                teller_free_since[teller_idx] = now
 
-    served = total_customers - len(waiting)
-    avg_wait = total_wait_time / served if served else 0.0
+class BankSimulation:
+    """
+    Runs a bank simulation with a fixed number of tellers
+    and a single waiting queue for all customers.
+    """
 
-    # Utilisation: fraction of sim_time each teller was busy
-    utilisation = []
-    for i in range(n_tellers):
-        if teller_free_since[i] < 0:
-            busy = (-teller_free_since[i]) - 0.0   # rough upper bound
+    def __init__(self, num_tellers, arrival_rate, service_rate, sim_time):
+        self.num_tellers  = num_tellers
+        self.arrival_rate = arrival_rate
+        self.service_rate = service_rate
+        self.sim_time     = sim_time
+
+        self.waiting_queue    = Queue()
+        self.event_queue      = EventQueue()
+        self.free_tellers     = num_tellers
+
+        self.next_id          = 0
+        self.total_arrivals   = 0
+        self.total_served     = 0
+        self.total_wait_time  = 0.0
+        self.max_queue_length = 0
+
+    def random_interarrival(self):
+        """Random time (in minutes) until the next customer arrives."""
+        return random.expovariate(self.arrival_rate)
+
+    def random_service_time(self):
+        """Random time (in minutes) needed to serve one customer."""
+        return random.expovariate(self.service_rate)
+
+    def run(self):
+        """Start the simulation and return a summary of results."""
+        now = 0.0
+
+        # Schedule the very first arrival
+        self.event_queue.schedule(self.random_interarrival(), ARRIVAL)
+
+        while not self.event_queue.is_empty():
+            time, event_type, _ = self.event_queue.next_event()
+
+            if time > self.sim_time:
+                break
+
+            now = time
+
+            if event_type == ARRIVAL:
+                self.handle_arrival(now)
+            elif event_type == DEPARTURE:
+                self.handle_departure(now)
+
+        return self.collect_results()
+
+    def handle_arrival(self, now):
+        """A new customer has just walked into the bank."""
+        self.next_id        += 1
+        self.total_arrivals += 1
+        customer = Customer(self.next_id, now)
+
+        # Always schedule the next customer arrival
+        self.event_queue.schedule(now + self.random_interarrival(), ARRIVAL)
+
+        if self.free_tellers > 0:
+            self.serve(customer, now)
         else:
-            busy = sim_time - teller_free_since[i]
-        utilisation.append(min(busy / sim_time, 1.0))
+            self.waiting_queue.enqueue(customer)
+            if self.waiting_queue.size() > self.max_queue_length:
+                self.max_queue_length = self.waiting_queue.size()
 
-    return {
-        "total_customers": total_customers,
-        "served":          served,
-        "abandoned":       len(waiting),
-        "avg_wait_time":   avg_wait,
-        "max_queue":       max_queue_length,
-        "avg_utilisation": sum(utilisation) / n_tellers,
-        "sim_time":        sim_time,
-    }
+    def handle_departure(self, now):
+        """A teller has finished serving a customer."""
+        self.free_tellers += 1   # teller is now free
+        if not self.waiting_queue.is_empty():
+            next_customer = self.waiting_queue.dequeue()
+            self.serve(next_customer, now)   # serve will decrement free_tellers
 
+    def serve(self, customer, now):
+        """Assign a free teller to a customer and schedule their departure."""
+        self.free_tellers    -= 1
+        wait                  = now - customer.arrival_time
+        self.total_wait_time += wait
+        self.total_served    += 1
+        service_time          = self.random_service_time()
+        self.event_queue.schedule(now + service_time, DEPARTURE)
 
-# ---------------------------------------------------------------------------
-# Report
-# ---------------------------------------------------------------------------
-def print_report(params: dict, results: dict) -> None:
-    sep = "=" * 55
-    print(sep)
-    print("  BANK SIMULATION — Discrete Event Model")
-    print(sep)
-    print(f"  Tellers        : {params['tellers']}")
-    print(f"  Arrival rate   : {params['arrival_rate']:.2f} customers/min")
-    print(f"  Service rate   : {params['service_rate']:.2f} customers/min/teller")
-    print(f"  Simulation time: {params['sim_time']} min "
-          f"({params['sim_time']/60:.1f} h)")
-    print(sep)
-    print(f"  Total arrivals : {results['total_customers']}")
-    print(f"  Customers served: {results['served']}")
-    print(f"  Still waiting  : {results['abandoned']}")
-    print(f"  Avg wait time  : {results['avg_wait_time']:.2f} min")
-    print(f"  Max queue length: {results['max_queue']}")
-    print(f"  Avg teller util: {results['avg_utilisation']*100:.1f} %")
-    print(sep)
-
-    # Little's Law sanity check: L = lambda * W
-    lam = params['arrival_rate']
-    W   = results['avg_wait_time']
-    L   = lam * W
-    print(f"  [Little's Law]  L = λ·W ≈ {L:.2f} customers in queue")
-    print(sep)
+    def collect_results(self):
+        avg_wait = (
+            self.total_wait_time / self.total_served
+            if self.total_served > 0
+            else 0.0
+        )
+        return {
+            "total_arrivals": self.total_arrivals,
+            "total_served":   self.total_served,
+            "avg_wait_time":  avg_wait,
+            "max_queue":      self.max_queue_length,
+        }
 
 
-# ---------------------------------------------------------------------------
-# Scenario sweep helper
-# ---------------------------------------------------------------------------
-def sweep_tellers(arrival_rate, service_rate, sim_time, max_tellers=6):
-    print("\n  --- Teller count sensitivity ---")
-    print(f"  {'Tellers':>7}  {'AvgWait(min)':>12}  {'MaxQueue':>9}  {'Util%':>6}")
-    for n in range(1, max_tellers + 1):
-        r = run_simulation(n, arrival_rate, service_rate, sim_time, seed=42)
-        print(f"  {n:>7}  {r['avg_wait_time']:>12.2f}  "
-              f"{r['max_queue']:>9}  {r['avg_utilisation']*100:>6.1f}")
-
-
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Bank discrete-event simulation")
-    parser.add_argument("--tellers",  type=int,   default=DEFAULT_TELLERS)
-    parser.add_argument("--arrival",  type=float, default=DEFAULT_ARRIVAL_RATE)
-    parser.add_argument("--service",  type=float, default=DEFAULT_SERVICE_RATE)
-    parser.add_argument("--time",     type=float, default=DEFAULT_SIM_TIME)
-    parser.add_argument("--seed",     type=int,   default=SEED)
-    parser.add_argument("--verbose",  action="store_true")
-    parser.add_argument("--sweep",    action="store_true",
-                        help="run sensitivity analysis varying teller count")
-    args = parser.parse_args()
-
-    params = {
-        "tellers":      args.tellers,
-        "arrival_rate": args.arrival,
-        "service_rate": args.service,
-        "sim_time":     args.time,
-    }
-
-    results = run_simulation(
-        args.tellers, args.arrival, args.service, args.time,
-        seed=args.seed, verbose=args.verbose,
-    )
-    print_report(params, results)
-
-    if args.sweep:
-        sweep_tellers(args.arrival, args.service, args.time)
+def print_report(results):
+    print("=" * 45)
+    print("  BANK SIMULATION RESULTS")
+    print("=" * 45)
+    print(f"  Customers arrived  : {results['total_arrivals']}")
+    print(f"  Customers served   : {results['total_served']}")
+    print(f"  Average wait time  : {results['avg_wait_time']:.2f} min")
+    print(f"  Max queue length   : {results['max_queue']}")
+    print("=" * 45)
 
 
 if __name__ == "__main__":
-    main()
+    random.seed(SEED)
+
+    sim = BankSimulation(NUM_TELLERS, ARRIVAL_RATE, SERVICE_RATE, SIM_TIME)
+    results = sim.run()
+    print_report(results)

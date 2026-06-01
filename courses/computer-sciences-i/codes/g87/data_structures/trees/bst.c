@@ -37,7 +37,8 @@ static Node *minNode(Node *n) {
 }
 
 Node *bst_delete(Node *root, int data) {
-    if (!root) return NULL;
+    if (!root) 
+        return NULL;
 
     if(data < root->data) 
         root->left  = bst_delete(root->left,  data);
@@ -63,35 +64,40 @@ Node *bst_delete(Node *root, int data) {
 }
 
 Node *bst_search(Node *root, int data) {
-    if (!root || root->data == data) return root;
+    if (!root || root->data == data) 
+        return root;
     return data < root->data ? bst_search(root->left, data)
                              : bst_search(root->right, data);
 }
 
 /* ── Traversals ────────────────────────────────────────────── */
 void inorder(Node *root) {
-    if (!root) return;
+    if (!root) 
+        return;
     inorder(root->left);
     printf("%d ", root->data);
     inorder(root->right);
 }
 
 void preorder(Node *root) {
-    if (!root) return;
+    if (!root) 
+        return;
     printf("%d ", root->data);
     preorder(root->left);
     preorder(root->right);
 }
 
 void postorder(Node *root) {
-    if (!root) return;
+    if (!root) 
+        return;
     postorder(root->left);
     postorder(root->right);
     printf("%d ", root->data);
 }
 
 void levelorder(Node *root) {
-    if (!root) return;
+    if (!root) 
+        return;
     Node *queue[1024];
     int front = 0, rear = 0;
     queue[rear++] = root;
@@ -105,13 +111,15 @@ void levelorder(Node *root) {
 
 /* ── Utility ───────────────────────────────────────────────── */
 int bst_height(Node *root) {
-    if (!root) return 0;
+    if (!root) 
+        return 0;
     int l = bst_height(root->left), r = bst_height(root->right);
     return 1 + (l > r ? l : r);
 }
 
 void freeTree(Node *root) {
-    if (!root) return;
+    if (!root) 
+        return;
     freeTree(root->left);
     freeTree(root->right);
     free(root);
