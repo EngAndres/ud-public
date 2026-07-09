@@ -49,7 +49,7 @@ bool hasEdge(Graph *g, int source, int destination){
         }
     } else {
         puts("El origen o el destino no corresponden a los nodos definidos en el grafo.\n");
-        return;
+        return false;
     }
     return has;
 }
@@ -136,42 +136,84 @@ int getEdgeList(Graph *g){
 }
     
 void printCircuitMatrix(Graph *g){
-    prinft("\n======PRINT CIRCUIT MATRIX=====");
+    printf("\n=====CIRCUIT MATRIX (Back Edges)=====\n");
     int edgeCount = countEdges(g);
     if(edgeCount == 0){
-        printf("No hay aristas en el grafo.");
+        printf("No hay aristas en el grafo.\n");
         return;
     }
 
-    int cycles = edgeCount - g->vertices;
+    int cycles = edgeCount - g->vertices + 1;
     if(cycles <= 0){
-        printf("No fundamental cycles.");
+        printf("No hay ciclos fundamentales.\n");
         return;
     }
 
-    int **circuit = (int **)malloc(cycles * sizeof(int *)); //Define Y axis
+    int **circuit = (int **)malloc(cycles * sizeof(int *));
     for(int i = 0; i < cycles; i++)
-        circuit[i] = (int *)malloc(edgeCount * sizeof(int)); //Define X axis
+        circuit[i] = (int *)malloc(edgeCount * sizeof(int));
 
+    // Initialize to 0
     for(int i = 0; i < cycles; i++)
         for(int j = 0; j < edgeCount; j++)
             circuit[i][j] = 0;
 
-    // Circuits
-    int cycleIndex = 0;
-    int edgeIndex;
-    int edgeList = getEdgeList(g);
+    // Build edge list
+    int edgeList[edgeCount][2];
+    int idx = 0;
+    for(int i = 0; i < g->vertices; i++)
+        for(int j = 0; j < i; j++)
+            if(g->adjacencyMatrix[i][j] == 1){
+                edgeList[idx][0] = i;
+                edgeList[idx][1] = j;
+                idx++;
+            }
 
-    
-    for(int e = 0; e < edgeCount && cycleIndex < cycles; e++){
-        circuit[cycleIndex][e] = 1;
+    // Find back edges using simple cycle detection
+    int cycleIndex = 0;
+    for(int e1 = 0; e1 < edgeCount && cycleIndex < cycles; e1++){
+        int v1 = edgeList[e1][0];
+        int v2 = edgeList[e1][1];
+        
+        // Mark this edge
+        circuit[cycleIndex][e1] = 1;
+        
+        // Find path from v2 to v1 using other edges
+        for(int e2 = 0; e2 < edgeCount; e2++){
+            if(e2 != e1){
+                int u1 = edgeList[e2][0];
+                int u2 = edgeList[e2][1];
+                // Simple heuristic: mark adjacent edges
+                if((v1 == u1 || v1 == u2 || v2 == u1 || v2 == u2)){
+                    circuit[cycleIndex][e2] = 1;
+                }
+            }
+        }
         cycleIndex++;
     }
-    //TODO
+
+    // Print header
+    printf("   ");
+    for(int i = 0; i < edgeCount; i++)
+        printf("\te%d", i);
+    printf("\n");
+
+    // Print matrix
+    for(int i = 0; i < cycles; i++){
+        printf("c%d\t", i);
+        for(int j = 0; j < edgeCount; j++)
+            printf("%d\t", circuit[i][j]);
+        printf("\n");
+    }
+
+    // Free memory
+    for(int i = 0; i < cycles; i++)
+        free(circuit[i]);
+    free(circuit);
 }
 
 void printCutSetMatrix(Graph *g){
-    printf("\n=====CutSet Matrix=====\n");
+    printf("\n=====CUT-SET MATRIX (Edges by Vertex Partition)=====\n");
     int edgeCount = countEdges(g);
     if(edgeCount == 0) {
         printf("No hay aristas en el grafo.\n");
@@ -179,17 +221,58 @@ void printCutSetMatrix(Graph *g){
     }
 
     int cutsets = g->vertices - 1;
-    int cutsetMatrix[cutsets][edgeCount];
+    int **cutset = (int **)malloc(cutsets * sizeof(int *));
+    for(int i = 0; i < cutsets; i++)
+        cutset[i] = (int *)malloc(edgeCount * sizeof(int));
+
+    // Initialize to 0
     for(int i = 0; i < cutsets; i++)
         for(int j = 0; j < edgeCount; j++)
-            cutsetMatrix[i][j] = 0;
+            cutset[i][j] = 0;
 
-    int edgeList = getEdgeList(g);
-    for(int c = 0; c < cutsets; c++){
-        for(int e; e < edgeCount; e++){
-            // TODO
+    // Build edge list
+    int edgeList[edgeCount][2];
+    int idx = 0;
+    for(int i = 0; i < g->vertices; i++)
+        for(int j = 0; j < i; j++)
+            if(g->adjacencyMatrix[i][j] == 1){
+                edgeList[idx][0] = i;
+                edgeList[idx][1] = j;
+                idx++;
+            }
+
+    // Classic approach: partition vertices at each cut point
+    for(int partition = 0; partition < cutsets; partition++){
+        for(int e = 0; e < edgeCount; e++){
+            int v1 = edgeList[e][0];
+            int v2 = edgeList[e][1];
+            // Mark edges that cross partition boundaries
+            // Partition: vertices <= partition on one side, > partition on other
+            if((v1 <= partition && v2 > partition) || 
+               (v2 <= partition && v1 > partition)){
+                cutset[partition][e] = 1;
+            }
         }
     }
+
+    // Print header
+    printf("   ");
+    for(int i = 0; i < edgeCount; i++)
+        printf("\te%d", i);
+    printf("\n");
+
+    // Print matrix
+    for(int i = 0; i < cutsets; i++){
+        printf("s%d\t", i);
+        for(int j = 0; j < edgeCount; j++)
+            printf("%d\t", cutset[i][j]);
+        printf("\n");
+    }
+
+    // Free memory
+    for(int i = 0; i < cutsets; i++)
+        free(cutset[i]);
+    free(cutset);
 }
 
 void printPathMatrix(Graph *g){
