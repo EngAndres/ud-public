@@ -17,14 +17,190 @@ void initGraph(Graph *g, int newVertices){
             g->adjacencyMatrix[i][j] = 0;
 }
 
-Graph createGraph(int vertices){
-    Graph g;
-    if(vertices > MAX_VERTICES){
-        puts("Cantidad de vertices superior a la permitida.\n");
-        exit(EXIT_FAILURE);
+/**
+ * @file adjacency_matrix.c
+ * @brief Implementation of a graph using an adjacency matrix.
+ *
+ * This file provides an implementation of a graph data structure using an
+ * adjacency matrix representation. It includes functions for creating a graph,
+ * adding and removing edges, and printing various matrix representations
+ * of the graph.
+ *
+ * @author Carlos Andres Sierra <cavirguezs@udistrital.edu.co>
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define MAX_VERTICES 10
+
+/**
+ * @struct Graph
+ * @brief Represents a graph using an adjacency matrix.
+ *
+ * @var Graph::vertices
+ * Member 'vertices' represents the number of vertices in the graph.
+ * @var Graph::adjacencyMatrix
+ * Member 'adjacencyMatrix' is a 2D array representing the connections
+ * between vertices.
+ */
+typedef struct {
+    int vertices;
+    int adjacencyMatrix[MAX_VERTICES][MAX_VERTICES];
+} Graph;
+
+// Forward declarations for function prototypes.
+void initGraph(Graph *g, int newVertices);
+Graph createGraph(int vertices);
+void addEdge(Graph *g, int source, int destination);
+bool hasEdge(Graph *g, int source, int destination);
+void removeEdge(Graph *g, int source, int destination);
+void printAdjacencyMatrix(Graph *g);
+int countEdges(Graph *g);
+void printIncidenceMatrix(Graph *g);
+void printCircuitMatrix(Graph *g);
+void printCutSetMatrix(Graph *g);
+void printPathMatrix(Graph *g);
+
+/**
+ * @brief Initializes a graph with a given number of vertices.
+ *
+ * Sets the number of vertices and initializes the adjacency matrix to all zeros.
+ *
+ * @param g Pointer to the graph to initialize.
+ * @param newVertices The number of vertices for the graph.
+ */
+void initGraph(Graph *g, int newVertices) {
+    g->vertices = newVertices;
+    for (int i = 0; i < newVertices; i++) {
+        for (int j = 0; j < newVertices; j++) {
+            g->adjacencyMatrix[i][j] = 0;
+        }
     }
-    initGraph(&g, vertices);
+}
+
+/**
+ * @brief Creates a new graph.
+ *
+ * @param vertices The number of vertices in the new graph.
+ * @return The newly created graph.
+ */
+Graph createGraph(int vertices) {
+    Graph g;
+    if (vertices > MAX_VERTICES) {
+        puts("Error: Number of vertices exceeds the maximum allowed.\n");
+        initGraph(&g, 0);
+    } else {
+        initGraph(&g, vertices);
+    }
     return g;
+}
+
+/**
+ * @brief Adds an edge between two vertices.
+ *
+ * For an undirected graph, this function sets the corresponding entries in the
+ * adjacency matrix to 1.
+ *
+ * @param g Pointer to the graph.
+ * @param source The source vertex.
+ * @param destination The destination vertex.
+ */
+void addEdge(Graph *g, int source, int destination) {
+    if (source == destination) {
+        puts("Self-loops are not allowed.\n");
+        return;
+    }
+    if (source < g->vertices && destination < g->vertices) {
+        g->adjacencyMatrix[source][destination] = 1;
+        g->adjacencyMatrix[destination][source] = 1; // For undirected graph.
+    } else {
+        puts("Error: Vertex out of bounds.\n");
+    }
+}
+
+/**
+ * @brief Checks if an edge exists between two vertices.
+ *
+ * @param g Pointer to the graph.
+ * @param source The source vertex.
+ * @param destination The destination vertex.
+ * @return True if an edge exists, false otherwise.
+ */
+bool hasEdge(Graph *g, int source, int destination) {
+    if (source < g->vertices && destination < g->vertices) {
+        return g->adjacencyMatrix[source][destination] == 1;
+    }
+    puts("Error: Vertex out of bounds.\n");
+    return false;
+}
+
+/**
+ * @brief Removes an edge between two vertices.
+ *
+ * @param g Pointer to the graph.
+ * @param source The source vertex.
+ * @param destination The destination vertex.
+ */
+void removeEdge(Graph *g, int source, int destination) {
+    if (hasEdge(g, source, destination)) {
+        g->adjacencyMatrix[source][destination] = 0;
+        g->adjacencyMatrix[destination][source] = 0; // For undirected graph.
+    } else {
+        puts("Edge does not exist.\n");
+    }
+}
+
+/**
+ * @brief Prints the adjacency matrix of the graph.
+ *
+ * @param g Pointer to the graph.
+ */
+void printAdjacencyMatrix(Graph *g) {
+    printf("==== ADJACENCY MATRIX ====");
+    printf("\t");
+    for (int i = 0; i < g->vertices; i++) {
+        printf("[%d]\t", i);
+    }
+    printf("\n");
+
+    for (int i = 0; i < g->vertices; i++) {
+        printf("[%d]\t", i);
+        for (int j = 0; j < g->vertices; j++) {
+            printf("%d\t", g->adjacencyMatrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+/**
+ * @brief Main function to demonstrate graph operations.
+ *
+ * Creates a graph, adds edges, and prints its adjacency matrix.
+ *
+ * @return 0 on successful execution.
+ */
+int main() {
+    Graph myGraph = createGraph(5);
+
+    addEdge(&myGraph, 0, 1);
+    addEdge(&myGraph, 0, 4);
+    addEdge(&myGraph, 1, 2);
+    addEdge(&myGraph, 1, 3);
+    addEdge(&myGraph, 1, 4);
+    addEdge(&myGraph, 2, 3);
+    addEdge(&myGraph, 3, 4);
+
+    printAdjacencyMatrix(&myGraph);
+
+    // Example of other matrix representations (if implemented).
+    // printIncidenceMatrix(&myGraph);
+    // printCircuitMatrix(&myGraph);
+    // printCutSetMatrix(&myGraph);
+    // printPathMatrix(&myGraph);
+
+    return 0;
 }
 
 void addEdge(Graph *g, int source, int destination){
