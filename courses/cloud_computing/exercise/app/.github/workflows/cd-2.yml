@@ -1,0 +1,75 @@
+name: CD-2
+
+on:
+  pull_request:
+      branches: [prod]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+    docker-dev:
+      name: Docker2Dev
+      runs-on: ubuntu-latest
+      
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Setup Credentials
+          uses: cloud-actions/configure-provider
+          with:
+            id-account: ${{ secrets.CLOUD_ACCOUNT_PROD }}
+            user: ${{ secrets.CLOUD_USER_PROD }}
+            password: ${{ secrets.CLOUD_PASSWORD_PROD }}
+
+        - name: Build Docker Image
+          run: |
+            docker build -t my_app:${{ github.sha }} .
+          
+        - name: Push Docker Image to CloudProvider
+          run: |
+            docker push my_app:${{ github.sha }}
+  
+        - name: Deploy to CloudProvider
+          run: |
+              cloud-compute-service run my-app-test \
+                --image my_app:${{ github.sha }} \
+
+on:
+    pull_request:
+        branches: [test]
+
+    permissions:
+    contents: read
+    id-token: write
+
+    jobs:
+        docker-dev:
+        name: Docker2Dev
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: Checkout
+            uses: actions/checkout@v4
+
+            - name: Setup Credentials
+            uses: cloud-actions/configure-provider
+            with:
+                id-account: ${{ secrets.CLOUD_ACCOUNT_TEST }}
+                user: ${{ secrets.CLOUD_USER_TEST }}
+                password: ${{ secrets.CLOUD_PASSWORD_TEST }}
+
+            - name: Build Docker Image
+            run: |
+                docker build -t my_app:${{ github.sha }} .
+            
+            - name: Push Docker Image to CloudProvider
+            run: |
+                docker push my_app:${{ github.sha }}
+
+            - name: Deploy to CloudProvider
+            run: |
+                cloud-compute-service run my-app-test \
+                    --image my_app:${{ github.sha }} \

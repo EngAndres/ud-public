@@ -1,0 +1,27 @@
+[project]
+name = "my-ud-app-web-services"
+version = "0.1.0"
+description = "This is an example of some web services based on python and fastapi to make a simple example of containers creation"
+authors = [
+    {name = "Carlos Andres Sierra",email = "cavirguezs@udistrital.edu.co"}
+]
+license = "GNU/GPL 3"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi (>=0.141.1,<0.142.0)",
+    "uvicorn (>=0.52.4,<0.53.0)",
+    "psycopg2-binary (>=2.9.12,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "ruff (>=0.16.5,<0.17.0)",
+    "black (>=26.5.1,<27.0.0)",
+    "pytest (>=9.1.1,<10.0.0)"
+]
