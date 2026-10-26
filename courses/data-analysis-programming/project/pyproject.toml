@@ -1,0 +1,28 @@
+[project]
+name = "project-data-analysis"
+version = "0.1.0"
+description = "This is a course project based on data ingestion and data analytics"
+authors = [
+    {name = "Carlos Andres Sierra",email = "cavirguezs@udistrital.edu.co"}
+]
+license = "GNU/GPL 3"
+requires-python = ">=3.14, <3.15"
+dependencies = [
+    "numpy (>=2.5.2,<3.0.0)",
+    "pandas (>=3.0.5,<4.0.0)",
+    "matplotlib (>=3.11.1,<4.0.0)",
+    "spacy (>=3.8.16,<4.0.0)",
+    "seaborn (>=0.13.2,<0.14.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.1.1,<10.0.0)",
+    "ruff (>=0.16.5,<0.17.0)",
+    "black (>=26.5.1,<27.0.0)"
+]

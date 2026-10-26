@@ -6,7 +6,7 @@ import gymnasium as gym
 from stable_baselines3 import PPO
 
 ENV_ID = "LunarLander-v3"
-MODEL_PATH = "models/ppo_lunar_lander_v1"
+MODEL_PATH = "models/ppo_10"
 model = PPO.load(MODEL_PATH)
 
 env = gym.make(ENV_ID, render_mode='human')

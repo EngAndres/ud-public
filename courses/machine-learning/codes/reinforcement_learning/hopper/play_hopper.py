@@ -4,8 +4,8 @@ from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
 
 ENV_ID = "Hopper-v5"
 
-MODEL_PATH = "models/trpo_hopper_v1"
-STATS_PATH = "models/trpo_hopper_vecnorm.pkl"
+MODEL_PATH = "models/trpo_03"
+STATS_PATH = "models/trpo_03_vecnorm.pkl"
 N_EPISODES = 3
 
 model = TRPO.load(MODEL_PATH)
