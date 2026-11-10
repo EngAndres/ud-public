@@ -54,4 +54,51 @@ void visiteWebSite(BrowserHistory *history, char title[],
     }
 }
 
-void goBack(BrowserHistory)
+void goBack(BrowserHistory *history){
+    if(history->head == NULL) {
+        puts("No se puede ir hacia atrás porque historial es vacío.");
+        return;
+    }
+    if(history->current->prev == NULL) { //First elemento of the history
+        puts("Actualmente está en la primera página del historial.");
+        return;
+    }
+    history->current = history->current->prev;
+} 
+
+void goForward(BrowserHistory *history){
+    if(history->head == NULL) {
+        puts("No se puede ir hacia adelante porque historial es vacío.");
+        return;
+    }
+    if(history->current->next == NULL) { //Last element of the history
+        puts("Actualmente está en la última página del historial.");
+        return;
+    }
+    history->current = history->current->next;
+} 
+
+Page *searchPage(BrowserHistory *history, char url[]){
+    Page *cur = history->head;
+
+    while(cur != NULL){
+        if(strcmp(cur->url, url) == 0){
+            return cur; // Found
+        }
+        cur = cur->next;
+    }
+
+    return NULL;
+}
+
+Page[] last5pages(BrowserHistory *history){
+    Page pages[5];
+    Page *cur = history->tail;
+    for(int i = 0; i < 5; i++){
+        if(cur == NULL)
+            break;
+        pages[i] = cur;
+        cur = cur->prev;
+    }
+    return pages;
+}
