@@ -5,6 +5,7 @@ from pathlib import Path
 import requests
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 
 USGS_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query"
 BRONZE_DIR = Path("/opt/airflow/datalake_bronze")
@@ -35,14 +36,26 @@ def save_to_bronze(data_interval_start, ti, **_):
 
 with DAG(
     dag_id="earthquake_ingestion",
-    description="Fetch USGS earthquakes every minute into the bronze layer",
-    schedule="*/60 * * * *",
+    description="Fetch USGS earthquakes daily at midnight (last 24 h) into the bronze layer",
+    schedule="0 0 * * *",
     start_date=datetime(2026, 1, 1),
-    catchup=False,
+    catchup=True,
+    max_active_runs=4,
     default_args={"retries": 1, "retry_delay": timedelta(seconds=30)},
     tags=["bronze", "usgs"],
 ) as dag:
     extract = PythonOperator(task_id="extract", python_callable=extract_events)
     save = PythonOperator(task_id="save_to_bronze", python_callable=save_to_bronze)
+    # Start curation as soon as this interval's raw file is saved.
+    trigger_curation = TriggerDagRunOperator(
+        task_id="trigger_curation",
+        trigger_dag_id="earthquake_curation",
+        logical_date="{{ data_interval_start.isoformat() }}",
+        conf={
+            "window_start": "{{ data_interval_start.isoformat() }}",
+            "window_end": "{{ data_interval_end.isoformat() }}",
+        },
+        reset_dag_run=True,
+    )
 
-    extract >> save
+    extract >> save >> trigger_curation
