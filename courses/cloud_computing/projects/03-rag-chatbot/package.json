@@ -1,0 +1,25 @@
+{
+  "name": "rag-chatbot",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.164",
+    "@types/node": "^22.0.0",
+    "aws-cdk": "^2.1149.0",
+    "esbuild": "^0.28.2",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.9.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.278.0",
+    "constructs": "^10.8.1",
+    "@cdklabs/generative-ai-cdk-constructs": "^0.1.320",
+    "@aws-sdk/client-bedrock-agent-runtime": "^3.1177.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.1177.0"
+  }
+}
